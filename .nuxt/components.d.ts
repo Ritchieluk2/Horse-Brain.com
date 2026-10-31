@@ -4,10 +4,6 @@ type IslandComponent<T extends DefineComponent> = T & DefineComponent<{}, {refre
 interface _GlobalComponents {
       'CurrentlyRacingTicker': typeof import("../components/CurrentlyRacingTicker.vue")['default']
     'EntityProfile': typeof import("../components/EntityProfile.vue")['default']
-    'DataDisplayRacedaysRaceday': typeof import("../components/data_display/Racedays/Raceday.vue")['default']
-    'DataDisplayRacedaysRacedayContainerList': typeof import("../components/data_display/Racedays/RacedayContainerList.vue")['default']
-    'DataDisplayRaces': typeof import("../components/data_display/Races/Races.vue")['default']
-    'DataDisplayRacesContainerList': typeof import("../components/data_display/Races/RacesContainerList.vue")['default']
     'Footer': typeof import("../components/footer/Footer.vue")['default']
     'Header': typeof import("../components/header/Header.vue")['default']
     'RacetracksActiveRacetracksOverview': typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
@@ -41,10 +37,6 @@ interface _GlobalComponents {
     'NuxtRouteAnnouncer': IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
       'LazyCurrentlyRacingTicker': typeof import("../components/CurrentlyRacingTicker.vue")['default']
     'LazyEntityProfile': typeof import("../components/EntityProfile.vue")['default']
-    'LazyDataDisplayRacedaysRaceday': typeof import("../components/data_display/Racedays/Raceday.vue")['default']
-    'LazyDataDisplayRacedaysRacedayContainerList': typeof import("../components/data_display/Racedays/RacedayContainerList.vue")['default']
-    'LazyDataDisplayRaces': typeof import("../components/data_display/Races/Races.vue")['default']
-    'LazyDataDisplayRacesContainerList': typeof import("../components/data_display/Races/RacesContainerList.vue")['default']
     'LazyFooter': typeof import("../components/footer/Footer.vue")['default']
     'LazyHeader': typeof import("../components/header/Header.vue")['default']
     'LazyRacetracksActiveRacetracksOverview': typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
@@ -84,10 +76,6 @@ declare module 'vue' {
 
 export const CurrentlyRacingTicker: typeof import("../components/CurrentlyRacingTicker.vue")['default']
 export const EntityProfile: typeof import("../components/EntityProfile.vue")['default']
-export const DataDisplayRacedaysRaceday: typeof import("../components/data_display/Racedays/Raceday.vue")['default']
-export const DataDisplayRacedaysRacedayContainerList: typeof import("../components/data_display/Racedays/RacedayContainerList.vue")['default']
-export const DataDisplayRaces: typeof import("../components/data_display/Races/Races.vue")['default']
-export const DataDisplayRacesContainerList: typeof import("../components/data_display/Races/RacesContainerList.vue")['default']
 export const Footer: typeof import("../components/footer/Footer.vue")['default']
 export const Header: typeof import("../components/header/Header.vue")['default']
 export const RacetracksActiveRacetracksOverview: typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
@@ -121,10 +109,6 @@ export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components
 export const NuxtRouteAnnouncer: IslandComponent<typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']>
 export const LazyCurrentlyRacingTicker: typeof import("../components/CurrentlyRacingTicker.vue")['default']
 export const LazyEntityProfile: typeof import("../components/EntityProfile.vue")['default']
-export const LazyDataDisplayRacedaysRaceday: typeof import("../components/data_display/Racedays/Raceday.vue")['default']
-export const LazyDataDisplayRacedaysRacedayContainerList: typeof import("../components/data_display/Racedays/RacedayContainerList.vue")['default']
-export const LazyDataDisplayRaces: typeof import("../components/data_display/Races/Races.vue")['default']
-export const LazyDataDisplayRacesContainerList: typeof import("../components/data_display/Races/RacesContainerList.vue")['default']
 export const LazyFooter: typeof import("../components/footer/Footer.vue")['default']
 export const LazyHeader: typeof import("../components/header/Header.vue")['default']
 export const LazyRacetracksActiveRacetracksOverview: typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']

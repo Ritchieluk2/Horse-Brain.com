@@ -1,13 +1,10 @@
 {
-  "name": "horse-brain",
+  "name": "horse-brain-com", 
   "compatibility_date": "2024-04-03",
   "compatibility_flags": ["nodejs_compat"],
   "main": "./.output/server/index.mjs",
   "assets": {
     "directory": "./.output/public",
     "binding": "ASSETS"
-  },
-  "observability": {
-    "enabled": true
   }
 }

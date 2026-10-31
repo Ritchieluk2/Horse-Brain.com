@@ -1,0 +1,408 @@
+// =============================================================
+//  HorseBrain — mixins (no CSS output on their own)
+// =============================================================
+@use 'sass:map';
+@use 'tokens' as *;
+
+// ---- Media queries -------------------------------------------
+// Mobile-first: write base styles for phones, then layer up.
+//   @include up(md)   { ... }   // ≥ 768px
+//   @include down(md) { ... }   // < 768px  (use sparingly)
+@mixin up($bp) {
+  @media (min-width: map.get($breakpoints, $bp)) { @content; }
+}
+
+@mixin down($bp) {
+  @media (max-width: (map.get($breakpoints, $bp) - 0.02px)) { @content; }
+}
+
+@mixin between($from, $to) {
+  @media (min-width: map.get($breakpoints, $from)) and (max-width: (map.get($breakpoints, $to) - 0.02px)) { @content; }
+}
+
+@mixin hover {
+  @media (hover: hover) and (pointer: fine) { &:hover { @content; } }
+}
+
+@mixin reduced-motion {
+  @media (prefers-reduced-motion: reduce) { @content; }
+}
+
+// ---- Typography helpers ---------------------------------------
+@mixin heading-font {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-synthesis: none;
+}
+
+// Small uppercase label ("POST", "DISTANCE", eyebrow text)
+@mixin label-caps($size: var(--fs-2xs), $tracking: 0.08em) {
+  font-family: var(--font-body);
+  font-size: $size;
+  font-weight: 700;
+  letter-spacing: $tracking;
+  text-transform: uppercase;
+}
+
+@mixin truncate {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin visually-hidden {
+  position: absolute !important;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0 0 0 0);
+  white-space: nowrap; border: 0;
+}
+
+@mixin focus-ring($color: var(--color-baby-blue)) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+// ---- Surfaces --------------------------------------------------
+// MIXED-CUT border — the HorseBrain card shape. Sharp top-left and
+// bottom-right corners, rounded top-right and bottom-left. Left-edge
+// colour bars therefore run straight off a sharp top corner.
+@mixin mixed-cut($r: var(--radius-lg)) {
+  border-radius: 0 $r 0 $r;
+}
+
+// White card with hairline border + layered shadow (mixed-cut).
+@mixin card($pad: var(--space-6), $radius: var(--radius-lg)) {
+  position: relative;
+  background-color: var(--surface);
+  border: 1px solid var(--border-color);
+  @include mixed-cut($radius);
+  padding: $pad;
+  box-shadow: var(--shadow-card);
+}
+
+// THE FRAME — the brass treatment added to premium / featured cards:
+// an inner hairline frame (follows the card's mixed-cut shape) plus
+// brass corner brackets on the sharp top-left and bottom-right corners.
+// `@include frame;` and `@include ornament-frame;` are the same thing.
+// Expects child elements:
+//   <span class="X__frame"></span>
+//   <i class="X__corner X__corner--tl"></i>
+//   <i class="X__corner X__corner--br"></i>
+@mixin ornament-frame($corner: 20px, $color: var(--color-brass), $rest-opacity: 0.5) {
+  &__frame {
+    position: absolute;
+    inset: 8px;
+    border: 1px solid var(--border-color);
+    border-radius: inherit;
+    pointer-events: none;
+    transition: border-color var(--dur) var(--ease);
+  }
+
+  &__corner {
+    position: absolute;
+    width: $corner;
+    height: $corner;
+    pointer-events: none;
+    opacity: $rest-opacity;
+    transition: opacity var(--dur) var(--ease);
+
+    &--tl { top: -4px; left: -4px; border-top: 2px solid $color; border-left: 2px solid $color; }
+    &--br { bottom: -4px; right: -4px; border-bottom: 2px solid $color; border-right: 2px solid $color; }
+  }
+}
+
+@mixin frame($corner: 20px, $color: var(--color-brass), $rest-opacity: 0.5) {
+  @include ornament-frame($corner, $color, $rest-opacity);
+}
+
+// Thin brass rule inset 8px from a section edge (CTA bands, banners)
+@mixin brass-inlay($inset: 8px, $alpha: 0.35) {
+  position: relative;
+  &::before {
+    content: '';
+    position: absolute;
+    inset: $inset;
+    border: 1px solid rgba(199, 169, 107, $alpha);
+    pointer-events: none;
+  }
+}
+
+// Warm "paper" texture (cream). Used for the Our Pick panel etc.
+@mixin paper($base: var(--color-cream), $deep: var(--color-cream-deep)) {
+  background-color: $base;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg, transparent 0 2px, rgb(139 119 90 / 0.025) 2px 4px),
+    linear-gradient(135deg, $base 0%, $deep 100%);
+}
+
+// Program-number disc (the espresso circle with the saddlecloth #)
+@mixin program-disc($size: 44px, $font: 1.25rem, $bg: var(--color-espresso)) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background-color: $bg;
+  color: var(--color-white);
+  @include heading-font;
+  font-size: $font;
+  line-height: 1;
+}
+
+// ---- Layout patterns -------------------------------------------
+// "Split hero": dark text panel on the left, track photo on the
+// right that bleeds to the viewport edge on desktop. Stacks on
+// mobile with the image underneath.
+//   .x-hero { @include split-hero; }
+//   .x-hero__grid / __content / __visual / __bg / __overlay
+@mixin split-hero($min-h: 320px) {
+  background-color: var(--color-shadow-grey);
+  color: var(--text-on-dark);
+  position: relative;
+  overflow: hidden;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+
+    @include up(lg) {
+      grid-template-columns: 1fr 1fr;
+      min-height: $min-h;
+    }
+  }
+
+  &__content {
+    padding: var(--space-8) 0 var(--space-6);
+    text-align: center;
+
+    @include up(lg) {
+      padding: var(--space-8) var(--space-8) var(--space-8) 0;
+      text-align: left;
+    }
+  }
+
+  &__visual {
+    position: relative;
+    min-height: 220px;
+    border-radius: var(--radius-cut);
+    overflow: hidden;
+    margin-bottom: var(--space-6);
+
+    @include up(md) { min-height: 280px; }
+
+    @include up(lg) {
+      align-self: stretch;
+      min-height: $min-h;
+      margin-bottom: 0;
+      border-radius: 0;
+      // bleed to the right edge of the viewport
+      margin-right: calc(-1 * var(--gutter));
+    }
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgb(29 28 33 / 0.6) 0%, rgb(29 28 33 / 0.1) 100%);
+
+    @include up(lg) {
+      background: linear-gradient(to right, var(--color-shadow-grey) 0%, rgb(29 28 33 / 0.35) 40%, rgb(29 28 33 / 0.1) 100%);
+    }
+  }
+}
+
+// Row of inline stats with hairline dividers (hero meta: Post | Distance | ...)
+// Wraps to a 2-col grid on phones.
+@mixin stat-row($divider-class: '--divider') {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4) var(--space-5);
+  text-align: left;
+
+  @include up(sm) {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: var(--space-4) var(--space-6);
+  }
+
+  @include up(lg) { justify-content: flex-start; }
+}
+
+@mixin stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+
+  &--divider {
+    @include up(sm) {
+      padding-left: var(--space-6);
+      border-left: 1px solid var(--border-on-dark);
+    }
+  }
+
+  &__label {
+    @include label-caps;
+    color: var(--text-on-dark-muted);
+  }
+
+  &__value {
+    @include heading-font;
+    font-size: var(--fs-lg);
+    color: var(--color-white);
+  }
+}
+
+// ---- Brand signature: the "rail frame" ------------------------------
+// Two white rail lines that meet and OVERLAP at the top-left corner,
+// fading out along each edge — like painted track rail. It pairs with
+// the brass corner brackets (top-left + bottom-right) used on cards.
+// Draws on ::before (horizontal) and ::after (vertical), so the host
+// must not already use those pseudo-elements.
+//   $inset-x / $inset-y : where the corner sits inside the element
+//   $overhang          : how far each line runs past the corner
+//   $length-y          : how far the vertical rail runs down
+@mixin rail-frame(
+  $color: rgb(255 255 255 / 0.9),
+  $inset-x: 0px,
+  $inset-y: 0px,
+  $overhang: 8px,
+  $length-y: 100%,
+  $weight: 2px
+) {
+  position: relative;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    pointer-events: none;
+  }
+
+  // horizontal rail — starts $overhang left of the corner
+  &::before {
+    top: $inset-y;
+    left: calc(#{$inset-x} - #{$overhang});
+    right: 0;
+    height: $weight;
+    background-image: linear-gradient(to right, $color 0%, $color 55%, transparent 100%);
+  }
+
+  // vertical rail — starts $overhang above the corner
+  &::after {
+    top: calc(#{$inset-y} - #{$overhang});
+    left: $inset-x;
+    width: $weight;
+    height: calc(#{$length-y} + #{$overhang});
+    background-image: linear-gradient(to bottom, $color 0%, $color 60%, transparent 100%);
+  }
+}
+
+// ---- Textured "inlaid" band ------------------------------------------
+// Paper grain + crossed fibres + vignette + inset shadow, so the band
+// looks pressed into the page. Used by the fern newsletter CTA and the
+// baby-blue homepage newsletter. Content inside should be position:relative.
+@mixin textured-band($base, $deep, $vignette: rgb(15 30 10 / 0.4), $fibre-light: 0.03, $fibre-dark: 0.04) {
+  position: relative;
+  overflow: hidden;
+  background-color: $base;
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg, transparent 0 2px, rgba(255, 255, 255, $fibre-light) 2px 4px),
+    repeating-linear-gradient(-45deg, transparent 0 3px, rgba(0, 0, 0, $fibre-dark) 3px 5px),
+    radial-gradient(ellipse at center, transparent 0%, $vignette 100%),
+    linear-gradient(135deg, $base 0%, $deep 100%);
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    box-shadow: inset 0 8px 16px rgb(0 0 0 / 0.3), inset 0 -4px 8px rgb(255 255 255 / 0.06);
+    pointer-events: none;
+  }
+}
+
+
+// ---- Medal discs: 1st / 2nd / 3rd -------------------------------------
+// Metallic shine for finishing-position icons. $metal: gold | silver | bronze
+// Domed radial gradient + rim highlight + soft drop, with a glint that
+// sweeps across on hover.
+@mixin medal($metal) {
+  position: relative;
+  overflow: hidden;
+  color: var(--color-shadow-grey);
+  text-shadow: 0 1px 0 rgb(255 255 255 / 0.55);
+  background:
+    radial-gradient(circle at 32% 26%, var(--#{$metal}-hi) 0%, var(--#{$metal}) 48%, var(--#{$metal}-lo) 100%);
+  box-shadow:
+    inset 0 1px 1px rgb(255 255 255 / 0.75),
+    inset 0 -2px 3px rgb(0 0 0 / 0.22),
+    0 0 0 1px var(--#{$metal}-lo),
+    0 2px 4px rgb(29 28 33 / 0.25);
+
+  // glint
+  &::after {
+    content: '';
+    position: absolute;
+    inset: -20%;
+    background: linear-gradient(115deg, transparent 35%, rgb(255 255 255 / 0.65) 50%, transparent 65%);
+    transform: translateX(-70%);
+    transition: transform 0.6s var(--ease-out);
+    pointer-events: none;
+  }
+
+  @media (hover: hover) { &:hover::after { transform: translateX(70%); } }
+}
+
+// ---- Number icons (see components/_numbers.scss) ----------------------
+// HORSE number: square, bordered, transparent, saddlecloth colour via [data-pgm]
+// PLACE number: circle, solid; medals for 1-3 via [data-place]
+@mixin horse-num($size: 32px, $font: 1rem) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: $size;
+  height: $size;
+  border: 2px solid var(--pgm-border, var(--color-shadow-grey));
+  border-radius: var(--radius-cut-sm);
+  background: transparent;
+  color: var(--pgm-color, var(--color-shadow-grey));
+  @include heading-font;
+  font-size: $font;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+}
+
+@mixin place-num($size: 36px, $font: 1rem) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: $size;
+  height: $size;
+  border-radius: 50%;
+  background: var(--color-espresso);       // 4th and below: flat espresso
+  color: var(--color-white);
+  @include heading-font;
+  font-size: $font;
+  line-height: 1;
+  font-variant-numeric: lining-nums;
+  text-transform: none;
+}
+

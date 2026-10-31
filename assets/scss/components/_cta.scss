@@ -1,0 +1,202 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Call-to-action bands
+//  .final-cta / .schedule-cta  — shadow-grey band, brass inlay, text + buttons
+//  .newsletter-cta             — fern paper band with email form
+//  .newsletter                 — baby-blue band (homepage)
+// =============================================================
+
+.final-cta,
+.schedule-cta {
+  @include brass-inlay;
+  padding-block: var(--section-pad-sm);
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
+
+  &__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-6);
+
+    @include up(lg) {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-7);
+    }
+  }
+
+  &__text { max-width: 640px; }
+
+  &__title {
+    @include heading-font;
+    font-size: var(--fs-2xl);
+    color: var(--color-white);
+    margin-bottom: var(--space-2);
+  }
+
+  &__subtitle {
+    font-size: var(--fs-base);
+    color: var(--text-on-dark-muted);
+  }
+
+  &__actions { flex-shrink: 0; }
+}
+
+// Shared email form row (stacks on phones)
+@mixin email-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+
+  @include up(sm) { flex-direction: row; }
+}
+
+@mixin email-input {
+  flex: 1;
+  min-width: 0;
+  min-height: 48px;
+  padding: 12px 18px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-body);
+  font-size: var(--fs-base);
+  transition: border-color var(--dur-fast) ease, background var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+}
+
+.newsletter-cta {
+  @include textured-band(var(--color-fern), var(--color-fern-deep));
+  padding-block: var(--section-pad);
+  text-align: center;
+  color: var(--color-white);
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    @include heading-font;
+    font-size: var(--fs-3xl);
+    color: var(--color-white);
+    margin-bottom: var(--space-3);
+    text-shadow: 0 4px 8px rgb(0 0 0 / 0.35);
+  }
+
+  &__text {
+    margin: 0 auto var(--space-7);
+    font-size: var(--fs-md);
+    color: rgb(255 255 255 / 0.95);
+    text-shadow: 0 2px 4px rgb(0 0 0 / 0.3);
+  }
+
+  &__form {
+    @include email-form;
+    margin-bottom: var(--space-4);
+  }
+
+  &__input {
+    @include email-input;
+    border: 1px solid rgb(255 255 255 / 0.3);
+    background: rgb(255 255 255 / 0.15);
+    color: var(--color-white);
+
+    &::placeholder { color: rgb(255 255 255 / 0.75); }
+    &:focus {
+      outline: none;
+      border-color: rgb(255 255 255 / 0.7);
+      background: rgb(255 255 255 / 0.22);
+    }
+  }
+
+  .btn--primary { box-shadow: 0 4px 8px rgb(0 0 0 / 0.25); }
+
+  &__privacy {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin: 0 auto;
+    font-size: var(--fs-xs);
+    color: rgb(255 255 255 / 0.8);
+  }
+
+  // Larger version used as the lead section on /contact
+  &--hero {
+    .newsletter-cta__title { font-size: var(--fs-4xl); }
+    .newsletter-cta__text { margin-bottom: var(--space-8); }
+  }
+}
+
+// Homepage "Get Free Daily Picks" — same inlaid texture as the fern
+// band, in baby blue. Use .band--blue / .band--fern for new sections.
+.newsletter {
+  @include textured-band(var(--color-baby-blue), var(--color-blue-hover), rgb(20 40 90 / 0.28), 0.06, 0.03);
+  padding-block: var(--section-pad);
+  color: var(--color-shadow-grey);
+  text-align: center;
+
+  > .container { position: relative; z-index: 1; }
+
+  &__title {
+    font-size: var(--fs-3xl);
+    color: var(--color-shadow-grey);
+    margin-bottom: var(--space-2);
+    text-shadow: 0 2px 6px rgb(255 255 255 / 0.35);
+  }
+
+  &__text {
+    max-width: 600px;
+    margin: 0 auto var(--space-7);
+    font-size: var(--fs-md);
+    color: var(--color-shadow-grey);
+  }
+
+  &__form {
+    @include email-form;
+    filter: drop-shadow(0 8px 16px rgb(20 40 90 / 0.3));   // form floats above the inlay
+  }
+
+  &__input {
+    @include email-input;
+    border: 2px solid rgb(29 28 33 / 0.12);
+    background-color: var(--color-white);
+    color: var(--color-shadow-grey);
+
+    &::placeholder { color: rgb(29 28 33 / 0.5); }
+    &:focus { outline: none; border-color: var(--color-espresso); }
+  }
+
+  // On a baby-blue band the primary button flips to black (shadow grey)
+  .btn--primary {
+    background-color: var(--color-shadow-grey);
+    color: var(--color-white);
+    @include hover { background-color: var(--color-ink); transform: translateY(-2px); box-shadow: var(--shadow-md); }
+  }
+
+  &__input:focus { border-color: var(--color-shadow-grey); }
+
+  &__privacy {
+    margin: var(--space-5) auto 0;
+    font-size: var(--fs-xs);
+    color: rgb(29 28 33 / 0.78);
+  }
+}
+
+// Generic textured bands for new sections (wrap content in .container)
+.band--fern {
+  @include textured-band(var(--color-fern), var(--color-fern-deep));
+  color: var(--color-white);
+  > * { position: relative; z-index: 1; }
+}
+
+.band--blue {
+  @include textured-band(var(--color-baby-blue), var(--color-blue-hover), rgb(20 40 90 / 0.28), 0.06, 0.03);
+  color: var(--color-shadow-grey);
+  > * { position: relative; z-index: 1; }
+}

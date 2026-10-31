@@ -1,0 +1,51 @@
+@use '../abstracts' as *;
+
+// <PageTitle> — dark band with H1 + breadcrumbs (every inner page)
+.page-title {
+  position: relative;
+  padding-block: var(--space-7);
+  background-color: var(--bg-dark);
+  color: var(--text-on-dark);
+  text-align: center;
+
+  @include up(md) { padding-block: var(--space-8) var(--space-7); }
+
+  h1 {
+    font-size: var(--fs-4xl);
+    color: var(--color-white);
+    margin-bottom: var(--space-2);
+  }
+}
+
+.breadcrumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--fs-sm);
+
+  @include up(md) { font-size: var(--fs-base); }
+
+  li { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+  li + li::before {
+    content: '/';
+    color: var(--text-on-dark-faint);
+  }
+}
+
+.breadcrumb-link {
+  color: var(--color-baby-blue);
+  transition: color var(--dur-fast) ease;
+  @include hover { color: var(--color-white); text-decoration: underline; }
+}
+
+.breadcrumb-current {
+  color: var(--text-on-dark-muted);
+  // long track names shouldn't blow out the line on phones
+  max-width: 60vw;
+  @include truncate;
+}

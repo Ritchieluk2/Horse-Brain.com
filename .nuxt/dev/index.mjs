@@ -4,9 +4,12 @@ import { join } from 'node:path';
 import { mkdirSync } from 'node:fs';
 import { parentPort, threadId } from 'node:worker_threads';
 import { defineEventHandler, handleCacheHeaders, splitCookiesString, isEvent, createEvent, fetchWithEvent, getRequestHeader, eventHandler, setHeaders, sendRedirect, proxyRequest, createError, setResponseHeader, send, getResponseStatus, setResponseStatus, setResponseHeaders, getRequestHeaders, createApp, createRouter as createRouter$1, toNodeListener, lazyEventHandler, getRouterParam, getQuery as getQuery$1, readBody, getResponseStatusText } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/h3/dist/index.mjs';
+import { isVNode, ref, version, unref } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/vue/index.mjs';
+import mongo_api from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/api/mongo_api.js';
 import { getRequestDependencies, getPreloadLinks, getPrefetchLinks, createRenderer } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/vue-bundle-renderer/dist/runtime.mjs';
 import { stringify, uneval } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/devalue/index.js';
 import destr from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/destr/dist/index.mjs';
+import { parseURL, withoutBase, joinURL, getQuery, withQuery, withTrailingSlash, joinRelativeURL } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/ufo/dist/index.mjs';
 import { renderToString } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/vue/server-renderer/index.mjs';
 import { propsToString, renderSSRHead } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/@unhead/ssr/dist/index.mjs';
 import { createFetch as createFetch$1, Headers as Headers$1 } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/ofetch/dist/node.mjs';
@@ -23,7 +26,6 @@ import { AsyncLocalStorage } from 'node:async_hooks';
 import { consola } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/consola/dist/index.mjs';
 import { getContext } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/unctx/dist/index.mjs';
 import { captureRawStackTrace, parseRawStackTrace } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/errx/dist/index.js';
-import { isVNode, version, unref } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/vue/index.mjs';
 import { createServerHead as createServerHead$1, CapoPlugin } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/unhead/dist/index.mjs';
 import { defineHeadPlugin } from 'file://C:/Users/ritch/Documents/Coding%20Projects/HorseBrain/node_modules/@unhead/shared/dist/index.mjs';
 
@@ -77,7 +79,7 @@ const appConfig = defuFn(inlineAppConfig);
 
 const _inlineRuntimeConfig = {
   "app": {
-    "baseURL": "/HorseBrain/",
+    "baseURL": "/",
     "buildId": "dev",
     "buildAssetsDir": "/_nuxt/",
     "cdnURL": ""
@@ -87,6 +89,9 @@ const _inlineRuntimeConfig = {
     "routeRules": {
       "/__nuxt_error": {
         "cache": false
+      },
+      "/Racetracks": {
+        "ssr": false
       },
       "/_nuxt/builds/meta/**": {
         "headers": {
@@ -100,41 +105,7 @@ const _inlineRuntimeConfig = {
       }
     }
   },
-  "public": {
-    "i18n": {
-      "baseUrl": "",
-      "defaultLocale": "",
-      "defaultDirection": "ltr",
-      "strategy": "prefix_except_default",
-      "lazy": false,
-      "rootRedirect": "",
-      "routesNameSeparator": "___",
-      "defaultLocaleRouteNameSuffix": "default",
-      "skipSettingLocaleOnNavigate": false,
-      "differentDomains": false,
-      "trailingSlash": false,
-      "locales": [],
-      "detectBrowserLanguage": {
-        "alwaysRedirect": false,
-        "cookieCrossOrigin": false,
-        "cookieDomain": "",
-        "cookieKey": "i18n_redirected",
-        "cookieSecure": false,
-        "fallbackLocale": "",
-        "redirectOn": "root",
-        "useCookie": true
-      },
-      "experimental": {
-        "localeDetector": "",
-        "switchLocalePathLinkSSR": false,
-        "autoImportTranslationFunctions": false,
-        "typedPages": true,
-        "typedOptionsAndMessages": false
-      },
-      "multiDomainLocales": false
-    },
-    "aos": {}
-  }
+  "public": {}
 };
 const envOptions = {
   prefix: "NITRO_",
@@ -179,244 +150,6 @@ new Proxy(/* @__PURE__ */ Object.create(null), {
     return void 0;
   }
 });
-
-const HASH_RE = /#/g;
-const AMPERSAND_RE = /&/g;
-const SLASH_RE = /\//g;
-const EQUAL_RE = /=/g;
-const PLUS_RE = /\+/g;
-const ENC_CARET_RE = /%5e/gi;
-const ENC_BACKTICK_RE = /%60/gi;
-const ENC_PIPE_RE = /%7c/gi;
-const ENC_SPACE_RE = /%20/gi;
-function encode(text) {
-  return encodeURI("" + text).replace(ENC_PIPE_RE, "|");
-}
-function encodeQueryValue(input) {
-  return encode(typeof input === "string" ? input : JSON.stringify(input)).replace(PLUS_RE, "%2B").replace(ENC_SPACE_RE, "+").replace(HASH_RE, "%23").replace(AMPERSAND_RE, "%26").replace(ENC_BACKTICK_RE, "`").replace(ENC_CARET_RE, "^").replace(SLASH_RE, "%2F");
-}
-function encodeQueryKey(text) {
-  return encodeQueryValue(text).replace(EQUAL_RE, "%3D");
-}
-function decode(text = "") {
-  try {
-    return decodeURIComponent("" + text);
-  } catch {
-    return "" + text;
-  }
-}
-function decodeQueryKey(text) {
-  return decode(text.replace(PLUS_RE, " "));
-}
-function decodeQueryValue(text) {
-  return decode(text.replace(PLUS_RE, " "));
-}
-
-function parseQuery(parametersString = "") {
-  const object = {};
-  if (parametersString[0] === "?") {
-    parametersString = parametersString.slice(1);
-  }
-  for (const parameter of parametersString.split("&")) {
-    const s = parameter.match(/([^=]+)=?(.*)/) || [];
-    if (s.length < 2) {
-      continue;
-    }
-    const key = decodeQueryKey(s[1]);
-    if (key === "__proto__" || key === "constructor") {
-      continue;
-    }
-    const value = decodeQueryValue(s[2] || "");
-    if (object[key] === void 0) {
-      object[key] = value;
-    } else if (Array.isArray(object[key])) {
-      object[key].push(value);
-    } else {
-      object[key] = [object[key], value];
-    }
-  }
-  return object;
-}
-function encodeQueryItem(key, value) {
-  if (typeof value === "number" || typeof value === "boolean") {
-    value = String(value);
-  }
-  if (!value) {
-    return encodeQueryKey(key);
-  }
-  if (Array.isArray(value)) {
-    return value.map((_value) => `${encodeQueryKey(key)}=${encodeQueryValue(_value)}`).join("&");
-  }
-  return `${encodeQueryKey(key)}=${encodeQueryValue(value)}`;
-}
-function stringifyQuery(query) {
-  return Object.keys(query).filter((k) => query[k] !== void 0).map((k) => encodeQueryItem(k, query[k])).filter(Boolean).join("&");
-}
-
-const PROTOCOL_STRICT_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{1,2})/;
-const PROTOCOL_REGEX = /^[\s\w\0+.-]{2,}:([/\\]{2})?/;
-const PROTOCOL_RELATIVE_REGEX = /^([/\\]\s*){2,}[^/\\]/;
-const JOIN_LEADING_SLASH_RE = /^\.?\//;
-function hasProtocol(inputString, opts = {}) {
-  if (typeof opts === "boolean") {
-    opts = { acceptRelative: opts };
-  }
-  if (opts.strict) {
-    return PROTOCOL_STRICT_REGEX.test(inputString);
-  }
-  return PROTOCOL_REGEX.test(inputString) || (opts.acceptRelative ? PROTOCOL_RELATIVE_REGEX.test(inputString) : false);
-}
-function hasTrailingSlash(input = "", respectQueryAndFragment) {
-  {
-    return input.endsWith("/");
-  }
-}
-function withoutTrailingSlash(input = "", respectQueryAndFragment) {
-  {
-    return (hasTrailingSlash(input) ? input.slice(0, -1) : input) || "/";
-  }
-}
-function withTrailingSlash(input = "", respectQueryAndFragment) {
-  {
-    return input.endsWith("/") ? input : input + "/";
-  }
-}
-function withoutBase(input, base) {
-  if (isEmptyURL(base)) {
-    return input;
-  }
-  const _base = withoutTrailingSlash(base);
-  if (!input.startsWith(_base)) {
-    return input;
-  }
-  const trimmed = input.slice(_base.length);
-  return trimmed[0] === "/" ? trimmed : "/" + trimmed;
-}
-function withQuery(input, query) {
-  const parsed = parseURL(input);
-  const mergedQuery = { ...parseQuery(parsed.search), ...query };
-  parsed.search = stringifyQuery(mergedQuery);
-  return stringifyParsedURL(parsed);
-}
-function getQuery(input) {
-  return parseQuery(parseURL(input).search);
-}
-function isEmptyURL(url) {
-  return !url || url === "/";
-}
-function isNonEmptyURL(url) {
-  return url && url !== "/";
-}
-function joinURL(base, ...input) {
-  let url = base || "";
-  for (const segment of input.filter((url2) => isNonEmptyURL(url2))) {
-    if (url) {
-      const _segment = segment.replace(JOIN_LEADING_SLASH_RE, "");
-      url = withTrailingSlash(url) + _segment;
-    } else {
-      url = segment;
-    }
-  }
-  return url;
-}
-function joinRelativeURL(..._input) {
-  const JOIN_SEGMENT_SPLIT_RE = /\/(?!\/)/;
-  const input = _input.filter(Boolean);
-  const segments = [];
-  let segmentsDepth = 0;
-  for (const i of input) {
-    if (!i || i === "/") {
-      continue;
-    }
-    for (const [sindex, s] of i.split(JOIN_SEGMENT_SPLIT_RE).entries()) {
-      if (!s || s === ".") {
-        continue;
-      }
-      if (s === "..") {
-        if (segments.length === 1 && hasProtocol(segments[0])) {
-          continue;
-        }
-        segments.pop();
-        segmentsDepth--;
-        continue;
-      }
-      if (sindex === 1 && segments[segments.length - 1]?.endsWith(":/")) {
-        segments[segments.length - 1] += "/" + s;
-        continue;
-      }
-      segments.push(s);
-      segmentsDepth++;
-    }
-  }
-  let url = segments.join("/");
-  if (segmentsDepth >= 0) {
-    if (input[0]?.startsWith("/") && !url.startsWith("/")) {
-      url = "/" + url;
-    } else if (input[0]?.startsWith("./") && !url.startsWith("./")) {
-      url = "./" + url;
-    }
-  } else {
-    url = "../".repeat(-1 * segmentsDepth) + url;
-  }
-  if (input[input.length - 1]?.endsWith("/") && !url.endsWith("/")) {
-    url += "/";
-  }
-  return url;
-}
-
-const protocolRelative = Symbol.for("ufo:protocolRelative");
-function parseURL(input = "", defaultProto) {
-  const _specialProtoMatch = input.match(
-    /^[\s\0]*(blob:|data:|javascript:|vbscript:)(.*)/i
-  );
-  if (_specialProtoMatch) {
-    const [, _proto, _pathname = ""] = _specialProtoMatch;
-    return {
-      protocol: _proto.toLowerCase(),
-      pathname: _pathname,
-      href: _proto + _pathname,
-      auth: "",
-      host: "",
-      search: "",
-      hash: ""
-    };
-  }
-  if (!hasProtocol(input, { acceptRelative: true })) {
-    return parsePath(input);
-  }
-  const [, protocol = "", auth, hostAndPath = ""] = input.replace(/\\/g, "/").match(/^[\s\0]*([\w+.-]{2,}:)?\/\/([^/@]+@)?(.*)/) || [];
-  let [, host = "", path = ""] = hostAndPath.match(/([^#/?]*)(.*)?/) || [];
-  if (protocol === "file:") {
-    path = path.replace(/\/(?=[A-Za-z]:)/, "");
-  }
-  const { pathname, search, hash } = parsePath(path);
-  return {
-    protocol: protocol.toLowerCase(),
-    auth: auth ? auth.slice(0, Math.max(0, auth.length - 1)) : "",
-    host,
-    pathname,
-    search,
-    hash,
-    [protocolRelative]: !protocol
-  };
-}
-function parsePath(input = "") {
-  const [pathname = "", search = "", hash = ""] = (input.match(/([^#?]*)(\?[^#]*)?(#.*)?/) || []).splice(1);
-  return {
-    pathname,
-    search,
-    hash
-  };
-}
-function stringifyParsedURL(parsed) {
-  const pathname = parsed.pathname || "";
-  const search = parsed.search ? (parsed.search.startsWith("?") ? "" : "?") + parsed.search : "";
-  const hash = parsed.hash || "";
-  const auth = parsed.auth ? parsed.auth + "@" : "";
-  const host = parsed.host || "";
-  const proto = parsed.protocol || parsed[protocolRelative] ? (parsed.protocol || "") + "//" : "";
-  return proto + auth + host + pathname + search + hash;
-}
 
 const serverAssets = [{"baseName":"server","dir":"C:/Users/ritch/Documents/Coding Projects/HorseBrain/server/assets"}];
 
@@ -892,7 +625,7 @@ const _EC3p9zZSPj = (function(nitro) {
 
 const rootDir = "C:/Users/ritch/Documents/Coding Projects/HorseBrain";
 
-const appHead = {"meta":[{"name":"viewport","content":"width=device-width, initial-scale=1"},{"charset":"utf-8"}],"link":[],"style":[],"script":[],"noscript":[]};
+const appHead = {"meta":[{"charset":"utf-8"},{"name":"viewport","content":"width=device-width, initial-scale=1, viewport-fit=cover"},{"name":"theme-color","content":"#45201A"},{"name":"description","content":"Transparent, machine-learning horse racing picks with a verified track record."}],"link":[{"rel":"preconnect","href":"https://fonts.googleapis.com"},{"rel":"preconnect","href":"https://fonts.gstatic.com","crossorigin":""},{"rel":"stylesheet","href":"https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"}],"style":[],"script":[],"noscript":[],"htmlAttrs":{"lang":"en"},"title":"HorseBrain — Race picks powered by machine learning"};
 
 const appRootTag = "div";
 
@@ -1111,9 +844,11 @@ const errorHandler = (async function errorhandler(error, event) {
   return send(event, html);
 });
 
+const _lazy_G2gniR = () => Promise.resolve().then(function () { return racetracks_today$1; });
 const _lazy_6HtLpm = () => Promise.resolve().then(function () { return renderer$1; });
 
 const handlers = [
+  { route: '/api/racetracks_today', handler: _lazy_G2gniR, lazy: true, middleware: false, method: undefined },
   { route: '/__nuxt_error', handler: _lazy_6HtLpm, lazy: true, middleware: false, method: undefined },
   { route: '/**', handler: _lazy_6HtLpm, lazy: true, middleware: false, method: undefined }
 ];
@@ -1308,6 +1043,35 @@ const template$1 = (messages) => {
 const errorDev = /*#__PURE__*/Object.freeze({
   __proto__: null,
   template: template$1
+});
+
+const racetracks_today = defineEventHandler(async (event) => {
+  const races = ref([]);
+  const fetchedRaces = await mongo_api.fetchRacesToday();
+  races.value = fetchedRaces.map((race) => ({
+    date: race.date.split("T")[0],
+    // Extract just the date part
+    track_id: race.track_id,
+    num_races: race.num_races.toString(),
+    // Convert to string
+    track_name: race.track_name,
+    post_time: (() => {
+      const time = race.post_time.split("T")[1].split(".")[0];
+      const [hours, minutes] = time.split(":");
+      const ampm = hours >= 12 ? "PM" : "AM";
+      const formattedHours = hours % 12 || 12;
+      return `${formattedHours}:${minutes}${ampm}`;
+    })()
+  }));
+  races.value.sort((a, b) => a.track_id.localeCompare(b.track_id));
+  console.log("API \n");
+  console.log(races);
+  return { races };
+});
+
+const racetracks_today$1 = /*#__PURE__*/Object.freeze({
+  __proto__: null,
+  default: racetracks_today
 });
 
 const Vue3 = version[0] === "3";

@@ -1,0 +1,3359 @@
+{
+  "racedays": {
+    "CD-2026-10-28": {
+      "track_id": "CD",
+      "date": "2026-10-28",
+      "weather": {
+        "condition": "Overcast",
+        "temperature": "54°F",
+        "track_condition": "Fast",
+        "wind": "N 6 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 35.2,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 19.8,
+        "average_roi": 14.1,
+        "total_picks": 188
+      },
+      "races": [
+        {
+          "id": "CD102826R1",
+          "race_num": 1,
+          "race_type": "Maiden Special Weight",
+          "distance": "6F",
+          "surface": "Dirt",
+          "post_time": "2026-10-28T13:00:00",
+          "status": "completed",
+          "purse": 58000,
+          "botPick": {
+            "program_number": "6",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "5",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance. Jockey Santiago has a 38% win rate at Keeneland this meet."
+            },
+            {
+              "program_number": "6",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel. Murrill's mount has hit the board in 4 of 5 starts."
+            },
+            {
+              "program_number": "3",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post. Value play at odds."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "5",
+              "horse_name": "Thunder Bolt",
+              "confidence": "high",
+              "probability": 42
+            },
+            "bestValue": {
+              "program_number": "3",
+              "horse_name": "Golden Arrow",
+              "odds": "8-1",
+              "reason": "Class drop + tactical angle = hidden value at morning line"
+            },
+            "wps": [
+              "5",
+              "6",
+              "3"
+            ],
+            "exacta": {
+              "top": "5",
+              "second": "6",
+              "payout": "$14.20"
+            },
+            "trifecta": {
+              "top": "5",
+              "second": "6",
+              "third": "3",
+              "payout": "$87.50"
+            },
+            "wpsConfidence": [
+              42,
+              59,
+              69
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "3",
+              "horse_name": "Twin Spires",
+              "horse_equibase_refid": "10000003",
+              "jockey_name": "T. Gaffalione",
+              "odds": "6.50",
+              "weight": 122,
+              "finish_position": 3
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Louisville Slugger",
+              "horse_equibase_refid": "10000001",
+              "jockey_name": "J. Rosario",
+              "odds": "4.20",
+              "weight": 122,
+              "finish_position": 2
+            },
+            {
+              "program_number": "6",
+              "horse_name": "Derby Dreams",
+              "horse_equibase_refid": "10000002",
+              "jockey_name": "L. Saez",
+              "odds": "2.80",
+              "weight": 122,
+              "finish_position": 1
+            }
+          ]
+        },
+        {
+          "id": "CD102826R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "1M",
+          "surface": "Dirt",
+          "post_time": "2026-10-28T13:32:00",
+          "status": "completed",
+          "purse": 72000,
+          "botPick": {
+            "program_number": "4",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "4",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance. Jockey Santiago has a 38% win rate at Keeneland this meet."
+            },
+            {
+              "program_number": "1",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel. Murrill's mount has hit the board in 4 of 5 starts."
+            },
+            {
+              "program_number": "7",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post. Value play at odds."
+            },
+            {
+              "program_number": "4",
+              "confidence": "low",
+              "analysis": "First-time starter with strong works but unproven. Saez is a capable rider but the field looks tough."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "4",
+              "horse_name": "Thunder Bolt",
+              "confidence": "high",
+              "probability": 42
+            },
+            "bestValue": {
+              "program_number": "7",
+              "horse_name": "Golden Arrow",
+              "odds": "8-1",
+              "reason": "Class drop + tactical angle = hidden value at morning line"
+            },
+            "wps": [
+              "4",
+              "1",
+              "7"
+            ],
+            "exacta": {
+              "top": "4",
+              "second": "1",
+              "payout": "$14.20"
+            },
+            "trifecta": {
+              "top": "4",
+              "second": "1",
+              "third": "7",
+              "payout": "$87.50"
+            },
+            "wpsConfidence": [
+              42,
+              59,
+              69
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Oak Leaf",
+              "horse_equibase_refid": "10000005",
+              "jockey_name": "J. Rosario",
+              "odds": "5.40",
+              "weight": 124,
+              "finish_position": 1
+            },
+            {
+              "program_number": "4",
+              "horse_name": "Bluegrass Baron",
+              "horse_equibase_refid": "10000004",
+              "jockey_name": "I. Ortiz Jr.",
+              "odds": "3.10",
+              "weight": 124,
+              "finish_position": 3
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Filly Fortune",
+              "horse_equibase_refid": "10000006",
+              "jockey_name": "M. Murrill",
+              "odds": "7.90",
+              "weight": 124,
+              "finish_position": 2
+            }
+          ]
+        },
+        {
+          "id": "CD102826R3",
+          "race_num": 3,
+          "race_type": "Claiming",
+          "distance": "7F",
+          "surface": "Dirt",
+          "post_time": "2026-10-28T14:04:00",
+          "status": "completed",
+          "purse": 34000,
+          "botPick": {
+            "program_number": "7",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "1",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance. Jockey Santiago has a 38% win rate at Keeneland this meet."
+            },
+            {
+              "program_number": "4",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel. Murrill's mount has hit the board in 4 of 5 starts."
+            },
+            {
+              "program_number": "7",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post. Value play at odds."
+            },
+            {
+              "program_number": "4",
+              "confidence": "low",
+              "analysis": "First-time starter with strong works but unproven. Saez is a capable rider but the field looks tough."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "1",
+              "horse_name": "Thunder Bolt",
+              "confidence": "high",
+              "probability": 42
+            },
+            "bestValue": {
+              "program_number": "7",
+              "horse_name": "Golden Arrow",
+              "odds": "8-1",
+              "reason": "Class drop + tactical angle = hidden value at morning line"
+            },
+            "wps": [
+              "1",
+              "4",
+              "7"
+            ],
+            "exacta": {
+              "top": "1",
+              "second": "4",
+              "payout": "$14.20"
+            },
+            "trifecta": {
+              "top": "1",
+              "second": "4",
+              "third": "7",
+              "payout": "$87.50"
+            },
+            "wpsConfidence": [
+              42,
+              59,
+              69
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "River Road",
+              "horse_equibase_refid": "10000007",
+              "jockey_name": "F. Arriet",
+              "odds": "3.60",
+              "weight": 121,
+              "finish_position": 1
+            },
+            {
+              "program_number": "4",
+              "horse_name": "Bourbon Trail",
+              "horse_equibase_refid": "10000008",
+              "jockey_name": "L. Saez",
+              "odds": "4.90",
+              "weight": 121,
+              "finish_position": 2
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Pegasus Post",
+              "horse_equibase_refid": "10000009",
+              "jockey_name": "T. Gaffalione",
+              "odds": "9.20",
+              "weight": 121,
+              "finish_position": 4
+            }
+          ]
+        }
+      ]
+    },
+    "KEE-2026-10-31": {
+      "track_id": "KEE",
+      "date": "2026-10-31",
+      "weather": {
+        "condition": "Sunny",
+        "temperature": "68°F",
+        "track_condition": "Firm",
+        "wind": "NW 8 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 38.5,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 22.4,
+        "average_roi": 14.1,
+        "total_picks": 142
+      },
+      "races": [
+        {
+          "id": "KEE103126R1",
+          "race_num": 1,
+          "race_type": "Maiden Special Weight",
+          "distance": "6F",
+          "surface": "Dirt",
+          "post_time": "2026-10-31T13:00:00",
+          "status": "completed",
+          "purse": 45000,
+          "botPick": {
+            "program_number": "7",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "7",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "2",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            },
+            {
+              "program_number": "8",
+              "confidence": "low",
+              "analysis": "First-time starter with strong works but unproven."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "7",
+              "horse_name": "Thunder Bolt",
+              "confidence": "high",
+              "probability": 42
+            },
+            "bestValue": {
+              "program_number": "2",
+              "horse_name": "Golden Arrow",
+              "odds": "8-1",
+              "reason": "Class drop + tactical angle = hidden value at morning line"
+            },
+            "wps": [
+              "7",
+              "9",
+              "2"
+            ],
+            "exacta": {
+              "top": "7",
+              "second": "9",
+              "payout": "$14.20"
+            },
+            "trifecta": {
+              "top": "7",
+              "second": "9",
+              "third": "2",
+              "payout": "$87.50"
+            },
+            "wpsConfidence": [
+              42,
+              59,
+              69
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Golden Arrow",
+              "horse_equibase_refid": "10000012",
+              "jockey_name": "T. Gaffalione",
+              "jockey_equibase_refid": "130271",
+              "odds": "8.00",
+              "weight": 122,
+              "finish_position": 3
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Thunder Bolt",
+              "horse_equibase_refid": "10000010",
+              "jockey_name": "J. Santiago",
+              "jockey_equibase_refid": "130270",
+              "odds": "3.50",
+              "weight": 122,
+              "finish_position": 1
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Silver Storm",
+              "horse_equibase_refid": "10000013",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "12.50",
+              "weight": 122,
+              "finish_position": 4
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Midnight Runner",
+              "horse_equibase_refid": "10000011",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "5.20",
+              "weight": 122,
+              "finish_position": 2
+            }
+          ]
+        },
+        {
+          "id": "KEE103126R2",
+          "race_num": 2,
+          "race_type": "Allowance Optional Claiming",
+          "distance": "1 1/16M",
+          "surface": "Dirt",
+          "post_time": "2026-10-31T13:35:00",
+          "status": "live",
+          "purse": 65000,
+          "botPick": {
+            "program_number": "4",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "9",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "4",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            },
+            {
+              "program_number": "5",
+              "confidence": "low",
+              "analysis": "First-time starter with strong works but unproven."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "9",
+              "horse_name": "Desert Wind",
+              "confidence": "high",
+              "probability": 38
+            },
+            "bestValue": {
+              "program_number": "4",
+              "horse_name": "Royal Flush",
+              "odds": "3-1",
+              "reason": "Dropping in class with top jockey."
+            },
+            "wps": [
+              "9",
+              "4",
+              "2"
+            ],
+            "exacta": {
+              "top": "9",
+              "second": "4",
+              "payout": "$18.40"
+            },
+            "trifecta": {
+              "top": "9",
+              "second": "4",
+              "third": "2",
+              "payout": "$92.10"
+            },
+            "wpsConfidence": [
+              38,
+              55,
+              65
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Crimson Tide",
+              "horse_equibase_refid": "10000015",
+              "jockey_name": "J. Santiago",
+              "jockey_equibase_refid": "130270",
+              "odds": "6.80",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "4",
+              "horse_name": "Royal Flush",
+              "horse_equibase_refid": "10000016",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "2.90",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Ocean Breeze",
+              "horse_equibase_refid": "10000017",
+              "jockey_name": "T. Gaffalione",
+              "jockey_equibase_refid": "130271",
+              "odds": "11.00",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Desert Wind",
+              "horse_equibase_refid": "10000014",
+              "jockey_name": "F. Arriet",
+              "jockey_equibase_refid": "130273",
+              "odds": "4.10",
+              "weight": 124,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "KEE103126R3",
+          "race_num": 3,
+          "race_type": "Stakes",
+          "distance": "1 1/8M",
+          "surface": "Dirt",
+          "post_time": "2026-10-31T14:10:00",
+          "status": "upcoming",
+          "purse": 150000,
+          "botPick": {
+            "program_number": "4",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "4",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "1",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "4",
+              "horse_name": "Wildfire",
+              "confidence": "high",
+              "probability": 45
+            },
+            "bestValue": {
+              "program_number": "9",
+              "horse_name": "Iron Will",
+              "odds": "5-2",
+              "reason": "Improving form and tactical speed."
+            },
+            "wps": [
+              "4",
+              "9",
+              "1"
+            ],
+            "exacta": {
+              "top": "4",
+              "second": "9",
+              "payout": "$12.60"
+            },
+            "trifecta": {
+              "top": "4",
+              "second": "9",
+              "third": "1",
+              "payout": "$64.80"
+            },
+            "wpsConfidence": [
+              45,
+              62,
+              72
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Lightning Strike",
+              "horse_equibase_refid": "10000020",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "7.20",
+              "weight": 126,
+              "finish_position": null
+            },
+            {
+              "program_number": "4",
+              "horse_name": "Wildfire",
+              "horse_equibase_refid": "10000018",
+              "jockey_name": "J. Santiago",
+              "jockey_equibase_refid": "130270",
+              "odds": "2.10",
+              "weight": 126,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Iron Will",
+              "horse_equibase_refid": "10000019",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "4.50",
+              "weight": 126,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "KEE103126R4",
+          "race_num": 4,
+          "race_type": "Claiming",
+          "distance": "7F",
+          "surface": "Dirt",
+          "post_time": "2026-10-31T14:45:00",
+          "status": "upcoming",
+          "purse": 32000,
+          "botPick": {
+            "program_number": "2",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "3",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "7",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "3",
+              "horse_name": "Sunset Rider",
+              "confidence": "medium",
+              "probability": 35
+            },
+            "bestValue": {
+              "program_number": "2",
+              "horse_name": "Morning Glory",
+              "odds": "6-1",
+              "reason": "First time claiming, sharp workout."
+            },
+            "wps": [
+              "3",
+              "2",
+              "7"
+            ],
+            "exacta": {
+              "top": "3",
+              "second": "2",
+              "payout": "$22.40"
+            },
+            "trifecta": {
+              "top": "3",
+              "second": "2",
+              "third": "7",
+              "payout": "$115.20"
+            },
+            "wpsConfidence": [
+              35,
+              52,
+              62
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Morning Glory",
+              "horse_equibase_refid": "10000022",
+              "jockey_name": "K. Carmouche",
+              "jockey_equibase_refid": "130275",
+              "odds": "5.50",
+              "weight": 120,
+              "finish_position": null
+            },
+            {
+              "program_number": "3",
+              "horse_name": "Sunset Rider",
+              "horse_equibase_refid": "10000021",
+              "jockey_name": "D. Davis",
+              "jockey_equibase_refid": "130274",
+              "odds": "3.80",
+              "weight": 120,
+              "finish_position": null
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Evening Star",
+              "horse_equibase_refid": "10000023",
+              "jockey_name": "R. Maragh",
+              "jockey_equibase_refid": "130276",
+              "odds": "8.20",
+              "weight": 120,
+              "finish_position": null
+            }
+          ]
+        }
+      ]
+    },
+    "BEL-2026-11-01": {
+      "track_id": "BEL",
+      "date": "2026-11-01",
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": "57°F",
+        "track_condition": "Fast",
+        "wind": "NE 11 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 29.8,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 11.2,
+        "average_roi": 14.1,
+        "total_picks": 203
+      },
+      "races": [
+        {
+          "id": "BEL110126R1",
+          "race_num": 1,
+          "race_type": "Maiden Claiming",
+          "distance": "5F",
+          "surface": "Dirt",
+          "post_time": "2026-11-01T13:05:00",
+          "status": "upcoming",
+          "purse": 32000,
+          "botPick": {
+            "program_number": "12",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "4",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "12",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "5",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "4",
+              "horse_name": "Hudson Line",
+              "confidence": "medium",
+              "probability": 32
+            },
+            "bestValue": {
+              "program_number": "12",
+              "horse_name": "Empire State",
+              "odds": "6-1",
+              "reason": "Debuting with strong works, value play."
+            },
+            "wps": [
+              "4",
+              "12",
+              "5"
+            ],
+            "exacta": {
+              "top": "4",
+              "second": "12",
+              "payout": "$24.80"
+            },
+            "trifecta": {
+              "top": "4",
+              "second": "12",
+              "third": "5",
+              "payout": "$132.50"
+            },
+            "wpsConfidence": [
+              32,
+              49,
+              59
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "4",
+              "horse_name": "Hudson Line",
+              "horse_equibase_refid": "10000024",
+              "jockey_name": "D. Davis",
+              "jockey_equibase_refid": "130274",
+              "odds": "3.80",
+              "weight": 120,
+              "finish_position": null
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Brooklyn Bridge",
+              "horse_equibase_refid": "10000026",
+              "jockey_name": "R. Maragh",
+              "jockey_equibase_refid": "130276",
+              "odds": "8.20",
+              "weight": 120,
+              "finish_position": null
+            },
+            {
+              "program_number": "12",
+              "horse_name": "Empire State",
+              "horse_equibase_refid": "10000025",
+              "jockey_name": "K. Carmouche",
+              "jockey_equibase_refid": "130275",
+              "odds": "5.50",
+              "weight": 120,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "BEL110126R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "7F",
+          "surface": "Dirt",
+          "post_time": "2026-11-01T13:38:00",
+          "status": "upcoming",
+          "purse": 58000,
+          "botPick": {
+            "program_number": "1",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "1",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "3",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "5",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "1",
+              "horse_name": "Velocity",
+              "confidence": "high",
+              "probability": 48
+            },
+            "bestValue": {
+              "program_number": "3",
+              "horse_name": "Momentum",
+              "odds": "7-2",
+              "reason": "Consistent form, jockey change positive."
+            },
+            "wps": [
+              "1",
+              "3",
+              "5"
+            ],
+            "exacta": {
+              "top": "1",
+              "second": "3",
+              "payout": "$16.40"
+            },
+            "trifecta": {
+              "top": "1",
+              "second": "3",
+              "third": "5",
+              "payout": "$78.90"
+            },
+            "wpsConfidence": [
+              48,
+              65,
+              75
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Velocity",
+              "horse_equibase_refid": "10000027",
+              "jockey_name": "D. Davis",
+              "jockey_equibase_refid": "130274",
+              "odds": "4.20",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "3",
+              "horse_name": "Momentum",
+              "horse_equibase_refid": "10000028",
+              "jockey_name": "K. Carmouche",
+              "jockey_equibase_refid": "130275",
+              "odds": "6.10",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Breakaway",
+              "horse_equibase_refid": "10000029",
+              "jockey_name": "J. Alvarado",
+              "jockey_equibase_refid": "130277",
+              "odds": "13.00",
+              "weight": 123,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "BEL110126R3",
+          "race_num": 3,
+          "race_type": "Stakes",
+          "distance": "1 1/8M",
+          "surface": "Turf",
+          "post_time": "2026-11-01T14:12:00",
+          "status": "upcoming",
+          "purse": 200000,
+          "botPick": {
+            "program_number": "1",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "7",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "1",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "7",
+              "horse_name": "Saratoga Spirit",
+              "confidence": "high",
+              "probability": 40
+            },
+            "bestValue": {
+              "program_number": "1",
+              "horse_name": "Turf Titan",
+              "odds": "7-2",
+              "reason": "Turf specialist dropping in class."
+            },
+            "wps": [
+              "7",
+              "9",
+              "1"
+            ],
+            "exacta": {
+              "top": "7",
+              "second": "1",
+              "payout": "$19.80"
+            },
+            "trifecta": {
+              "top": "7",
+              "second": "1",
+              "third": "9",
+              "payout": "$95.40"
+            },
+            "wpsConfidence": [
+              40,
+              57,
+              67
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Turf Titan",
+              "horse_equibase_refid": "10000032",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "6.40",
+              "weight": 125,
+              "finish_position": null
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Saratoga Spirit",
+              "horse_equibase_refid": "10000030",
+              "jockey_name": "I. Ortiz Jr.",
+              "jockey_equibase_refid": "130278",
+              "odds": "2.70",
+              "weight": 125,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Belmont Bow",
+              "horse_equibase_refid": "10000031",
+              "jockey_name": "J. Rosario",
+              "jockey_equibase_refid": "130279",
+              "odds": "4.80",
+              "weight": 125,
+              "finish_position": null
+            }
+          ]
+        }
+      ]
+    },
+    "AD-2026-11-03": {
+      "track_id": "AD",
+      "date": "2026-11-03",
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": "46°F",
+        "track_condition": "Muddy",
+        "wind": "W 14 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 24.1,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 7.6,
+        "average_roi": 14.1,
+        "total_picks": 96
+      },
+      "races": [
+        {
+          "id": "AD110326R1",
+          "race_num": 1,
+          "race_type": "Quarter Horse Maiden",
+          "distance": "250Y",
+          "surface": "Dirt",
+          "post_time": "2026-11-03T12:30:00",
+          "status": "upcoming",
+          "purse": 18000,
+          "botPick": {
+            "program_number": "1",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "1",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "3",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "1",
+              "horse_name": "Maple Sprint",
+              "confidence": "medium",
+              "probability": 36
+            },
+            "bestValue": {
+              "program_number": "9",
+              "horse_name": "Niagara Flash",
+              "odds": "5-1",
+              "reason": "Strong gate speed, value at morning line."
+            },
+            "wps": [
+              "1",
+              "9",
+              "3"
+            ],
+            "exacta": {
+              "top": "1",
+              "second": "9",
+              "payout": "$15.60"
+            },
+            "trifecta": {
+              "top": "1",
+              "second": "9",
+              "third": "3",
+              "payout": "$68.20"
+            },
+            "wpsConfidence": [
+              36,
+              53,
+              63
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Maple Sprint",
+              "horse_equibase_refid": "10000033",
+              "jockey_name": "R. Sanchez",
+              "jockey_equibase_refid": "130280",
+              "odds": "3.30",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "3",
+              "horse_name": "Lakeshore Lad",
+              "horse_equibase_refid": "10000035",
+              "jockey_name": "A. Diaz",
+              "jockey_equibase_refid": "130282",
+              "odds": "8.10",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Niagara Flash",
+              "horse_equibase_refid": "10000034",
+              "jockey_name": "B. Bell",
+              "jockey_equibase_refid": "130281",
+              "odds": "4.70",
+              "weight": 124,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "AD110326R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "350Y",
+          "surface": "Dirt",
+          "post_time": "2026-11-03T12:58:00",
+          "status": "upcoming",
+          "purse": 24000,
+          "botPick": {
+            "program_number": "6",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "7",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "6",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "7",
+              "horse_name": "Durham Dash",
+              "confidence": "high",
+              "probability": 44
+            },
+            "bestValue": {
+              "program_number": "6",
+              "horse_name": "Ontario Bolt",
+              "odds": "10-1",
+              "reason": "First time starter with elite pedigree."
+            },
+            "wps": [
+              "7",
+              "9",
+              "6"
+            ],
+            "exacta": {
+              "top": "7",
+              "second": "9",
+              "payout": "$11.20"
+            },
+            "trifecta": {
+              "top": "7",
+              "second": "9",
+              "third": "6",
+              "payout": "$84.50"
+            },
+            "wpsConfidence": [
+              44,
+              61,
+              71
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "6",
+              "horse_name": "Ontario Bolt",
+              "horse_equibase_refid": "10000038",
+              "jockey_name": "A. Diaz",
+              "jockey_equibase_refid": "130282",
+              "odds": "9.40",
+              "weight": 125,
+              "finish_position": null
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Durham Dash",
+              "horse_equibase_refid": "10000036",
+              "jockey_name": "R. Sanchez",
+              "jockey_equibase_refid": "130280",
+              "odds": "2.90",
+              "weight": 125,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Ajax Ace",
+              "horse_equibase_refid": "10000037",
+              "jockey_name": "B. Bell",
+              "jockey_equibase_refid": "130281",
+              "odds": "5.60",
+              "weight": 125,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "AD110326R3",
+          "race_num": 3,
+          "race_type": "Claiming",
+          "distance": "400Y",
+          "surface": "Dirt",
+          "post_time": "2026-11-03T13:26:00",
+          "status": "upcoming",
+          "purse": 15000,
+          "botPick": {
+            "program_number": "10",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "6",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "10",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "5",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "6",
+              "horse_name": "Cold Front",
+              "confidence": "medium",
+              "probability": 34
+            },
+            "bestValue": {
+              "program_number": "10",
+              "horse_name": "Muddy Waters",
+              "odds": "6-1",
+              "reason": "Handles muddy track conditions perfectly."
+            },
+            "wps": [
+              "6",
+              "10",
+              "5"
+            ],
+            "exacta": {
+              "top": "6",
+              "second": "10",
+              "payout": "$18.90"
+            },
+            "trifecta": {
+              "top": "6",
+              "second": "10",
+              "third": "5",
+              "payout": "$96.30"
+            },
+            "wpsConfidence": [
+              34,
+              51,
+              61
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "5",
+              "horse_name": "Rain Check",
+              "horse_equibase_refid": "10000041",
+              "jockey_name": "R. Sanchez",
+              "jockey_equibase_refid": "130280",
+              "odds": "7.80",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "6",
+              "horse_name": "Cold Front",
+              "horse_equibase_refid": "10000039",
+              "jockey_name": "B. Bell",
+              "jockey_equibase_refid": "130281",
+              "odds": "4.00",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Muddy Waters",
+              "horse_equibase_refid": "10000040",
+              "jockey_name": "A. Diaz",
+              "jockey_equibase_refid": "130282",
+              "odds": "5.20",
+              "weight": 123,
+              "finish_position": null
+            }
+          ]
+        }
+      ]
+    },
+    "CD-2026-11-05": {
+      "track_id": "CD",
+      "date": "2026-11-05",
+      "weather": {
+        "condition": "Clear",
+        "temperature": "61°F",
+        "track_condition": "Fast",
+        "wind": "SW 5 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 36.1,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 22.7,
+        "average_roi": 14.1,
+        "total_picks": 412
+      },
+      "races": [
+        {
+          "id": "CD110526R1",
+          "race_num": 1,
+          "race_type": "Maiden Special Weight",
+          "distance": "6 1/2F",
+          "surface": "Dirt",
+          "post_time": "2026-11-05T13:00:00",
+          "status": "upcoming",
+          "purse": 62000,
+          "botPick": {
+            "program_number": "8",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "8",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "9",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "8",
+              "horse_name": "Run For Roses",
+              "confidence": "high",
+              "probability": 46
+            },
+            "bestValue": {
+              "program_number": "2",
+              "horse_name": "Churchill Charm",
+              "odds": "6-1",
+              "reason": "Debuting with strong works, value play."
+            },
+            "wps": [
+              "8",
+              "2",
+              "9"
+            ],
+            "exacta": {
+              "top": "8",
+              "second": "2",
+              "payout": "$17.40"
+            },
+            "trifecta": {
+              "top": "8",
+              "second": "2",
+              "third": "9",
+              "payout": "$82.10"
+            },
+            "wpsConfidence": [
+              46,
+              63,
+              73
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Churchill Charm",
+              "horse_equibase_refid": "10000043",
+              "jockey_name": "J. Rosario",
+              "jockey_equibase_refid": "130279",
+              "odds": "5.10",
+              "weight": 122,
+              "finish_position": null
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Run For Roses",
+              "horse_equibase_refid": "10000042",
+              "jockey_name": "I. Ortiz Jr.",
+              "jockey_equibase_refid": "130278",
+              "odds": "2.40",
+              "weight": 122,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Spire Rising",
+              "horse_equibase_refid": "10000044",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "7.60",
+              "weight": 122,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "CD110526R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "1 1/16M",
+          "surface": "Dirt",
+          "post_time": "2026-11-05T13:33:00",
+          "status": "upcoming",
+          "purse": 84000,
+          "botPick": {
+            "program_number": "1",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "8",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "1",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "5",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "8",
+              "horse_name": "Clark County",
+              "confidence": "medium",
+              "probability": 38
+            },
+            "bestValue": {
+              "program_number": "1",
+              "horse_name": "Downs Defender",
+              "odds": "5-2",
+              "reason": "Improving form and tactical speed."
+            },
+            "wps": [
+              "8",
+              "1",
+              "5"
+            ],
+            "exacta": {
+              "top": "8",
+              "second": "1",
+              "payout": "$13.80"
+            },
+            "trifecta": {
+              "top": "8",
+              "second": "1",
+              "third": "5",
+              "payout": "$71.50"
+            },
+            "wpsConfidence": [
+              38,
+              55,
+              65
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Downs Defender",
+              "horse_equibase_refid": "10000046",
+              "jockey_name": "I. Ortiz Jr.",
+              "jockey_equibase_refid": "130278",
+              "odds": "4.60",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Rose Runner",
+              "horse_equibase_refid": "10000047",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "8.80",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Clark County",
+              "horse_equibase_refid": "10000045",
+              "jockey_name": "T. Gaffalione",
+              "jockey_equibase_refid": "130271",
+              "odds": "3.90",
+              "weight": 124,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "CD110526R3",
+          "race_num": 3,
+          "race_type": "Stakes",
+          "distance": "1 1/8M",
+          "surface": "Dirt",
+          "post_time": "2026-11-05T14:07:00",
+          "status": "upcoming",
+          "purse": 300000,
+          "botPick": {
+            "program_number": "2",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "5",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "8",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "2",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "5",
+              "horse_name": "Grand Stand",
+              "confidence": "high",
+              "probability": 41
+            },
+            "bestValue": {
+              "program_number": "2",
+              "horse_name": "Sovereign Son",
+              "odds": "6-1",
+              "reason": "Class dropper with upside, tactical angle."
+            },
+            "wps": [
+              "5",
+              "8",
+              "2"
+            ],
+            "exacta": {
+              "top": "5",
+              "second": "2",
+              "payout": "$21.60"
+            },
+            "trifecta": {
+              "top": "5",
+              "second": "2",
+              "third": "8",
+              "payout": "$104.20"
+            },
+            "wpsConfidence": [
+              41,
+              58,
+              68
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Sovereign Son",
+              "horse_equibase_refid": "10000050",
+              "jockey_name": "I. Ortiz Jr.",
+              "jockey_equibase_refid": "130278",
+              "odds": "5.90",
+              "weight": 126,
+              "finish_position": null
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Grand Stand",
+              "horse_equibase_refid": "10000048",
+              "jockey_name": "J. Rosario",
+              "jockey_equibase_refid": "130279",
+              "odds": "3.20",
+              "weight": 126,
+              "finish_position": null
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Bluegrass King",
+              "horse_equibase_refid": "10000049",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "4.40",
+              "weight": 126,
+              "finish_position": null
+            }
+          ]
+        }
+      ]
+    },
+    "RP-2026-11-07": {
+      "track_id": "RP",
+      "date": "2026-11-07",
+      "weather": {
+        "condition": "Windy",
+        "temperature": "64°F",
+        "track_condition": "Fast",
+        "wind": "S 19 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 31.5,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 14.8,
+        "average_roi": 14.1,
+        "total_picks": 198
+      },
+      "races": [
+        {
+          "id": "RP110726R1",
+          "race_num": 1,
+          "race_type": "Claiming",
+          "distance": "6F",
+          "surface": "Dirt",
+          "post_time": "2026-11-07T14:15:00",
+          "status": "upcoming",
+          "purse": 18000,
+          "botPick": {
+            "program_number": "1",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "1",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "5",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "10",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "1",
+              "horse_name": "Prairie Wind",
+              "confidence": "high",
+              "probability": 43
+            },
+            "bestValue": {
+              "program_number": "5",
+              "horse_name": "Dusty Trail",
+              "odds": "6-1",
+              "reason": "Dropping in class, sharp recent workout."
+            },
+            "wps": [
+              "1",
+              "5",
+              "10"
+            ],
+            "exacta": {
+              "top": "1",
+              "second": "5",
+              "payout": "$16.80"
+            },
+            "trifecta": {
+              "top": "1",
+              "second": "5",
+              "third": "10",
+              "payout": "$88.40"
+            },
+            "wpsConfidence": [
+              43,
+              60,
+              70
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Prairie Wind",
+              "horse_equibase_refid": "10000051",
+              "jockey_name": "R. Richard",
+              "jockey_equibase_refid": "130283",
+              "odds": "3.20",
+              "weight": 122,
+              "finish_position": null
+            },
+            {
+              "program_number": "5",
+              "horse_name": "Dusty Trail",
+              "horse_equibase_refid": "10000052",
+              "jockey_name": "A. Birzer",
+              "jockey_equibase_refid": "130284",
+              "odds": "5.80",
+              "weight": 122,
+              "finish_position": null
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Red Rock",
+              "horse_equibase_refid": "10000053",
+              "jockey_name": "K. Frey",
+              "jockey_equibase_refid": "130285",
+              "odds": "7.50",
+              "weight": 122,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "RP110726R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "7 1/2F",
+          "surface": "Turf",
+          "post_time": "2026-11-07T14:47:00",
+          "status": "upcoming",
+          "purse": 36000,
+          "botPick": {
+            "program_number": "12",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "7",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "12",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "11",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "7",
+              "horse_name": "Sooner Sprint",
+              "confidence": "medium",
+              "probability": 37
+            },
+            "bestValue": {
+              "program_number": "12",
+              "horse_name": "Plains Drifter",
+              "odds": "6-1",
+              "reason": "Turf specialist, value at morning line."
+            },
+            "wps": [
+              "7",
+              "12",
+              "11"
+            ],
+            "exacta": {
+              "top": "7",
+              "second": "12",
+              "payout": "$19.20"
+            },
+            "trifecta": {
+              "top": "7",
+              "second": "12",
+              "third": "11",
+              "payout": "$98.60"
+            },
+            "wpsConfidence": [
+              37,
+              54,
+              64
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "7",
+              "horse_name": "Sooner Sprint",
+              "horse_equibase_refid": "10000054",
+              "jockey_name": "T. Berry",
+              "jockey_equibase_refid": "130286",
+              "odds": "4.10",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "11",
+              "horse_name": "Canyon Run",
+              "horse_equibase_refid": "10000056",
+              "jockey_name": "A. Birzer",
+              "jockey_equibase_refid": "130284",
+              "odds": "9.00",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "12",
+              "horse_name": "Plains Drifter",
+              "horse_equibase_refid": "10000055",
+              "jockey_name": "R. Richard",
+              "jockey_equibase_refid": "130283",
+              "odds": "5.30",
+              "weight": 123,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "RP110726R3",
+          "race_num": 3,
+          "race_type": "Springboard Mile Trial",
+          "distance": "1M",
+          "surface": "Dirt",
+          "post_time": "2026-11-07T15:20:00",
+          "status": "upcoming",
+          "purse": 75000,
+          "botPick": {
+            "program_number": "7",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "3",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "7",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "3",
+              "horse_name": "Oklahoma Sky",
+              "confidence": "medium",
+              "probability": 35
+            },
+            "bestValue": {
+              "program_number": "7",
+              "horse_name": "Remington Rocket",
+              "odds": "11-1",
+              "reason": "First time starter with elite pedigree."
+            },
+            "wps": [
+              "3",
+              "2",
+              "7"
+            ],
+            "exacta": {
+              "top": "3",
+              "second": "2",
+              "payout": "$14.50"
+            },
+            "trifecta": {
+              "top": "3",
+              "second": "2",
+              "third": "7",
+              "payout": "$125.80"
+            },
+            "wpsConfidence": [
+              35,
+              52,
+              62
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Thunder Plains",
+              "horse_equibase_refid": "10000058",
+              "jockey_name": "T. Berry",
+              "jockey_equibase_refid": "130286",
+              "odds": "4.90",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "3",
+              "horse_name": "Oklahoma Sky",
+              "horse_equibase_refid": "10000057",
+              "jockey_name": "K. Frey",
+              "jockey_equibase_refid": "130285",
+              "odds": "2.80",
+              "weight": 124,
+              "finish_position": null
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Remington Rocket",
+              "horse_equibase_refid": "10000059",
+              "jockey_name": "R. Richard",
+              "jockey_equibase_refid": "130283",
+              "odds": "10.50",
+              "weight": 124,
+              "finish_position": null
+            }
+          ]
+        }
+      ]
+    },
+    "DD-2026-11-09": {
+      "track_id": "DD",
+      "date": "2026-11-09",
+      "weather": {
+        "condition": "Humid",
+        "temperature": "72°F",
+        "track_condition": "Good",
+        "wind": "SE 7 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 32.7,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 16.1,
+        "average_roi": 14.1,
+        "total_picks": 224
+      },
+      "races": [
+        {
+          "id": "DD110926R1",
+          "race_num": 1,
+          "race_type": "Maiden Claiming",
+          "distance": "5F",
+          "surface": "Dirt",
+          "post_time": "2026-11-09T13:30:00",
+          "status": "upcoming",
+          "purse": 20000,
+          "botPick": {
+            "program_number": "2",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "11",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "10",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "11",
+              "horse_name": "Bayou Bullet",
+              "confidence": "medium",
+              "probability": 33
+            },
+            "bestValue": {
+              "program_number": "2",
+              "horse_name": "Delta Dawn",
+              "odds": "6-1",
+              "reason": "Debuting with strong works, value play."
+            },
+            "wps": [
+              "11",
+              "2",
+              "10"
+            ],
+            "exacta": {
+              "top": "11",
+              "second": "2",
+              "payout": "$20.40"
+            },
+            "trifecta": {
+              "top": "11",
+              "second": "2",
+              "third": "10",
+              "payout": "$108.60"
+            },
+            "wpsConfidence": [
+              33,
+              50,
+              60
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Delta Dawn",
+              "horse_equibase_refid": "10000061",
+              "jockey_name": "J. Dominguez",
+              "jockey_equibase_refid": "130288",
+              "odds": "5.00",
+              "weight": 121,
+              "finish_position": null
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Vinton Valor",
+              "horse_equibase_refid": "10000062",
+              "jockey_name": "T. Thornton",
+              "jockey_equibase_refid": "130289",
+              "odds": "8.60",
+              "weight": 121,
+              "finish_position": null
+            },
+            {
+              "program_number": "11",
+              "horse_name": "Bayou Bullet",
+              "horse_equibase_refid": "10000060",
+              "jockey_name": "C. McMahon",
+              "jockey_equibase_refid": "130287",
+              "odds": "3.70",
+              "weight": 121,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "DD110926R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "6 1/2F",
+          "surface": "Dirt",
+          "post_time": "2026-11-09T14:02:00",
+          "status": "upcoming",
+          "purse": 42000,
+          "botPick": {
+            "program_number": "8",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "8",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "5",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "10",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "8",
+              "horse_name": "Jackpot Junction",
+              "confidence": "high",
+              "probability": 47
+            },
+            "bestValue": {
+              "program_number": "5",
+              "horse_name": "Cajun Comet",
+              "odds": "7-2",
+              "reason": "Consistent form, jockey change positive."
+            },
+            "wps": [
+              "8",
+              "5",
+              "10"
+            ],
+            "exacta": {
+              "top": "8",
+              "second": "5",
+              "payout": "$15.20"
+            },
+            "trifecta": {
+              "top": "8",
+              "second": "5",
+              "third": "10",
+              "payout": "$76.40"
+            },
+            "wpsConfidence": [
+              47,
+              64,
+              74
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "5",
+              "horse_name": "Cajun Comet",
+              "horse_equibase_refid": "10000064",
+              "jockey_name": "C. McMahon",
+              "jockey_equibase_refid": "130287",
+              "odds": "5.70",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Jackpot Junction",
+              "horse_equibase_refid": "10000063",
+              "jockey_name": "J. Dominguez",
+              "jockey_equibase_refid": "130288",
+              "odds": "2.60",
+              "weight": 123,
+              "finish_position": null
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Louisiana Lightning",
+              "horse_equibase_refid": "10000065",
+              "jockey_name": "T. Thornton",
+              "jockey_equibase_refid": "130289",
+              "odds": "9.80",
+              "weight": 123,
+              "finish_position": null
+            }
+          ]
+        },
+        {
+          "id": "DD110926R3",
+          "race_num": 3,
+          "race_type": "Claiming",
+          "distance": "7F",
+          "surface": "Dirt",
+          "post_time": "2026-11-09T14:35:00",
+          "status": "upcoming",
+          "purse": 22000,
+          "botPick": {
+            "program_number": "7",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "4",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "7",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "4",
+              "horse_name": "Swamp Fox",
+              "confidence": "medium",
+              "probability": 36
+            },
+            "bestValue": {
+              "program_number": "7",
+              "horse_name": "Gulf Gambit",
+              "odds": "12-1",
+              "reason": "First time claiming, sharp workout."
+            },
+            "wps": [
+              "4",
+              "9",
+              "7"
+            ],
+            "exacta": {
+              "top": "4",
+              "second": "9",
+              "payout": "$17.80"
+            },
+            "trifecta": {
+              "top": "4",
+              "second": "9",
+              "third": "7",
+              "payout": "$142.30"
+            },
+            "wpsConfidence": [
+              36,
+              53,
+              63
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "4",
+              "horse_name": "Swamp Fox",
+              "horse_equibase_refid": "10000066",
+              "jockey_name": "T. Thornton",
+              "jockey_equibase_refid": "130289",
+              "odds": "3.40",
+              "weight": 122,
+              "finish_position": null
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Gulf Gambit",
+              "horse_equibase_refid": "10000068",
+              "jockey_name": "J. Dominguez",
+              "jockey_equibase_refid": "130288",
+              "odds": "11.20",
+              "weight": 122,
+              "finish_position": null
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Pelican Path",
+              "horse_equibase_refid": "10000067",
+              "jockey_name": "C. McMahon",
+              "jockey_equibase_refid": "130287",
+              "odds": "6.20",
+              "weight": 122,
+              "finish_position": null
+            }
+          ]
+        }
+      ]
+    },
+    "KEE-2026-11-11": {
+      "track_id": "KEE",
+      "date": "2026-11-11",
+      "weather": {
+        "condition": "Sunny",
+        "temperature": "68°F",
+        "track_condition": "Firm",
+        "wind": "NW 8 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 38.5,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 22.4,
+        "average_roi": 14.1,
+        "total_picks": 142
+      },
+      "races": [
+        {
+          "id": "KEE111126R1",
+          "race_num": 1,
+          "race_type": "Maiden Special Weight",
+          "distance": "6F",
+          "surface": "Dirt",
+          "post_time": "2026-11-11T13:00:00",
+          "status": "upcoming",
+          "purse": 45000,
+          "botPick": {
+            "program_number": "2",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "2",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "9",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "1",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            },
+            {
+              "program_number": "7",
+              "confidence": "low",
+              "analysis": "First-time starter with strong works but unproven."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "2",
+              "horse_name": "Thunder Bolt",
+              "confidence": "high",
+              "probability": 42
+            },
+            "bestValue": {
+              "program_number": "1",
+              "horse_name": "Golden Arrow",
+              "odds": "8-1",
+              "reason": "Class drop + tactical angle = hidden value at morning line"
+            },
+            "wps": [
+              "2",
+              "9",
+              "1"
+            ],
+            "exacta": {
+              "top": "2",
+              "second": "9",
+              "payout": "$14.20"
+            },
+            "trifecta": {
+              "top": "2",
+              "second": "9",
+              "third": "1",
+              "payout": "$87.50"
+            },
+            "wpsConfidence": [
+              42,
+              59,
+              69
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Golden Arrow",
+              "horse_equibase_refid": "10000012",
+              "jockey_name": "T. Gaffalione",
+              "jockey_equibase_refid": "130271",
+              "odds": "8.00",
+              "weight": 122
+            },
+            {
+              "program_number": "2",
+              "horse_name": "Thunder Bolt",
+              "horse_equibase_refid": "10000010",
+              "jockey_name": "J. Santiago",
+              "jockey_equibase_refid": "130270",
+              "odds": "3.50",
+              "weight": 122
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Silver Storm",
+              "horse_equibase_refid": "10000013",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "12.50",
+              "weight": 122
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Midnight Runner",
+              "horse_equibase_refid": "10000011",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "5.20",
+              "weight": 122
+            }
+          ]
+        },
+        {
+          "id": "KEE111126R2",
+          "race_num": 2,
+          "race_type": "Allowance Optional Claiming",
+          "distance": "1 1/16M",
+          "surface": "Dirt",
+          "post_time": "2026-11-11T13:35:00",
+          "status": "upcoming",
+          "purse": 65000,
+          "botPick": {
+            "program_number": "6",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "8",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "1",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "6",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            },
+            {
+              "program_number": "2",
+              "confidence": "low",
+              "analysis": "First-time starter with strong works but unproven."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "8",
+              "horse_name": "Desert Wind",
+              "confidence": "high",
+              "probability": 38
+            },
+            "bestValue": {
+              "program_number": "6",
+              "horse_name": "Royal Flush",
+              "odds": "3-1",
+              "reason": "Dropping in class with top jockey."
+            },
+            "wps": [
+              "8",
+              "6",
+              "1"
+            ],
+            "exacta": {
+              "top": "8",
+              "second": "6",
+              "payout": "$18.40"
+            },
+            "trifecta": {
+              "top": "8",
+              "second": "6",
+              "third": "1",
+              "payout": "$92.10"
+            },
+            "wpsConfidence": [
+              38,
+              55,
+              65
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Crimson Tide",
+              "horse_equibase_refid": "10000015",
+              "jockey_name": "J. Santiago",
+              "jockey_equibase_refid": "130270",
+              "odds": "6.80",
+              "weight": 124
+            },
+            {
+              "program_number": "2",
+              "horse_name": "Ocean Breeze",
+              "horse_equibase_refid": "10000017",
+              "jockey_name": "T. Gaffalione",
+              "jockey_equibase_refid": "130271",
+              "odds": "11.00",
+              "weight": 124
+            },
+            {
+              "program_number": "6",
+              "horse_name": "Royal Flush",
+              "horse_equibase_refid": "10000016",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "2.90",
+              "weight": 124
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Desert Wind",
+              "horse_equibase_refid": "10000014",
+              "jockey_name": "F. Arriet",
+              "jockey_equibase_refid": "130273",
+              "odds": "4.10",
+              "weight": 124
+            }
+          ]
+        },
+        {
+          "id": "KEE111126R3",
+          "race_num": 3,
+          "race_type": "Stakes",
+          "distance": "1 1/8M",
+          "surface": "Dirt",
+          "post_time": "2026-11-11T14:10:00",
+          "status": "upcoming",
+          "purse": 150000,
+          "botPick": {
+            "program_number": "3",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "3",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "10",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "9",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "3",
+              "horse_name": "Wildfire",
+              "confidence": "high",
+              "probability": 45
+            },
+            "bestValue": {
+              "program_number": "10",
+              "horse_name": "Iron Will",
+              "odds": "5-2",
+              "reason": "Improving form and tactical speed."
+            },
+            "wps": [
+              "3",
+              "10",
+              "9"
+            ],
+            "exacta": {
+              "top": "3",
+              "second": "10",
+              "payout": "$12.60"
+            },
+            "trifecta": {
+              "top": "3",
+              "second": "10",
+              "third": "9",
+              "payout": "$64.80"
+            },
+            "wpsConfidence": [
+              45,
+              62,
+              72
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "3",
+              "horse_name": "Wildfire",
+              "horse_equibase_refid": "10000018",
+              "jockey_name": "J. Santiago",
+              "jockey_equibase_refid": "130270",
+              "odds": "2.10",
+              "weight": 126
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Lightning Strike",
+              "horse_equibase_refid": "10000020",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "7.20",
+              "weight": 126
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Iron Will",
+              "horse_equibase_refid": "10000019",
+              "jockey_name": "M. Murrill",
+              "jockey_equibase_refid": "145892",
+              "odds": "4.50",
+              "weight": 126
+            }
+          ]
+        },
+        {
+          "id": "KEE111126R4",
+          "race_num": 4,
+          "race_type": "Claiming",
+          "distance": "7F",
+          "surface": "Dirt",
+          "post_time": "2026-11-11T14:45:00",
+          "status": "upcoming",
+          "purse": 32000,
+          "botPick": {
+            "program_number": "6",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "7",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "6",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "5",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "7",
+              "horse_name": "Sunset Rider",
+              "confidence": "medium",
+              "probability": 35
+            },
+            "bestValue": {
+              "program_number": "6",
+              "horse_name": "Morning Glory",
+              "odds": "6-1",
+              "reason": "First time claiming, sharp workout."
+            },
+            "wps": [
+              "7",
+              "6",
+              "5"
+            ],
+            "exacta": {
+              "top": "7",
+              "second": "6",
+              "payout": "$22.40"
+            },
+            "trifecta": {
+              "top": "7",
+              "second": "6",
+              "third": "5",
+              "payout": "$115.20"
+            },
+            "wpsConfidence": [
+              35,
+              52,
+              62
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "5",
+              "horse_name": "Evening Star",
+              "horse_equibase_refid": "10000023",
+              "jockey_name": "R. Maragh",
+              "jockey_equibase_refid": "130276",
+              "odds": "8.20",
+              "weight": 120
+            },
+            {
+              "program_number": "6",
+              "horse_name": "Morning Glory",
+              "horse_equibase_refid": "10000022",
+              "jockey_name": "K. Carmouche",
+              "jockey_equibase_refid": "130275",
+              "odds": "5.50",
+              "weight": 120
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Sunset Rider",
+              "horse_equibase_refid": "10000021",
+              "jockey_name": "D. Davis",
+              "jockey_equibase_refid": "130274",
+              "odds": "3.80",
+              "weight": 120
+            }
+          ]
+        }
+      ]
+    },
+    "BEL-2026-11-13": {
+      "track_id": "BEL",
+      "date": "2026-11-13",
+      "weather": {
+        "condition": "Partly Cloudy",
+        "temperature": "57°F",
+        "track_condition": "Fast",
+        "wind": "NE 11 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 29.8,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 11.2,
+        "average_roi": 14.1,
+        "total_picks": 203
+      },
+      "races": [
+        {
+          "id": "BEL111326R1",
+          "race_num": 1,
+          "race_type": "Maiden Claiming",
+          "distance": "5F",
+          "surface": "Dirt",
+          "post_time": "2026-11-13T13:05:00",
+          "status": "upcoming",
+          "purse": 32000,
+          "botPick": {
+            "program_number": "2",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "8",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "12",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "8",
+              "horse_name": "Hudson Line",
+              "confidence": "medium",
+              "probability": 32
+            },
+            "bestValue": {
+              "program_number": "2",
+              "horse_name": "Empire State",
+              "odds": "6-1",
+              "reason": "Debuting with strong works, value play."
+            },
+            "wps": [
+              "8",
+              "2",
+              "12"
+            ],
+            "exacta": {
+              "top": "8",
+              "second": "2",
+              "payout": "$24.80"
+            },
+            "trifecta": {
+              "top": "8",
+              "second": "2",
+              "third": "12",
+              "payout": "$132.50"
+            },
+            "wpsConfidence": [
+              32,
+              49,
+              59
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Empire State",
+              "horse_equibase_refid": "10000025",
+              "jockey_name": "K. Carmouche",
+              "jockey_equibase_refid": "130275",
+              "odds": "5.50",
+              "weight": 120
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Hudson Line",
+              "horse_equibase_refid": "10000024",
+              "jockey_name": "D. Davis",
+              "jockey_equibase_refid": "130274",
+              "odds": "3.80",
+              "weight": 120
+            },
+            {
+              "program_number": "12",
+              "horse_name": "Brooklyn Bridge",
+              "horse_equibase_refid": "10000026",
+              "jockey_name": "R. Maragh",
+              "jockey_equibase_refid": "130276",
+              "odds": "8.20",
+              "weight": 120
+            }
+          ]
+        },
+        {
+          "id": "BEL111326R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "7F",
+          "surface": "Dirt",
+          "post_time": "2026-11-13T13:38:00",
+          "status": "upcoming",
+          "purse": 58000,
+          "botPick": {
+            "program_number": "6",
+            "confidence": "high"
+          },
+          "predictions": [
+            {
+              "program_number": "6",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "7",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "8",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "6",
+              "horse_name": "Velocity",
+              "confidence": "high",
+              "probability": 48
+            },
+            "bestValue": {
+              "program_number": "7",
+              "horse_name": "Momentum",
+              "odds": "7-2",
+              "reason": "Consistent form, jockey change positive."
+            },
+            "wps": [
+              "6",
+              "7",
+              "8"
+            ],
+            "exacta": {
+              "top": "6",
+              "second": "7",
+              "payout": "$16.40"
+            },
+            "trifecta": {
+              "top": "6",
+              "second": "7",
+              "third": "8",
+              "payout": "$78.90"
+            },
+            "wpsConfidence": [
+              48,
+              65,
+              75
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "6",
+              "horse_name": "Velocity",
+              "horse_equibase_refid": "10000027",
+              "jockey_name": "D. Davis",
+              "jockey_equibase_refid": "130274",
+              "odds": "4.20",
+              "weight": 123
+            },
+            {
+              "program_number": "7",
+              "horse_name": "Momentum",
+              "horse_equibase_refid": "10000028",
+              "jockey_name": "K. Carmouche",
+              "jockey_equibase_refid": "130275",
+              "odds": "6.10",
+              "weight": 123
+            },
+            {
+              "program_number": "8",
+              "horse_name": "Breakaway",
+              "horse_equibase_refid": "10000029",
+              "jockey_name": "J. Alvarado",
+              "jockey_equibase_refid": "130277",
+              "odds": "13.00",
+              "weight": 123
+            }
+          ]
+        },
+        {
+          "id": "BEL111326R3",
+          "race_num": 3,
+          "race_type": "Stakes",
+          "distance": "1 1/8M",
+          "surface": "Turf",
+          "post_time": "2026-11-13T14:12:00",
+          "status": "upcoming",
+          "purse": 200000,
+          "botPick": {
+            "program_number": "11",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "9",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "2",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "11",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "9",
+              "horse_name": "Saratoga Spirit",
+              "confidence": "high",
+              "probability": 40
+            },
+            "bestValue": {
+              "program_number": "11",
+              "horse_name": "Turf Titan",
+              "odds": "7-2",
+              "reason": "Turf specialist dropping in class."
+            },
+            "wps": [
+              "9",
+              "2",
+              "11"
+            ],
+            "exacta": {
+              "top": "9",
+              "second": "11",
+              "payout": "$19.80"
+            },
+            "trifecta": {
+              "top": "9",
+              "second": "11",
+              "third": "2",
+              "payout": "$95.40"
+            },
+            "wpsConfidence": [
+              40,
+              57,
+              67
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "2",
+              "horse_name": "Belmont Bow",
+              "horse_equibase_refid": "10000031",
+              "jockey_name": "J. Rosario",
+              "jockey_equibase_refid": "130279",
+              "odds": "4.80",
+              "weight": 125
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Saratoga Spirit",
+              "horse_equibase_refid": "10000030",
+              "jockey_name": "I. Ortiz Jr.",
+              "jockey_equibase_refid": "130278",
+              "odds": "2.70",
+              "weight": 125
+            },
+            {
+              "program_number": "11",
+              "horse_name": "Turf Titan",
+              "horse_equibase_refid": "10000032",
+              "jockey_name": "L. Saez",
+              "jockey_equibase_refid": "130272",
+              "odds": "6.40",
+              "weight": 125
+            }
+          ]
+        }
+      ]
+    },
+    "AD-2026-11-15": {
+      "track_id": "AD",
+      "date": "2026-11-15",
+      "weather": {
+        "condition": "Light Rain",
+        "temperature": "46°F",
+        "track_condition": "Muddy",
+        "wind": "W 14 mph"
+      },
+      "botStats": {
+        "track_weather_win_rate": 24.1,
+        "average_win_rate": 28.2,
+        "track_weather_roi": 7.6,
+        "average_roi": 14.1,
+        "total_picks": 96
+      },
+      "races": [
+        {
+          "id": "AD111526R1",
+          "race_num": 1,
+          "race_type": "Quarter Horse Maiden",
+          "distance": "250Y",
+          "surface": "Dirt",
+          "post_time": "2026-11-15T12:30:00",
+          "status": "upcoming",
+          "purse": 18000,
+          "botPick": {
+            "program_number": "9",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "9",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "4",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "3",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "9",
+              "horse_name": "Maple Sprint",
+              "confidence": "medium",
+              "probability": 36
+            },
+            "bestValue": {
+              "program_number": "4",
+              "horse_name": "Niagara Flash",
+              "odds": "5-1",
+              "reason": "Strong gate speed, value at morning line."
+            },
+            "wps": [
+              "9",
+              "4",
+              "3"
+            ],
+            "exacta": {
+              "top": "9",
+              "second": "4",
+              "payout": "$15.60"
+            },
+            "trifecta": {
+              "top": "9",
+              "second": "4",
+              "third": "3",
+              "payout": "$68.20"
+            },
+            "wpsConfidence": [
+              36,
+              53,
+              63
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "3",
+              "horse_name": "Lakeshore Lad",
+              "horse_equibase_refid": "10000035",
+              "jockey_name": "A. Diaz",
+              "jockey_equibase_refid": "130282",
+              "odds": "8.10",
+              "weight": 124
+            },
+            {
+              "program_number": "4",
+              "horse_name": "Niagara Flash",
+              "horse_equibase_refid": "10000034",
+              "jockey_name": "B. Bell",
+              "jockey_equibase_refid": "130281",
+              "odds": "4.70",
+              "weight": 124
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Maple Sprint",
+              "horse_equibase_refid": "10000033",
+              "jockey_name": "R. Sanchez",
+              "jockey_equibase_refid": "130280",
+              "odds": "3.30",
+              "weight": 124
+            }
+          ]
+        },
+        {
+          "id": "AD111526R2",
+          "race_num": 2,
+          "race_type": "Allowance",
+          "distance": "350Y",
+          "surface": "Dirt",
+          "post_time": "2026-11-15T12:58:00",
+          "status": "upcoming",
+          "purse": 24000,
+          "botPick": {
+            "program_number": "3",
+            "confidence": "low"
+          },
+          "predictions": [
+            {
+              "program_number": "9",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "10",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "3",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "9",
+              "horse_name": "Durham Dash",
+              "confidence": "high",
+              "probability": 44
+            },
+            "bestValue": {
+              "program_number": "3",
+              "horse_name": "Ontario Bolt",
+              "odds": "10-1",
+              "reason": "First time starter with elite pedigree."
+            },
+            "wps": [
+              "9",
+              "10",
+              "3"
+            ],
+            "exacta": {
+              "top": "9",
+              "second": "10",
+              "payout": "$11.20"
+            },
+            "trifecta": {
+              "top": "9",
+              "second": "10",
+              "third": "3",
+              "payout": "$84.50"
+            },
+            "wpsConfidence": [
+              44,
+              61,
+              71
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "3",
+              "horse_name": "Ontario Bolt",
+              "horse_equibase_refid": "10000038",
+              "jockey_name": "A. Diaz",
+              "jockey_equibase_refid": "130282",
+              "odds": "9.40",
+              "weight": 125
+            },
+            {
+              "program_number": "9",
+              "horse_name": "Durham Dash",
+              "horse_equibase_refid": "10000036",
+              "jockey_name": "R. Sanchez",
+              "jockey_equibase_refid": "130280",
+              "odds": "2.90",
+              "weight": 125
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Ajax Ace",
+              "horse_equibase_refid": "10000037",
+              "jockey_name": "B. Bell",
+              "jockey_equibase_refid": "130281",
+              "odds": "5.60",
+              "weight": 125
+            }
+          ]
+        },
+        {
+          "id": "AD111526R3",
+          "race_num": 3,
+          "race_type": "Claiming",
+          "distance": "400Y",
+          "surface": "Dirt",
+          "post_time": "2026-11-15T13:26:00",
+          "status": "upcoming",
+          "purse": 15000,
+          "botPick": {
+            "program_number": "3",
+            "confidence": "medium"
+          },
+          "predictions": [
+            {
+              "program_number": "1",
+              "confidence": "high",
+              "analysis": "Dominant early speed figures in last two outings. Ideal inside post at this distance."
+            },
+            {
+              "program_number": "3",
+              "confidence": "medium",
+              "analysis": "Solid late runner with tactical speed. Could benefit from early pace duel."
+            },
+            {
+              "program_number": "10",
+              "confidence": "low",
+              "analysis": "Class dropper with upside, but inconsistent form. Needs clean trip from outside post."
+            }
+          ],
+          "premiumPicks": {
+            "mostLikelyWinner": {
+              "program_number": "1",
+              "horse_name": "Cold Front",
+              "confidence": "medium",
+              "probability": 34
+            },
+            "bestValue": {
+              "program_number": "3",
+              "horse_name": "Muddy Waters",
+              "odds": "6-1",
+              "reason": "Handles muddy track conditions perfectly."
+            },
+            "wps": [
+              "1",
+              "3",
+              "10"
+            ],
+            "exacta": {
+              "top": "1",
+              "second": "3",
+              "payout": "$18.90"
+            },
+            "trifecta": {
+              "top": "1",
+              "second": "3",
+              "third": "10",
+              "payout": "$96.30"
+            },
+            "wpsConfidence": [
+              34,
+              51,
+              61
+            ]
+          },
+          "participants": [
+            {
+              "program_number": "1",
+              "horse_name": "Cold Front",
+              "horse_equibase_refid": "10000039",
+              "jockey_name": "B. Bell",
+              "jockey_equibase_refid": "130281",
+              "odds": "4.00",
+              "weight": 123
+            },
+            {
+              "program_number": "3",
+              "horse_name": "Muddy Waters",
+              "horse_equibase_refid": "10000040",
+              "jockey_name": "A. Diaz",
+              "jockey_equibase_refid": "130282",
+              "odds": "5.20",
+              "weight": 123
+            },
+            {
+              "program_number": "10",
+              "horse_name": "Rain Check",
+              "horse_equibase_refid": "10000041",
+              "jockey_name": "R. Sanchez",
+              "jockey_equibase_refid": "130280",
+              "odds": "7.80",
+              "weight": 123
+            }
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -1,0 +1,12 @@
+// Amagro — display face for headings, buttons, numbers.
+// The file only ships a bold cut, so we declare it across the
+// whole weight range: any font-weight maps to this file and the
+// browser never fakes a bolder version of an already-bold face.
+// Body face (Raleway) is loaded from Google Fonts in nuxt.config.ts.
+@font-face {
+  font-family: 'Amagro';
+  src: url('@/assets/css/amagro.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}

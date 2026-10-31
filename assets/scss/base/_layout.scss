@@ -1,0 +1,61 @@
+@use '../abstracts' as *;
+
+// ---- Container -------------------------------------------------
+.container {
+  width: 100%;
+  max-width: calc(#{$container-max} + 2 * var(--gutter));
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+
+  &--wide { max-width: calc(#{$container-wide} + 2 * var(--gutter)); }
+  &--narrow { max-width: calc(800px + 2 * var(--gutter)); }
+}
+
+main { flex: 1 0 auto; }
+
+// ---- Sections --------------------------------------------------
+// Every top-level <section> gets vertical rhythm via its own class;
+// these helpers cover the common backgrounds.
+.section { padding-block: var(--section-pad); }
+.section--alt { background-color: var(--bg-alt); }
+.section--dark { background-color: var(--bg-dark); color: var(--text-on-dark); }
+.section--espresso { background-color: var(--bg-dark-warm); color: var(--text-on-dark); }
+
+// ---- Section heading pattern -----------------------------------
+.section-header {
+  text-align: center;
+  margin-bottom: var(--space-8);
+}
+
+.section-title {
+  font-size: var(--fs-3xl);
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+.section-subtitle {
+  font-size: var(--fs-md);
+  color: var(--text-secondary);
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto var(--space-8);
+  line-height: var(--lh-body);
+}
+
+.section-header .section-subtitle { margin-bottom: 0; }
+
+// Dark section variants flip heading colours
+.section--dark,
+.section--espresso {
+  .section-title { color: var(--color-white); }
+  .section-subtitle { color: var(--text-on-dark-muted); }
+}
+
+// ---- Responsive grids ------------------------------------------
+// Auto-fill grid that never overflows on narrow phones.
+.auto-grid {
+  --min: 300px;
+  display: grid;
+  gap: var(--space-5);
+  grid-template-columns: repeat(auto-fill, minmax(min(var(--min), 100%), 1fr));
+}

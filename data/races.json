@@ -1,0 +1,362 @@
+{
+  "date": "2026-10-31",
+  "races": [
+    {
+      "id": "KEE103126USA1",
+      "track_id": "KEE",
+      "track_name": "Keeneland",
+      "race_num": 1,
+      "race_type": "Maiden Special Weight",
+      "distance": "6F",
+      "surface": "Dirt",
+      "post_time": "2026-10-31T13:00:00",
+      "status": "completed",
+      "purse": 45000,
+      "pick": {
+        "program_number": "7",
+        "horse_name": "Thunder Bolt",
+        "confidence": "high"
+      },
+      "participants": [
+        {
+          "program_number": "2",
+          "horse_name": "Golden Arrow",
+          "horse_equibase_refid": "10000012",
+          "jockey_name": "T. Gaffalione",
+          "odds": "8.00",
+          "weight": 122,
+          "finish_position": 3
+        },
+        {
+          "program_number": "7",
+          "horse_name": "Thunder Bolt",
+          "horse_equibase_refid": "10000010",
+          "jockey_name": "J. Santiago",
+          "odds": "3.50",
+          "weight": 122,
+          "finish_position": 1
+        },
+        {
+          "program_number": "8",
+          "horse_name": "Silver Storm",
+          "horse_equibase_refid": "10000013",
+          "jockey_name": "L. Saez",
+          "odds": "12.50",
+          "weight": 122,
+          "finish_position": 4
+        },
+        {
+          "program_number": "9",
+          "horse_name": "Midnight Runner",
+          "horse_equibase_refid": "10000011",
+          "jockey_name": "M. Murrill",
+          "odds": "5.20",
+          "weight": 122,
+          "finish_position": 2
+        }
+      ]
+    },
+    {
+      "id": "KEE103126USA2",
+      "track_id": "KEE",
+      "track_name": "Keeneland",
+      "race_num": 2,
+      "race_type": "Allowance Optional Claiming",
+      "distance": "1 1/16M",
+      "surface": "Dirt",
+      "post_time": "2026-10-31T13:35:00",
+      "status": "live",
+      "purse": 65000,
+      "pick": {
+        "program_number": "4",
+        "horse_name": "Royal Flush",
+        "confidence": "medium"
+      },
+      "participants": [
+        {
+          "program_number": "2",
+          "horse_name": "Crimson Tide",
+          "horse_equibase_refid": "10000015",
+          "jockey_name": "J. Santiago",
+          "odds": "6.80",
+          "weight": 124,
+          "finish_position": null
+        },
+        {
+          "program_number": "4",
+          "horse_name": "Royal Flush",
+          "horse_equibase_refid": "10000016",
+          "jockey_name": "M. Murrill",
+          "odds": "2.90",
+          "weight": 124,
+          "finish_position": null
+        },
+        {
+          "program_number": "5",
+          "horse_name": "Ocean Breeze",
+          "horse_equibase_refid": "10000017",
+          "jockey_name": "T. Gaffalione",
+          "odds": "11.00",
+          "weight": 124,
+          "finish_position": null
+        },
+        {
+          "program_number": "9",
+          "horse_name": "Desert Wind",
+          "horse_equibase_refid": "10000014",
+          "jockey_name": "F. Arriet",
+          "odds": "4.10",
+          "weight": 124,
+          "finish_position": null
+        }
+      ]
+    },
+    {
+      "id": "KEE103126USA3",
+      "track_id": "KEE",
+      "track_name": "Keeneland",
+      "race_num": 3,
+      "race_type": "Stakes",
+      "distance": "1 1/8M",
+      "surface": "Dirt",
+      "post_time": "2026-10-31T14:10:00",
+      "status": "upcoming",
+      "purse": 150000,
+      "pick": {
+        "program_number": "4",
+        "horse_name": "Wildfire",
+        "confidence": "high"
+      },
+      "participants": [
+        {
+          "program_number": "1",
+          "horse_name": "Lightning Strike",
+          "horse_equibase_refid": "10000020",
+          "jockey_name": "L. Saez",
+          "odds": "7.20",
+          "weight": 126,
+          "finish_position": null
+        },
+        {
+          "program_number": "4",
+          "horse_name": "Wildfire",
+          "horse_equibase_refid": "10000018",
+          "jockey_name": "J. Santiago",
+          "odds": "2.10",
+          "weight": 126,
+          "finish_position": null
+        },
+        {
+          "program_number": "7",
+          "horse_name": "Blazing Fast",
+          "horse_equibase_refid": "10000071",
+          "jockey_name": "F. Arriet",
+          "odds": "14.00",
+          "weight": 126,
+          "finish_position": null
+        },
+        {
+          "program_number": "8",
+          "horse_name": "Thunder Road",
+          "horse_equibase_refid": "10000072",
+          "jockey_name": "T. Gaffalione",
+          "odds": "18.50",
+          "weight": 126,
+          "finish_position": null
+        },
+        {
+          "program_number": "9",
+          "horse_name": "Iron Will",
+          "horse_equibase_refid": "10000019",
+          "jockey_name": "M. Murrill",
+          "odds": "4.50",
+          "weight": 126,
+          "finish_position": null
+        },
+        {
+          "program_number": "10",
+          "horse_name": "Storm Chaser",
+          "horse_equibase_refid": "10000070",
+          "jockey_name": "I. Ortiz Jr.",
+          "odds": "9.80",
+          "weight": 126,
+          "finish_position": null
+        }
+      ]
+    },
+    {
+      "id": "BEL103126USA1",
+      "track_id": "BEL",
+      "track_name": "Belmont Park",
+      "race_num": 1,
+      "race_type": "Maiden Claiming",
+      "distance": "5F",
+      "surface": "Dirt",
+      "post_time": "2026-11-01T13:05:00",
+      "status": "upcoming",
+      "purse": 32000,
+      "pick": {
+        "program_number": "4",
+        "horse_name": "Empire State",
+        "confidence": "medium"
+      },
+      "participants": [
+        {
+          "program_number": "1",
+          "horse_name": "Dawn Patrol",
+          "horse_equibase_refid": "10000073",
+          "jockey_name": "J. Alvarado",
+          "odds": "12.00",
+          "weight": 120,
+          "finish_position": null
+        },
+        {
+          "program_number": "2",
+          "horse_name": "Brooklyn Bridge",
+          "horse_equibase_refid": "10000026",
+          "jockey_name": "R. Maragh",
+          "odds": "8.20",
+          "weight": 120,
+          "finish_position": null
+        },
+        {
+          "program_number": "4",
+          "horse_name": "Empire State",
+          "horse_equibase_refid": "10000025",
+          "jockey_name": "K. Carmouche",
+          "odds": "5.50",
+          "weight": 120,
+          "finish_position": null
+        },
+        {
+          "program_number": "5",
+          "horse_name": "Hudson Line",
+          "horse_equibase_refid": "10000024",
+          "jockey_name": "D. Davis",
+          "odds": "3.80",
+          "weight": 120,
+          "finish_position": null
+        }
+      ]
+    },
+    {
+      "id": "BEL103126USA2",
+      "track_id": "BEL",
+      "track_name": "Belmont Park",
+      "race_num": 2,
+      "race_type": "Allowance",
+      "distance": "7F",
+      "surface": "Dirt",
+      "post_time": "2026-11-01T13:38:00",
+      "status": "upcoming",
+      "purse": 58000,
+      "pick": {
+        "program_number": "7",
+        "horse_name": "Velocity",
+        "confidence": "high"
+      },
+      "participants": [
+        {
+          "program_number": "1",
+          "horse_name": "Full Throttle",
+          "horse_equibase_refid": "10000075",
+          "jockey_name": "E. Cancel",
+          "odds": "16.50",
+          "weight": 123,
+          "finish_position": null
+        },
+        {
+          "program_number": "5",
+          "horse_name": "Acceleration",
+          "horse_equibase_refid": "10000074",
+          "jockey_name": "R. Maragh",
+          "odds": "9.50",
+          "weight": 123,
+          "finish_position": null
+        },
+        {
+          "program_number": "7",
+          "horse_name": "Velocity",
+          "horse_equibase_refid": "10000027",
+          "jockey_name": "D. Davis",
+          "odds": "4.20",
+          "weight": 123,
+          "finish_position": null
+        },
+        {
+          "program_number": "8",
+          "horse_name": "Momentum",
+          "horse_equibase_refid": "10000028",
+          "jockey_name": "K. Carmouche",
+          "odds": "6.10",
+          "weight": 123,
+          "finish_position": null
+        },
+        {
+          "program_number": "10",
+          "horse_name": "Breakaway",
+          "horse_equibase_refid": "10000029",
+          "jockey_name": "J. Alvarado",
+          "odds": "13.00",
+          "weight": 123,
+          "finish_position": null
+        }
+      ]
+    },
+    {
+      "id": "RP103126USA1",
+      "track_id": "RP",
+      "track_name": "Remington Park",
+      "race_num": 1,
+      "race_type": "Claiming",
+      "distance": "6F",
+      "surface": "Dirt",
+      "post_time": "2026-11-07T14:15:00",
+      "status": "upcoming",
+      "purse": 18000,
+      "pick": {
+        "program_number": "8",
+        "horse_name": "Prairie Wind",
+        "confidence": "high"
+      },
+      "participants": [
+        {
+          "program_number": "2",
+          "horse_name": "Canyon Run",
+          "horse_equibase_refid": "10000056",
+          "jockey_name": "T. Berry",
+          "odds": "10.00",
+          "weight": 122,
+          "finish_position": null
+        },
+        {
+          "program_number": "7",
+          "horse_name": "Dusty Trail",
+          "horse_equibase_refid": "10000052",
+          "jockey_name": "A. Birzer",
+          "odds": "5.80",
+          "weight": 122,
+          "finish_position": null
+        },
+        {
+          "program_number": "8",
+          "horse_name": "Prairie Wind",
+          "horse_equibase_refid": "10000051",
+          "jockey_name": "R. Richard",
+          "odds": "3.20",
+          "weight": 122,
+          "finish_position": null
+        },
+        {
+          "program_number": "11",
+          "horse_name": "Red Rock",
+          "horse_equibase_refid": "10000053",
+          "jockey_name": "K. Frey",
+          "odds": "7.50",
+          "weight": 122,
+          "finish_position": null
+        }
+      ]
+    }
+  ]
+}

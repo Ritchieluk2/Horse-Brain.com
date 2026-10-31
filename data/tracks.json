@@ -1,0 +1,142 @@
+{
+  "tracks": [
+    {
+      "id": "KEE",
+      "name": "Keeneland",
+      "logo": "/images/Racetracks/Keeneland/horizontal_logo.webp",
+      "background": "/images/Racetracks/Keeneland/background.webp",
+      "nextRace": "Oct 30, 2026",
+      "nextRaceISO": "2026-10-30T13:00:00",
+      "races": 9,
+      "post": "1:00 PM",
+      "location": "Lexington, Kentucky",
+      "established": 1936,
+      "surface": "Dirt / Turf",
+      "trackLength": "1 1/8 mile",
+      "description": "Keeneland is a historic thoroughbred racetrack in the heart of Kentucky's Bluegrass region. Known for its pristine condition and prestigious fall meet, it hosts the Breeders' Cup and is widely considered one of the most beautiful racetracks in the world.",
+      "notableRaces": ["Breeders' Cup", "Blue Grass Stakes", "Madison Stakes"],
+      "botStats": {
+        "totalPicks": 342,
+        "winRate": 34.2,
+        "roi": 18.4,
+        "avgConfidence": "high",
+        "performanceVsAvg": 12
+      }
+    },
+    {
+      "id": "BEL",
+      "name": "Belmont Park",
+      "logo": "/images/Racetracks/BelmontPark/horizontal_logo.webp",
+      "background": "/images/Racetracks/BelmontPark/background.webp",
+      "nextRace": "Nov 01, 2026",
+      "nextRaceISO": "2026-11-01T13:05:00",
+      "races": 10,
+      "post": "1:05 PM",
+      "location": "Elmont, New York",
+      "established": 1905,
+      "surface": "Dirt / Turf",
+      "trackLength": "1 1/2 mile",
+      "description": "Belmont Park is home to the Belmont Stakes, the final jewel of the Triple Crown. Its wide, sweeping turns and long stretch make it a unique challenge that rewards both speed and stamina.",
+      "notableRaces": ["Belmont Stakes", "Metropolitan Handicap", "Jockey Club Gold Cup"],
+      "botStats": {
+        "totalPicks": 287,
+        "winRate": 29.8,
+        "roi": 11.2,
+        "avgConfidence": "medium",
+        "performanceVsAvg": -3
+      }
+    },
+    {
+      "id": "CD",
+      "name": "Churchill Downs",
+      "logo": "/images/Racetracks/ChurchillDowns/horizontal_logo.webp",
+      "background": "/images/Racetracks/ChurchillDowns/background.webp",
+      "nextRace": "Nov 05, 2026",
+      "nextRaceISO": "2026-11-05T13:00:00",
+      "races": 9,
+      "post": "1:00 PM",
+      "location": "Louisville, Kentucky",
+      "established": 1875,
+      "surface": "Dirt / Turf",
+      "trackLength": "1 mile",
+      "description": "Churchill Downs is the iconic home of the Kentucky Derby, the 'Run for the Roses.' Operating continuously since 1875, it is the longest-running sporting event in American history and a cornerstone of thoroughbred racing.",
+      "notableRaces": ["Kentucky Derby", "Kentucky Oaks", "Clark Stakes"],
+      "botStats": {
+        "totalPicks": 412,
+        "winRate": 36.1,
+        "roi": 22.7,
+        "avgConfidence": "high",
+        "performanceVsAvg": 18
+      }
+    },
+    {
+      "id": "RP",
+      "name": "Remington Park",
+      "logo": "/images/Racetracks/RemingtonPark/horizontal_logo.webp",
+      "background": "/images/Racetracks/RemingtonPark/background.webp",
+      "nextRace": "Nov 07, 2026",
+      "nextRaceISO": "2026-11-07T14:15:00",
+      "races": 8,
+      "post": "2:15 PM",
+      "location": "Oklahoma City, Oklahoma",
+      "established": 1988,
+      "surface": "Dirt",
+      "trackLength": "1 mile",
+      "description": "Remington Park is Oklahoma's premier thoroughbred racetrack, hosting both thoroughbred and quarter horse racing. Its modern facilities and competitive purses make it a key stop on the regional racing circuit.",
+      "notableRaces": ["Oklahoma Derby", "Springboard Mile"],
+      "botStats": {
+        "totalPicks": 198,
+        "winRate": 31.5,
+        "roi": 14.8,
+        "avgConfidence": "medium",
+        "performanceVsAvg": 5
+      }
+    },
+    {
+      "id": "AD",
+      "name": "Ajax Downs",
+      "logo": "/images/Racetracks/AjaxDowns/horizontal_logo.webp",
+      "background": "/images/Racetracks/AjaxDowns/background.webp",
+      "nextRace": "Nov 03, 2026",
+      "nextRaceISO": "2026-11-03T12:30:00",
+      "races": 8,
+      "post": "12:30 PM",
+      "location": "Ajax, Ontario",
+      "established": 1997,
+      "surface": "Dirt",
+      "trackLength": "7/8 mile",
+      "description": "Ajax Downs is a beloved Canadian racetrack offering thoroughbred racing in the Greater Toronto Area. Known for its tight-knit community and competitive daily cards.",
+      "notableRaces": ["Ajax Stakes"],
+      "botStats": {
+        "totalPicks": 156,
+        "winRate": 28.2,
+        "roi": 9.4,
+        "avgConfidence": "medium",
+        "performanceVsAvg": -6
+      }
+    },
+    {
+      "id": "DD",
+      "name": "Delta Downs",
+      "logo": "/images/Racetracks/DeltaDowns/horizontal_logo.webp",
+      "background": "/images/Racetracks/DeltaDowns/background.webp",
+      "nextRace": "Nov 09, 2026",
+      "nextRaceISO": "2026-11-09T13:30:00",
+      "races": 9,
+      "post": "1:30 PM",
+      "location": "Vinton, Louisiana",
+      "established": 1995,
+      "surface": "Dirt",
+      "trackLength": "7/8 mile",
+      "description": "Delta Downs is a Louisiana racetrack and casino known for hosting the Grade 1 Delta Downs Jackpot, a key prep race for young thoroughbreds on the Road to the Kentucky Derby.",
+      "notableRaces": ["Delta Downs Jackpot"],
+      "botStats": {
+        "totalPicks": 224,
+        "winRate": 32.7,
+        "roi": 16.1,
+        "avgConfidence": "medium",
+        "performanceVsAvg": 8
+      }
+    }
+  ]
+}

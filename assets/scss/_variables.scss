@@ -13,6 +13,10 @@
   
   /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
   :root { 
+    --white: #FFFFFF;
+    --black: #000000;    
+    --light-shades: #f0f0f0;
+    --dark-shades: #171717;
     --background-color: #ffffff; /* Background color for the entire website, including individual sections */
     --default-color: #552119; /* Default color used for the majority of the text content across the entire website */
     --heading-color: #2e601e; /* Color for headings, subheadings and title throughout the website */
@@ -54,3 +58,45 @@
   :root {
     scroll-behavior: smooth;
   }
+
+  /*--------------------------------------------------------------
+# HorseBrain Brand Variables
+--------------------------------------------------------------*/
+:root {
+  /* Typography */
+  --font-heading: "amagrobold",  sans-serif; /* Rustic, refined headers */
+  --font-body: "Raleway", "Segoe UI", sans-serif;        /* Clean, highly legible data/body text */
+  --font-button: "amagrobold", sans-serif;
+  /* Brand Colors (from Project Document) */
+  --color-baby-blue: #85ABFF;
+  --color-espresso: #45201A;
+  --color-fern: #366B24;
+  --color-light-fern: #9CAF88;
+  --color-white: #FFFFFF;
+  --color-shadow-grey: #1D1C21;
+
+  /* Semantic Mappings */
+  --bg-primary: var(--color-white);
+  --bg-secondary: var(--color-shadow-grey);
+  --bg-accent: var(--color-baby-blue);
+  
+  --text-primary: var(--color-espresso);
+  --text-secondary: #6b5854; /* Lightened espresso for subtitles */
+  --text-on-dark: var(--color-white);
+  --text-on-accent: var(--color-espresso);
+
+  /* UI Elements */
+  --surface-color: var(--color-white);
+  --border-color: rgba(69, 32, 26, 0.1); /* Very subtle espresso border */
+  --shadow-sm: 0 2px 4px rgba(29, 28, 33, 0.05);
+  --shadow-md: 0 8px 16px rgba(29, 28, 33, 0.08);
+  --shadow-lg: 0 12px 24px rgba(29, 28, 33, 0.12);
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 12px;
+}
+
+/* Smooth scroll */
+html {
+  scroll-behavior: smooth;
+}

@@ -1,13 +1,36 @@
-@use './_variables.scss';
-@use './_sections.scss';
-@use './layouts/_general.scss';
-@use './site/_header.scss';
-@use './site/_navmenu.scss';
-@use './site/_aos.scss';
-@use './site/_scrolltop.scss';
-@use './site/_preloader.scss';
-@use './components/snippets/_page-titles.scss';
-@use './components/racetracks/_active-racetracks.scss';
-@use './components/racetracks/_racetracks.scss';
+// =============================================================
+//  HorseBrain global stylesheet
+//  Loaded once from nuxt.config.ts. Order matters:
+//    base → components → pages
+//
+//  Rules of the road (see docs/CSS-GUIDE.md):
+//   • Colours, spacing, type, radii, shadows come from CSS
+//     variables in base/_root.scss — no raw hex in components.
+//   • Mobile-first. Use @include up(md) etc. from abstracts.
+//   • A pattern used on 2+ pages lives in components/ here,
+//     NOT copy-pasted into each page's <style scoped>.
+// =============================================================
 
+// Base
+@use 'base/fonts';
+@use 'base/root';
+@use 'base/reset';
+@use 'base/typography';
+@use 'base/layout';
 
+// Shared components
+@use 'components/buttons';
+@use 'components/badges';
+@use 'components/page-title';
+@use 'components/ticker';
+@use 'components/track-cards';
+@use 'components/race-row';
+@use 'components/picks';
+@use 'components/numbers';
+@use 'components/stats';
+@use 'components/cta';
+@use 'components/states';
+@use 'components/racetracks/upcoming-races';
+
+// Page-level (global because markup is spread across components).
+@use 'pages/homepage';

@@ -1,0 +1,27 @@
+// =============================================================
+//  HorseBrain — SCSS build-time tokens
+//  -------------------------------------------------------------
+//  These are compile-time only (no CSS output). Runtime colours,
+//  spacing, type etc. live as CSS custom properties in
+//  base/_root.scss so they can be themed and inspected in DevTools.
+//
+//  This file is auto-injected into every <style lang="scss"> block
+//  via nuxt.config.ts, so components can use $bp-*, up(), down()
+//  without importing anything.
+// =============================================================
+
+// ---- Breakpoints (mobile-first) ------------------------------
+//  sm  576  large phones / phone landscape
+//  md  768  tablets portrait
+//  lg 1024  tablets landscape / small laptops
+//  xl 1280  desktop
+$breakpoints: (
+  sm: 576px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px,
+) !default;
+
+// ---- Layout ---------------------------------------------------
+$container-max: 1200px !default;
+$container-wide: 1400px !default;

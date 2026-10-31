@@ -95,39 +95,6 @@
       "public/*": [
         "../public/*"
       ],
-      "vue-i18n": [
-        "../node_modules/vue-i18n/dist/vue-i18n"
-      ],
-      "@intlify/shared": [
-        "../node_modules/@intlify/shared/dist/shared"
-      ],
-      "@intlify/message-compiler": [
-        "../node_modules/@intlify/message-compiler/dist/message-compiler"
-      ],
-      "@intlify/core-base": [
-        "../node_modules/@intlify/core-base/dist/core-base"
-      ],
-      "@intlify/core": [
-        "../node_modules/@intlify/core/dist/core.node"
-      ],
-      "@intlify/utils/h3": [
-        "../node_modules/@intlify/utils/dist/h3"
-      ],
-      "ufo": [
-        "../node_modules/ufo/dist/index"
-      ],
-      "is-https": [
-        "../node_modules/is-https/dist/index"
-      ],
-      "#i18n": [
-        "../node_modules/@nuxtjs/i18n/dist/runtime/composables/index"
-      ],
-      "#aos": [
-        "../node_modules/nuxt-aos/dist/runtime"
-      ],
-      "#aos/*": [
-        "../node_modules/nuxt-aos/dist/runtime/*"
-      ],
       "#vue-router": [
         "./vue-router"
       ]
@@ -140,9 +107,6 @@
   },
   "include": [
     "./types/nitro-nuxt.d.ts",
-    "../node_modules/@nuxtjs/tailwindcss/runtime/server",
-    "../node_modules/@nuxtjs/i18n/runtime/server",
-    "../node_modules/nuxt-aos/runtime/server",
     "../node_modules/@nuxt/devtools/runtime/server",
     "../node_modules/@nuxt/telemetry/runtime/server",
     "./types/nitro.d.ts",

@@ -1,46 +1,49 @@
-const pkg = require("./package");
-const path = require('path')
+import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  target: 'static',
-  router: {
-    base: "/HorseBrain/"
-  },
-  app: {
-    baseURL: "/HorseBrain/"
-  },
   compatibilityDate: '2024-04-03',
   devtools: { enabled: true },
-  modules: ['@nuxtjs/tailwindcss', '@nuxtjs/i18n', 'nuxt-aos'],
 
-
-  head: {
-    link: [
-      {rel: 'stylesheet', type: 'text/css', href: '/bootstrap-icons/bootstrap-icons.css'},
-      {rel: 'stylesheet', type: 'text/css', href: '/aos/aos.css'},
-      {rel: 'stylesheet', type: 'text/css', href: '/swiper/swiper-bundle.min.css'}
-    ],
-    script: [
-      {src: 'https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js', tagPosition: 'bodyClose'},
-      {src: 'https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js', tagPosition: 'bodyClose'},
-      {src: 'https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css', tagPosition: 'bodyClose'}
-    ]
+  app: {
+    baseURL: '/',
+    head: {
+      htmlAttrs: { lang: 'en' },
+      title: 'HorseBrain — Race picks powered by machine learning',
+      meta: [
+        { name: 'viewport', content: 'width=device-width, initial-scale=1, viewport-fit=cover' },
+        { name: 'theme-color', content: '#45201A' },
+        { name: 'description', content: 'Transparent, machine-learning horse racing picks with a verified track record.' }
+      ],
+      link: [
+        { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+        { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossorigin: '' },
+        { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css2?family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap' }
+      ]
+    }
   },
 
-  css: ['@/assets/css/fonts.css', '~/node_modules/bootstrap/dist/css/bootstrap.min.css', '@/assets/css/main.css', '@/assets/scss/main.scss'],
-
-  purgeCSS: {
-    mode: 'postcss',
-    enabled: (process.env.NODE_ENV === 'production')
+  routeRules: {
+    '/Racetracks': { ssr: false }
   },
-  build: {
-    loaders: {
-      sass: {
-        implementation: require('sass'),
-      },
-      scss: {
-        implementation: require('sass'),
-      },
-    },
+
+  nitro: {
+    preset: 'cloudflare_pages'
+  },
+
+  // One global stylesheet. Component <style> blocks stay scoped and
+  // only hold page-specific layout.
+  css: ['@/assets/scss/main.scss'],
+
+  vite: {
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // Makes breakpoints + mixins (up(), down(), card(), …) available
+          // in every <style lang="scss"> without an import.
+          // Emits no CSS, so it is safe to inject everywhere.
+          additionalData: '@use "@/assets/scss/abstracts" as *;\n'
+        }
+      }
+    }
   }
-});
+})

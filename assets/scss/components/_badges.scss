@@ -1,0 +1,142 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Badges, tags, status pills, confidence chips
+// =============================================================
+
+// Generic tag ("Track Profile", "Verified Data", "Our Methodology")
+.tag,
+.info-card__tag,
+.stats-card__tag,
+.reporting-card__tag,
+.process-tag,
+.ml-tag {
+  display: inline-block;
+  @include label-caps(var(--fs-2xs), 0.1em);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  color: var(--color-fern);
+  background: var(--confidence-high-bg);
+  white-space: nowrap;
+}
+
+.tag--premium {
+  color: var(--color-brass-ink);
+  background: var(--premium-bg);
+}
+
+// Race status: Live / Upcoming / Final
+.race-row__status-badge,
+.status-badge {
+  display: inline-block;
+  @include label-caps(var(--fs-2xs), 0.06em);
+  padding: 4px 10px;
+  border-radius: var(--radius-sm);
+  white-space: nowrap;
+
+  &--completed { background-color: var(--status-final-bg); color: var(--status-final); }
+  &--upcoming  { background-color: var(--status-upcoming-bg); color: var(--status-upcoming); }
+  &--live {
+    background-color: var(--status-live-bg);
+    color: var(--status-live);
+    animation: hb-pulse-fade 2s ease-in-out infinite;
+  }
+}
+
+// Confidence chip (icon + label). Used in pick tabs & prediction cards.
+// High confidence carries a brass ring — brass = premium / high confidence.
+.confidence,
+.pick-tab__confidence,
+.prediction-card__confidence {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  border-radius: var(--radius-sm);
+  @include label-caps(var(--fs-2xs), 0.08em);
+  flex-shrink: 0;
+  white-space: nowrap;
+
+  &--high {
+    background-color: var(--confidence-high-bg);
+    color: var(--confidence-high);
+    box-shadow: inset 0 0 0 1px rgb(199 169 107 / 0.55);
+  }
+  &--medium { background-color: var(--confidence-medium-bg); color: var(--confidence-medium); }
+  &--low    { background-color: var(--confidence-low-bg); color: var(--confidence-low); }
+}
+
+// Homepage pick-card variant — solid fern with brass border
+.pick-card__confidence {
+  @include label-caps(var(--fs-2xs), 0.08em);
+  padding: 5px 12px;
+  border-radius: var(--radius-sm);
+
+  &--high {
+    background-color: var(--color-fern);
+    color: var(--color-white);
+    border: 1px solid var(--color-brass);
+    box-shadow: 0 2px 4px rgb(199 169 107 / 0.25);
+  }
+  &--medium {
+    background-color: var(--confidence-high-bg);
+    color: var(--color-fern);
+    border: 1px solid rgb(54 107 36 / 0.3);
+  }
+}
+
+// Round confidence icon (race rows)
+.race-row__pick-icon,
+.pick-icon-inline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+
+  &--high   { background-color: var(--confidence-high-bg); color: var(--confidence-high); box-shadow: 0 0 0 2px rgb(199 169 107 / 0.45); }
+  &--medium { background-color: var(--confidence-medium-bg); color: var(--confidence-medium); box-shadow: 0 0 0 2px rgb(133 171 255 / 0.3); }
+  &--low    { background-color: var(--confidence-low-bg); color: var(--confidence-low); box-shadow: 0 0 0 2px rgb(107 88 84 / 0.2); }
+}
+
+.race-row__pick-icon { width: 28px; height: 28px; }
+
+// Inline icon inside table cells, with CSS tooltip from [title]
+.pick-icon-inline {
+  width: 22px;
+  height: 22px;
+  margin-left: var(--space-2);
+  vertical-align: middle;
+  cursor: help;
+  position: relative;
+
+  &::after {
+    content: attr(title);
+    position: absolute;
+    bottom: calc(100% + 8px);
+    left: 50%;
+    transform: translateX(-50%) translateY(4px);
+    background-color: var(--color-shadow-grey);
+    color: var(--color-white);
+    padding: 6px 12px;
+    border-radius: var(--radius-sm);
+    font-family: var(--font-body);
+    font-size: var(--fs-xs);
+    font-weight: 500;
+    white-space: nowrap;
+    text-transform: none;
+    letter-spacing: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity var(--dur-fast) ease, transform var(--dur-fast) ease;
+    z-index: var(--z-tooltip);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.2);
+  }
+
+  &:hover::after { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes hb-pulse-fade {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}

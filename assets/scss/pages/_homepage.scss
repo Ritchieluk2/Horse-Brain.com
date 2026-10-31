@@ -1,0 +1,136 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Homepage (pages/index.vue)
+//  Shared sections used here live in components/:
+//   ticker → _ticker, tracks grid → _track-cards,
+//   track record → _stats, newsletter → _cta
+// =============================================================
+
+// ---- 1. Hero -------------------------------------------------------
+.hero {
+  position: relative;
+  overflow: hidden;
+  padding: clamp(72px, 12vw, 140px) var(--gutter);
+  text-align: center;
+  color: var(--text-on-dark);
+  background-color: var(--color-espresso);
+  background-image:
+    linear-gradient(rgb(29 28 33 / 0.75), rgb(29 28 33 / 0.85)),
+    url('@/assets/images/Horse_Race_Finish_Line_(11888565543).webp');
+  background-size: cover;
+  background-position: center;
+
+  &__content {
+    position: relative;
+    z-index: 1;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  &__title {
+    font-size: var(--fs-display);
+    letter-spacing: -0.01em;
+    color: var(--color-white);
+    margin-bottom: var(--space-2);
+  }
+
+  &__subtitle {
+    margin: 0 auto var(--space-8);
+    font-size: clamp(1.15rem, 1rem + 0.8vw, 1.5rem);
+    color: rgb(255 255 255 / 0.9);
+  }
+
+  &__actions {
+    justify-content: center;
+    max-width: 360px;
+    margin-inline: auto;
+
+    @include up(sm) { max-width: none; }
+  }
+}
+
+// ---- 3. Featured free picks --------------------------------------
+.featured-picks {
+  padding-block: var(--section-pad);
+  background-color: var(--color-cream);
+
+  .picks-grid {
+    display: grid;
+    gap: var(--space-6);
+    grid-template-columns: repeat(auto-fit, minmax(min(320px, 100%), 1fr));
+  }
+}
+
+// White paper "business cards" INLAID into the cream page: textured
+// white stock set into a recess (inset shadows), not floating above it.
+.pick-card {
+  position: relative;
+  padding: var(--space-6);
+  @include mixed-cut(var(--radius-md));
+  background-color: var(--color-white);
+  // white paper stock: grain + fine crossed fibres, kept bright
+  background-image:
+    linear-gradient(to bottom, rgb(69 32 26 / 0.05) 0, transparent 6px),   // the tuck
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E"),
+    repeating-linear-gradient(45deg, transparent 0 2px, rgb(139 119 90 / 0.022) 2px 4px),
+    repeating-linear-gradient(-45deg, transparent 0 3px, rgb(139 119 90 / 0.015) 3px 5px),
+    linear-gradient(135deg, var(--color-white) 0%, var(--color-paper-white) 100%);
+  // INLAID: recessed into the cream page — the page edge casts a soft
+  // inset shadow along the top/left, and a light catch sits on the
+  // bottom/right where the page surface meets the card. No lift.
+  border: 1px solid rgb(69 32 26 / 0.12);
+  box-shadow:
+    inset 0 3px 6px -1px rgb(69 32 26 / 0.16),
+    inset 2px 0 4px -2px rgb(69 32 26 / 0.1),
+    inset 0 -1px 0 rgb(255 255 255 / 0.9),
+    0 1px 0 rgb(255 255 255 / 0.9),
+    0 -1px 0 rgb(69 32 26 / 0.06);
+  transition: border-color var(--dur) ease, box-shadow var(--dur) ease;
+
+  @include hover {
+    border-color: rgb(199 169 107 / 0.55);
+    box-shadow:
+      inset 0 4px 10px -1px rgb(69 32 26 / 0.2),
+      inset 2px 0 5px -2px rgb(69 32 26 / 0.12),
+      inset 0 -1px 0 rgb(255 255 255 / 0.9),
+      0 1px 0 rgb(255 255 255 / 0.9),
+      0 -1px 0 rgb(69 32 26 / 0.08);
+  }
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+    margin-bottom: var(--space-4);
+    @include label-caps(var(--fs-xs), 0.05em);
+    color: var(--text-secondary);
+  }
+
+  &__horse {
+    font-size: var(--fs-2xl);
+    color: var(--color-espresso);
+    margin-bottom: var(--space-4);
+  }
+
+  &__details {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-1) var(--space-3);
+    margin-bottom: var(--space-6);
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+  }
+
+  &__footer {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-3);
+    padding-top: var(--space-4);
+    border-top: 1px solid var(--border-color);
+  }
+}

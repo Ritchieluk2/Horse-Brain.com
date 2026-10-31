@@ -1,0 +1,273 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Track-record stats
+//  .track-record (espresso section) > .stats-grid > .stat-card
+//  .stat-card__value contains the odometer (.char-roll / .char-static)
+//  .metric / .summary-stat — bar metrics in track/raceday sidebars
+// =============================================================
+
+.track-record {
+  padding-block: var(--section-pad);
+  background-color: var(--bg-dark-warm);
+  color: var(--text-on-dark);
+  text-align: center;
+
+  .section-title { color: var(--color-white); }
+  .section-subtitle { color: var(--text-on-dark-muted); }
+
+  &__ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-4);
+    max-width: 400px;
+    margin: var(--space-7) auto var(--space-8);
+  }
+
+  &__ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--color-brass) 20%, var(--color-brass) 80%, transparent);
+    opacity: 0.55;
+  }
+
+  &__ornament-diamond {
+    width: 8px;
+    height: 8px;
+    flex-shrink: 0;
+    background: var(--color-brass);
+    transform: rotate(45deg);
+    opacity: 0.85;
+  }
+
+  &__disclaimer {
+    max-width: 600px;
+    margin: var(--space-8) auto 0;
+    font-size: var(--fs-sm);
+    line-height: 1.5;
+    color: var(--text-on-dark-faint);
+  }
+}
+
+.stats-grid {
+  display: grid;
+  gap: var(--space-6);
+  grid-template-columns: 1fr;
+
+  @include up(sm) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include up(lg) { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--space-7); }
+}
+
+.stat-card {
+  position: relative;
+  min-width: 0;
+  padding: var(--space-7) var(--space-5);
+  background: var(--color-cream);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-cut-md);
+  outline: 1px solid rgb(54 107 36 / 0.3);
+  outline-offset: 4px;
+  color: var(--color-espresso);
+  text-align: center;
+  transition: transform var(--dur) ease, background var(--dur) ease, outline-color var(--dur-slow) ease;
+  @include ornament-frame(18px);
+
+  @include up(md) { padding: var(--space-8) var(--space-6); }
+
+  @include hover {
+    transform: translateY(-4px);
+    background: var(--color-cream-light);
+  }
+
+  &.is-settled {
+    outline-color: rgb(54 107 36 / 0.7);
+    .stat-card__frame { border-color: var(--border-strong); }
+    .stat-card__corner { opacity: 1; }
+  }
+
+  &__value {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    margin-bottom: var(--space-3);
+    @include heading-font;
+    // sized so "$45k+" / "1,240" never overflow a 2-up phone card
+    font-size: clamp(2.25rem, 1.4rem + 3vw, 4rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-shadow-grey);
+    overflow: hidden;
+  }
+
+  &__label {
+    display: block;
+    @include label-caps(var(--fs-xs), 0.1em);
+    color: var(--color-espresso);
+  }
+
+  &__context {
+    margin: var(--space-2) auto 0;
+    font-size: var(--fs-xs);
+    font-style: italic;
+    line-height: 1.4;
+    color: var(--text-secondary);
+  }
+}
+
+// ---- Odometer digits ------------------------------------------------
+.char-static {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.char-roll {
+  display: inline-block;
+  flex-shrink: 0;
+  height: 1em;
+  line-height: 1;
+  overflow: hidden;
+}
+
+.char-roll__column {
+  display: flex;
+  flex-direction: column;
+  transform: translateY(0);
+  transition: transform 2s cubic-bezier(0.15, 0.85, 0.25, 1);
+
+  &.is-rolled { transform: translateY(calc(var(--roll-dist) * -1em)); }
+
+  span {
+    flex: 0 0 1em;
+    height: 1em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+// ---- Bar metrics (track & raceday performance cards) ----------------
+.metric {
+  &__value-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: var(--space-2) var(--space-3);
+    margin-bottom: 4px;
+  }
+
+  &__value {
+    @include heading-font;
+    font-size: clamp(1.9rem, 1.5rem + 1.5vw, 2.5rem);
+    line-height: 1;
+    letter-spacing: -0.02em;
+    color: var(--color-espresso);
+  }
+
+  &__delta {
+    @include label-caps(var(--fs-2xs), 0.05em);
+    padding: 3px 8px;
+    border-radius: var(--radius-sm);
+
+    &--positive { background: var(--confidence-high-bg); color: var(--color-fern); }
+    &--negative { background: rgb(194 59 59 / 0.12); color: var(--color-negative); }
+  }
+
+  &__label {
+    display: block;
+    @include label-caps;
+    color: var(--text-secondary);
+    margin-bottom: var(--space-2);
+  }
+
+  &__bar {
+    height: 6px;
+    margin-bottom: var(--space-2);
+    border-radius: 3px;
+    overflow: hidden;
+    background: rgb(69 32 26 / 0.08);
+  }
+
+  &__bar-fill {
+    height: 100%;
+    border-radius: 3px;
+    background: linear-gradient(to right, var(--color-fern), var(--color-fern-bright));
+    transition: width 1s var(--ease-out);
+
+    &--roi { background: linear-gradient(to right, var(--color-baby-blue), var(--color-blue-hover)); }
+  }
+
+  &__context {
+    font-size: var(--fs-xs);
+    font-style: italic;
+    color: var(--text-secondary);
+  }
+}
+
+.summary-stat {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  text-align: center;
+  background: rgb(69 32 26 / 0.04);
+  border-radius: var(--radius-cut-md);
+
+  &__value {
+    display: block;
+    margin-bottom: 2px;
+    @include heading-font;
+    font-size: var(--fs-xl);
+    color: var(--color-espresso);
+
+    &--capitalize { text-transform: capitalize; }
+  }
+
+  &__label {
+    @include label-caps;
+    color: var(--text-secondary);
+  }
+}
+
+// Info / stats sidebar cards with ornament frame (track page, raceday page)
+.info-card,
+.stats-card,
+.reporting-card {
+  @include card(var(--space-6));
+  @include ornament-frame(22px);
+  min-width: 0;
+
+  @include up(md) { padding: var(--space-8) var(--space-7); }
+
+  &__header {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    margin-bottom: var(--space-6);
+    padding-bottom: var(--space-5);
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__title {
+    @include heading-font;
+    font-size: var(--fs-xl);
+    color: var(--color-espresso);
+  }
+}
+
+// Blue-ruled context note inside performance cards
+.stats-card__disclaimer,
+.reporting-card__context {
+  margin-bottom: var(--space-6);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--fs-sm);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  background: rgb(133 171 255 / 0.08);
+  border-left: 3px solid var(--color-baby-blue);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+}

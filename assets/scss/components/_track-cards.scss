@@ -1,0 +1,139 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Track cards — photo card with logo pill (homepage, /Racetracks)
+//  Grid: .tracks-container (homepage) or .track-cards (generic)
+// =============================================================
+// Homepage "All Supported Tracks" band: cream textured paper, with a
+// shadow cast from the section above and an inlaid edge into the next.
+// (Scoped to <section> — on /Racetracks .tracks-grid is the card grid.)
+section.tracks-grid {
+  @include textured-band(var(--color-cream), var(--color-cream-deep), rgb(139 119 90 / 0.18), 0.12, 0.022);
+  padding-block: var(--section-pad);
+
+  // override the band's default inset: soft top shadow (cast by the
+  // section above) + deeper bottom edge (pressed under the next band)
+  &::before {
+    box-shadow:
+      inset 0 14px 18px -12px rgb(29 28 33 / 0.35),
+      inset 0 -16px 20px -12px rgb(69 32 26 / 0.3);
+  }
+
+  > .container { position: relative; z-index: 1; }
+
+  .section-title {
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.9), 0 3px 8px rgb(69 32 26 / 0.18);
+  }
+
+  .section-subtitle {
+    text-shadow: 0 1px 0 rgb(255 255 255 / 0.8);
+  }
+
+  .track-card {
+    box-shadow:
+      0 2px 4px rgb(29 28 33 / 0.12),
+      0 14px 28px -10px rgb(29 28 33 / 0.45);
+
+    @include hover {
+      box-shadow:
+        0 4px 8px rgb(29 28 33 / 0.15),
+        0 24px 40px -12px rgb(29 28 33 / 0.5);
+    }
+  }
+}
+
+.tracks-container,
+.track-cards {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--space-5);
+
+  @include up(md) { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-7); }
+}
+
+.track-card {
+  position: relative;
+  display: block;
+  height: 260px;
+  border-radius: var(--radius-cut);
+  overflow: hidden;
+  color: var(--color-white);
+  text-decoration: none;
+  box-shadow: var(--shadow-sm);
+  transition: transform var(--dur) ease, box-shadow var(--dur) ease;
+  isolation: isolate;
+
+  @include up(sm) { height: 300px; }
+  @include up(lg) { height: 340px; }
+
+  @include hover {
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-lg);
+    .track-card__bg { transform: scale(1.08); }
+    .track-card__logo { transform: scale(1.05); background: rgb(255 255 255 / 0.95); }
+  }
+
+  &:focus-visible { @include focus-ring; }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+    z-index: -2;
+  }
+
+  &__overlay {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(to top, rgb(29 28 33 / 0.95) 0%, rgb(29 28 33 / 0.5) 50%, rgb(29 28 33 / 0.1) 100%);
+  }
+
+  &__logo {
+    position: absolute;
+    top: var(--space-4);
+    left: var(--space-4);
+    max-width: 130px;
+    max-height: 64px;
+    object-fit: contain;
+    padding: 10px 18px;
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 0.85);
+    backdrop-filter: blur(8px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+    transition: transform var(--dur) ease, background var(--dur) ease;
+
+    @include up(md) { top: var(--space-6); left: var(--space-6); max-width: 160px; max-height: 90px; padding: 12px 24px; }
+  }
+
+  &__info {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: var(--space-5);
+
+    @include up(md) { padding: var(--space-7); }
+  }
+
+  &__name {
+    @include heading-font;
+    font-size: var(--fs-2xl);
+    color: var(--color-white);
+    text-shadow: 0 2px 10px rgb(0 0 0 / 0.55);
+    margin-bottom: var(--space-2);
+  }
+
+  &__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1) var(--space-4);
+    font-size: var(--fs-sm);
+    font-weight: 500;
+    color: rgb(255 255 255 / 0.9);
+    text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
+
+    @include up(md) { font-size: var(--fs-base); }
+  }
+}

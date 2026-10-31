@@ -1,0 +1,386 @@
+@use '../../abstracts' as *;
+
+// =============================================================
+//  Race Schedule "rolodex" (UpcomingRacesCarousel.vue)
+//  Scroll-driven: JS sets --height, --translate-y, --alpha,
+//  --face, --detail, --morph on each .race-card. Card heights are
+//  fixed in JS (104px closed / 480px open), so the open face must
+//  fit 480px at every width.
+// =============================================================
+.race-schedule {
+  position: relative;
+  background: var(--bg-page);
+}
+
+// Pinned under the header while the first few race days scroll by.
+// Height is natural (heading + card stack + controls) — not 100vh.
+.rolodex-stage {
+  --w-card: min(#{$container-max}, calc(100vw - 2 * var(--gutter)));
+
+  position: sticky;
+  top: var(--header-h);
+  display: flex;
+  flex-direction: column;
+  padding: var(--section-pad-sm) 0 var(--space-4);
+}
+
+.rolodex-stage__header {
+  flex-shrink: 0;
+  z-index: 30;
+  margin-bottom: var(--space-2);
+  padding-inline: var(--gutter);
+  text-align: center;
+
+  .section-title { margin-bottom: var(--space-2); }
+  .section-subtitle { margin-bottom: 0; font-size: var(--fs-sm); @include up(md) { font-size: var(--fs-md); } }
+}
+
+// Cards are absolutely stacked around the vertical centre; JS supplies
+// the viewport height and each card's offset (--translate-y).
+.rolodex-viewport {
+  position: relative;
+  flex-shrink: 0;
+  // extra previews stop at the controls bar; the margin keeps the
+  // outline + brass corner brackets of visible cards from being cut
+  overflow: hidden;
+  overflow: clip;
+  overflow-clip-margin: 10px;
+}
+
+// ---- Position bubbles (right-hand gutter) -------------------------
+.rolodex-dots {
+  position: absolute;
+  top: 50%;
+  // centred in the gutter to the right of the cards
+  right: calc((100% - var(--w-card)) / 4);
+  z-index: 40;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  transform: translate(50%, -50%);
+
+  @include up(md) { gap: 10px; }
+
+  &__dot {
+    position: relative;
+    width: 6px;
+    height: 6px;
+    padding: 0;
+    border-radius: var(--radius-pill);
+    background-color: rgb(69 32 26 / 0.25);
+    transition: height var(--dur) var(--ease), background-color var(--dur) ease, box-shadow var(--dur) ease;
+    cursor: pointer;
+
+    @include up(md) { width: 8px; height: 8px; }
+
+    // generous invisible hit area
+    &::before {
+      content: '';
+      position: absolute;
+      inset: -8px -10px;
+    }
+
+    // race days past the scroll range are click-only: shown as rings
+    &:not(.is-scroll) {
+      background-color: transparent;
+      box-shadow: inset 0 0 0 1.5px rgb(69 32 26 / 0.35);
+    }
+
+    @include hover { background-color: rgb(69 32 26 / 0.45); }
+    &:focus-visible { @include focus-ring(var(--color-brass)); }
+
+    // current card: stretches into a brass pill
+    &.is-active {
+      height: 22px;
+      background-color: var(--color-brass);
+      box-shadow: 0 0 0 3px rgb(199 169 107 / 0.25);
+      @include up(md) { height: 28px; }
+    }
+  }
+}
+
+// ---- Card -------------------------------------------------------
+.race-card {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: var(--w-card);
+  height: var(--height);
+  transform: translate(-50%, var(--translate-y));
+  opacity: var(--alpha);
+  border-radius: var(--radius-cut-md);
+  background: var(--color-shadow-grey);
+  box-shadow: 0 24px 60px -24px rgb(29 28 33 / 0.45);
+  outline: 1px solid rgb(199 169 107 / 0.35);
+  outline-offset: 3px;
+  transition: outline-color 0.4s ease;
+  will-change: height, transform;
+
+  &__frame {
+    position: absolute;
+    inset: 7px;
+    z-index: 6;
+    border: 1px solid rgb(255 255 255 / 0.16);
+    border-radius: 3px;
+    pointer-events: none;
+    transition: border-color 0.4s ease;
+  }
+
+  &__corner {
+    position: absolute;
+    z-index: 7;
+    width: 22px;
+    height: 22px;
+    pointer-events: none;
+    opacity: calc(0.35 + var(--morph, 0) * 0.65);
+
+    &--tl { top: -4px; left: -4px; border-top: 2px solid var(--color-brass); border-left: 2px solid var(--color-brass); }
+    &--br { bottom: -4px; right: -4px; border-bottom: 2px solid var(--color-brass); border-right: 2px solid var(--color-brass); }
+  }
+
+  &.is-clickable {
+    cursor: pointer;
+    &:hover, &:focus-visible { outline-color: rgb(199 169 107 / 0.75); }
+    &:focus-visible { outline-width: 2px; }
+  }
+
+  &.is-open {
+    outline-color: rgb(199 169 107 / 0.8);
+    .race-card__frame { border-color: rgb(255 255 255 / 0.3); }
+  }
+
+  // ---- Compact face (closed row) ----
+  &__compact {
+    position: absolute;
+    inset: 0;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: 0 var(--space-5);
+    overflow: hidden;
+    border-radius: var(--radius-cut-md);
+    background: var(--surface);
+    opacity: var(--face);
+
+    @include up(md) { gap: var(--space-6); padding: 0 var(--space-7); }
+  }
+
+  &__tag {
+    flex-shrink: 0;
+    padding-left: 10px;
+    border-left: 2px solid var(--color-fern);
+    @include label-caps(var(--fs-2xs), 0.14em);
+    color: var(--color-fern);
+  }
+
+  &__name {
+    flex: 1;
+    min-width: 0;
+    margin: 0;
+    @include heading-font;
+    font-size: var(--fs-lg);
+    color: var(--color-espresso);
+    @include truncate;
+
+    @include up(md) { font-size: 1.6rem; }
+  }
+
+  &__meta {
+    display: none;
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+    white-space: nowrap;
+
+    @include up(xl) { display: inline; }
+  }
+
+  &__action {
+    display: none;
+    padding-bottom: 3px;
+    border-bottom: 1px solid var(--color-brass);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    color: var(--color-espresso);
+    white-space: nowrap;
+
+    @include up(md) { display: inline; }
+  }
+
+  // ---- Featured face (open) ----
+  &__featured {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    border-radius: var(--radius-cut-md);
+    opacity: var(--detail);
+    pointer-events: none;
+    transition: opacity var(--dur) ease;
+
+    .race-card.is-open & { pointer-events: auto; z-index: 10; }
+  }
+
+  &__bg {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 40%;
+  }
+
+  &__scrim {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: linear-gradient(to top, rgb(29 28 33 / 0.97) 0%, rgb(69 32 26 / 0.72) 45%, rgb(29 28 33 / 0.25) 100%);
+  }
+
+  &__content {
+    position: relative;
+    z-index: 3;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: var(--space-5);
+    pointer-events: auto;
+
+    @include up(md) { padding: var(--space-8) 56px; }
+  }
+
+  &__details { transform: translateY(calc((1 - var(--detail, 1)) * 24px)); }
+
+  &__dateplate {
+    display: inline-block;
+    margin-bottom: var(--space-3);
+    padding: 6px 14px;
+    background: var(--color-fern);
+    color: var(--color-white);
+    @include label-caps(var(--fs-2xs), 0.12em);
+
+    @include up(md) { margin-bottom: 18px; font-size: var(--fs-xs); }
+  }
+
+  &__headline {
+    margin-bottom: var(--space-4);
+    @include heading-font;
+    font-size: clamp(1.7rem, 1.1rem + 3.5vw, 3.8rem);
+    line-height: 1.05;
+    color: var(--color-white);
+
+    @include up(md) { margin-bottom: 22px; }
+  }
+
+  &__stats {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3) var(--space-6);
+    margin-bottom: var(--space-5);
+    font-size: var(--fs-sm);
+    color: var(--text-on-dark-muted);
+
+    @include up(md) { gap: var(--space-8); margin-bottom: 28px; font-size: var(--fs-base); }
+
+    strong {
+      display: block;
+      margin-bottom: 2px;
+      @include heading-font;
+      font-size: var(--fs-lg);
+      color: var(--color-baby-blue);
+    }
+  }
+
+  &__btn { @include down(sm) { width: 100%; } }
+
+  &__logo {
+    max-width: 160px;
+    min-height: 44px;
+    max-height: 60px;
+    margin-bottom: auto;
+    padding: 3px 7px;
+    object-fit: contain;
+    border: 1px solid rgb(255 255 255 / 0.15);
+    border-radius: var(--radius-pill);
+    background: rgb(255 255 255 / 0.25);
+    backdrop-filter: blur(10px);
+    box-shadow: inset 0 2px 8px rgb(0 0 0 / 0.15), inset 0 -1px 4px rgb(255 255 255 / 0.1), 0 4px 12px rgb(0 0 0 / 0.2);
+    transition: background var(--dur) ease, box-shadow var(--dur) ease;
+
+    @include up(md) { max-width: 200px; min-height: 50px; max-height: 70px; }
+  }
+
+  &.is-open &__logo { background: rgb(255 255 255 / 0.35); }
+
+  // Archived card never opens
+  &--locked {
+    pointer-events: auto;
+    .race-card__compact { background: var(--color-paper-warm); }
+    .race-card__frame { border-color: var(--border-color); }
+  }
+}
+
+// ---- Controls ------------------------------------------------------
+.rolodex-controls {
+  flex-shrink: 0;
+  z-index: 30;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-3) var(--space-7);
+  min-height: 56px;
+  // breathing room between the card stack and the Load More row
+  // (padding, not margin, so the JS height measurement includes it)
+  padding: var(--space-6) var(--gutter) 0;
+
+  @include up(md) { padding-top: var(--space-7); }
+
+  &__counter {
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.18em;
+    color: var(--text-secondary);
+  }
+
+  &__hint {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: var(--fs-2xs);
+    letter-spacing: 0.18em;
+    color: var(--color-espresso);
+  }
+
+  &__chevron { animation: hb-nudge 2s ease-in-out infinite; }
+}
+
+.load-more {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;
+  padding: 10px 24px;
+  border: 1px solid rgb(199 169 107 / 0.6);
+  border-radius: var(--radius-sm);
+  background-color: var(--color-espresso);
+  color: var(--color-white);
+  @include heading-font;
+  font-size: var(--fs-sm);
+  letter-spacing: 0.04em;
+  transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease, transform var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+
+  @include hover {
+    background-color: var(--color-shadow-grey);
+    border-color: var(--color-baby-blue);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
+  }
+}
+
+@keyframes hb-nudge {
+  0%, 100% { transform: translateY(0); opacity: 0.5; }
+  50% { transform: translateY(4px); opacity: 1; }
+}

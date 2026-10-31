@@ -1,0 +1,150 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Buttons
+//  .btn + one variant. Sizes: .btn--small, .btn--block
+//  Variants:
+//   --primary    baby blue fill, shadow-grey text (main CTA)
+//   --secondary  outline white — ONLY on dark backgrounds
+//   --outline    outline espresso — on light backgrounds
+//   --tertiary   fern fill
+//   --dark       espresso fill (small "View Analysis" buttons)
+//   --premium    brass fill (premium / unlock actions)
+//   --text       text-only link button
+// =============================================================
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  min-height: 44px;                 // touch target
+  padding: 12px 28px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  @include heading-font;
+  font-size: var(--fs-base);
+  letter-spacing: 0.03em;
+  line-height: 1.1;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+  user-select: none;
+  transition:
+    background-color var(--dur-fast) ease,
+    border-color var(--dur-fast) ease,
+    color var(--dur-fast) ease,
+    transform var(--dur-fast) ease,
+    box-shadow var(--dur-fast) ease;
+
+  &:focus-visible { @include focus-ring; }
+  &:active { transform: translateY(0); }
+  &:disabled, &[aria-disabled='true'] { opacity: 0.55; pointer-events: none; }
+
+  svg { width: 16px; height: 16px; }
+
+  // ---- variants ----
+  &--primary {
+    background-color: var(--color-baby-blue);
+    color: var(--color-shadow-grey);
+    @include hover {
+      background-color: var(--color-blue-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  &--secondary {
+    background-color: transparent;
+    border-color: var(--color-white);
+    color: var(--color-white);
+    @include hover {
+      background-color: var(--color-white);
+      color: var(--color-shadow-grey);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+  }
+
+  &--outline {
+    background-color: transparent;
+    border-color: var(--color-espresso);
+    color: var(--color-espresso);
+    @include hover {
+      background-color: var(--color-espresso);
+      color: var(--color-white);
+    }
+  }
+
+  &--tertiary {
+    background-color: var(--color-fern);
+    color: var(--color-white);
+    @include hover {
+      background-color: var(--color-fern-deep);
+      transform: translateY(-2px);
+    }
+  }
+
+  &--dark {
+    background-color: var(--color-espresso);
+    color: var(--color-white);
+    @include hover { background-color: var(--color-shadow-grey); }
+  }
+
+  &--premium {
+    background: linear-gradient(135deg, var(--color-brass-light) 0%, var(--color-brass) 55%, var(--color-brass-ink) 100%);
+    color: var(--color-shadow-grey);
+    @include hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-brass);
+    }
+  }
+
+  &--text {
+    min-height: 0;
+    padding: 4px 8px;
+    background: none;
+    color: var(--color-blue-ink);
+    @include hover { text-decoration: underline; }
+  }
+
+  // ---- sizes ----
+  &--small {
+    min-height: 36px;
+    padding: 8px 16px;
+    font-size: var(--fs-sm);
+  }
+
+  // Legacy: .btn--small used to imply espresso fill. Keep that when
+  // no colour variant is given.
+  &--small:not(.btn--primary):not(.btn--secondary):not(.btn--outline):not(.btn--tertiary):not(.btn--premium):not(.btn--text) {
+    background-color: var(--color-espresso);
+    color: var(--color-white);
+    @include hover { background-color: var(--color-shadow-grey); }
+  }
+
+  &--large {
+    min-height: 52px;
+    padding: 14px 32px;
+    font-size: var(--fs-md);
+  }
+
+  &--block { width: 100%; }
+}
+
+// Group of buttons that stacks full-width on phones
+.btn-group,
+.hero__actions,
+.analysis-cta,
+.final-cta__actions,
+.schedule-cta__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+
+  @include down(sm) {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    > .btn { width: 100%; }
+  }
+}

@@ -1,0 +1,67 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  NUMBER ICONS — two distinct shapes, never mixed up
+//
+//  PLACE numbers (finishing / predicted position: 1st, 2nd, 3rd …)
+//    → CIRCLE, solid background.
+//      1st gold · 2nd silver · 3rd bronze (metallic, `medal()`),
+//      4th and below: flat espresso.
+//      Markup: <span class="place-num" :data-place="n">n</span>
+//
+//  HORSE numbers (saddlecloth / program number within a race)
+//    → SQUARE (mixed-cut), 2px border, TRANSPARENT background,
+//      number + border in the bright saddlecloth colour for that number.
+//      Markup: <span class="horse-num" :data-pgm="pgm">{{ pgm }}</span>
+//
+//  Existing BEM classes (exacta-slot__program, wps-row__position, …)
+//  include these mixins below, so templates only need :data-* attrs.
+// =============================================================
+
+// ---- Saddlecloth colours (North American standard, darkened where
+//      needed to pass 4.5:1 on white and cream) --------------------
+[data-pgm]      { --pgm-color: var(--color-shadow-grey); --pgm-border: var(--pgm-color); }
+[data-pgm='1']  { --pgm-color: #D0202E; }                                   // red
+[data-pgm='2']  { --pgm-color: var(--color-shadow-grey); --pgm-border: #A3A3AB; } // white cloth
+[data-pgm='3']  { --pgm-color: #1F5FD1; }                                   // blue
+[data-pgm='4']  { --pgm-color: #8F6A00; }                                   // yellow
+[data-pgm='5']  { --pgm-color: #1B7A33; }                                   // green
+[data-pgm='6']  { --pgm-color: var(--color-shadow-grey); }                  // black
+[data-pgm='7']  { --pgm-color: #C2410C; }                                   // orange
+[data-pgm='8']  { --pgm-color: #C2185B; }                                   // pink
+[data-pgm='9']  { --pgm-color: #00737B; }                                   // turquoise
+[data-pgm='10'] { --pgm-color: #7B2FBE; }                                   // purple
+[data-pgm='11'] { --pgm-color: #5B6770; }                                   // grey
+[data-pgm='12'] { --pgm-color: #4D7C0F; }                                   // lime
+[data-pgm='13'] { --pgm-color: #7A4A2A; }                                   // brown
+[data-pgm='14'] { --pgm-color: #8E1B3A; }                                   // maroon
+
+// ---- Generic classes -------------------------------------------------
+.horse-num { @include horse-num; }
+.place-num { @include place-num; }
+
+
+// ---- Horse numbers in existing components ------------------------------
+.pick-tab__program        { @include horse-num(48px, 1.4rem); }
+.prediction-card__program { @include horse-num(44px, 1.25rem); }
+.premium-card__program    { @include horse-num(52px, 1.5rem); }
+.wps-row__program         { @include horse-num(30px, 0.9rem); }
+.exacta-slot__program     { @include horse-num(40px, 1.15rem); }
+.race-row__pick-program   { @include horse-num(28px, 0.9rem); }
+.participants-table .horse-num { @include horse-num(28px, 0.85rem); }
+
+// ---- Place numbers in existing components ------------------------------
+.wps-row__position     { @include place-num(32px, 0.9rem); }
+.exacta-slot__position { @include place-num(32px, 0.95rem); }
+.participants-table .place-num { @include place-num(28px, 0.8rem); }
+
+// ---- Medals for 1st–3rd (kept LAST so they win over the sizing rules) --
+.place-num,
+.wps-row__position,
+.exacta-slot__position,
+.history-row__finish-value,
+.participants-table .place-num {
+  &[data-place='1'] { @include medal(gold); }
+  &[data-place='2'] { @include medal(silver); }
+  &[data-place='3'] { @include medal(bronze); }
+}

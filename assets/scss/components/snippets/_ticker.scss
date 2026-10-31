@@ -1,0 +1,102 @@
+.ticker {
+  background-color: var(--color-shadow-grey);
+  color: var(--text-on-dark);
+  padding: 16px 0;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  position: relative;
+
+  &__label {
+    background-color: var(--color-fern);
+    color: var(--color-white);
+    padding: 6px 16px;
+    border-radius: var(--radius-sm);
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    margin: 0 24px 0 24px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    
+    /* Pulsing dot icon */
+    &::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background-color: #ff6b6b;
+      border-radius: 50%;
+      animation: pulse 2s ease-in-out infinite;
+    }
+  }
+
+  &__track {
+    display: flex;
+    gap: 0; /* REMOVED: No gap between items */
+    width: max-content;
+    animation: scroll-left 40s linear infinite;
+    
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%);
+    
+    &:hover {
+      animation-play-state: paused;
+    }
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    white-space: nowrap;
+    font-size: 0.95rem;
+    padding: 0 32px; /* Consistent padding on each item */
+    border-right: 1px solid rgba(255,255,255,0.15);
+    
+    &:last-child {
+      border-right: none;
+    }
+  }
+
+  &__track-name {
+    font-family: var(--font-heading);
+    font-weight: 400;
+    color: var(--color-white);
+  }
+
+  &__race-num {
+    color: rgba(255,255,255,0.7);
+  }
+
+  &__status {
+    font-weight: 700;
+    font-size: 0.8rem;
+    padding: 2px 8px;
+    border-radius: 4px;
+    
+    &--live { 
+      color: #ff6b6b; 
+      background: rgba(255, 107, 107, 0.15);
+    }
+    &--upcoming { 
+      color: var(--color-baby-blue); 
+      background: rgba(133, 171, 255, 0.15);
+    }
+  }
+}
+
+@keyframes scroll-left {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); } /* Exactly 50% because we have 2x duplicated content */
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.6; transform: scale(1.2); }
+}

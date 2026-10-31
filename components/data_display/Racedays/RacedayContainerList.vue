@@ -62,5 +62,5 @@
       }
     }
   
-  fetchRaces()
+  fetchRaces();
 </script>

@@ -1,5 +1,5 @@
 import { ref } from 'vue';
-import mongo_api from 'C:/Users/ritch/Documents/Coding Projects/HorseBrain/api/mongo_api.js';
+import mongo_api from '~/api/mongo_api.js';
 import { defineEventHandler } from 'h3';
 
 interface Racetrack {

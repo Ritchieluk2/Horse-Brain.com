@@ -27,8 +27,11 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'cloudflare_pages'
-  },
+    preset: 'cloudflare_module',   // ← was 'cloudflare_pages'
+    cloudflare: {
+      nodeCompat: true
+    }
+  }
 
   // One global stylesheet. Component <style> blocks stay scoped and
   // only hold page-specific layout.

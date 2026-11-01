@@ -156,6 +156,10 @@ Surface recipes worth reusing:
 | `rail-frame($color, $inset-x, $inset-y, $overhang, $length-y)` | **signature** white rails crossing at the top-left corner (uses `::before`/`::after`) |
 | `textured-band($base, $deep, …)` | **signature** inlaid band: grain + fibres + vignette + inset shadow |
 
+> Asset filenames: lowercase-kebab only (`hero-finish-line.webp`). No spaces, parentheses or
+> quotes. The production build writes CSS `url()` without quotes, so `photo_(123).webp` silently
+> drops the whole `background-image` line on the live site, while it still works in `npm run dev`.
+
 > Sass gotcha: never write `rgb(r g b / $variable)`. Sass treats the `/` as division and
 > silently produces a wrong, opaque colour. With a variable alpha, use `rgba(r, g, b, $variable)`.
 > Literal values like `rgb(29 28 33 / 0.5)` are fine.

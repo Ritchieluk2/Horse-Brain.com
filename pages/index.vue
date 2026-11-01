@@ -79,18 +79,30 @@
           <article v-for="pick in featuredPicks" :key="pick.key" class="pick-card">
             <div class="pick-card__header">
               <span class="pick-card__track">{{ pick.track_name }}</span>
-              <span class="pick-card__time">Post: {{ formatTime(pick.post_time) }}</span>
+              <span class="pick-card__when">
+                <span class="pick-card__race">Race {{ pick.race_num }}</span>
+                <span class="pick-card__time">Post {{ formatTime(pick.post_time) }}</span>
+              </span>
             </div>
             
-            <!-- Horse Name with Dynamic Link to Horse Profile -->
-            <NuxtLink 
-              v-if="getHorseLink(pick.botPick.program_number, pick)"
-              :to="getHorseLink(pick.botPick.program_number, pick)"
-              class="pick-card__horse pick-card__horse--link"
-            >
-              {{ pick.botPick.horse_name }}
-            </NuxtLink>
-            <h3 v-else class="pick-card__horse">{{ pick.botPick.horse_name }}</h3>
+            <!-- Horse name (links to profile); once the race is run, its finish medal sits on the left -->
+            <div class="pick-card__name-row">
+              <span
+                v-if="pick.botPick.finish_position"
+                class="place-num pick-card__place"
+                :data-place="pick.botPick.finish_position"
+                :title="`Finished ${ordinal(pick.botPick.finish_position)}`"
+                :aria-label="`Finished ${ordinal(pick.botPick.finish_position)}`"
+              >{{ pick.botPick.finish_position }}</span>
+              <NuxtLink 
+                v-if="getHorseLink(pick.botPick.program_number, pick)"
+                :to="getHorseLink(pick.botPick.program_number, pick)"
+                class="pick-card__horse pick-card__horse--link"
+              >
+                {{ pick.botPick.horse_name }}
+              </NuxtLink>
+              <h3 v-else class="pick-card__horse">{{ pick.botPick.horse_name }}</h3>
+            </div>
 
             <div class="pick-card__details">
               <NuxtLink 
@@ -106,6 +118,16 @@
             
             <div class="pick-card__footer">
               <span class="pick-card__confidence" :class="`pick-card__confidence--${pick.botPick.confidence}`">
+                <!-- Confidence icons: high ★ · medium ✓ · low ? (same set as race rows) -->
+                <svg v-if="pick.botPick.confidence === 'high'" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                </svg>
+                <svg v-else-if="pick.botPick.confidence === 'medium'" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <polyline points="20 6 9 17 4 12"/>
+                </svg>
+                <svg v-else width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/>
+                </svg>
                 {{ pick.botPick.confidence === 'high' ? 'High' : pick.botPick.confidence === 'medium' ? 'Medium' : 'Low' }} Confidence
               </span>
               <NuxtLink 
@@ -247,6 +269,8 @@ const { getNextRacedayForTrack, getRaceday } = useRacedays()
 /* ==========================================
    FEATURED PICKS LOGIC
    ========================================== */
+const ordinal = (n) => `${n}${({ 1: 'st', 2: 'nd', 3: 'rd' }[n] || 'th')}`
+
 const featuredPicks = computed(() => {
   const picks = []
 
@@ -267,6 +291,7 @@ const featuredPicks = computed(() => {
           program_number: pickPgm,
           horse_name: pickHorse?.horse_name || 'Unknown',
           jockey_name: pickHorse?.jockey_name || '—',
+          finish_position: pickHorse?.finish_position || null,
           confidence: race1.botPick?.confidence || 'medium'
         }
       })
@@ -290,6 +315,7 @@ const featuredPicks = computed(() => {
           program_number: pickPgm,
           horse_name: pickHorse?.horse_name || 'Unknown',
           jockey_name: pickHorse?.jockey_name || '—',
+          finish_position: pickHorse?.finish_position || null,
           confidence: race2.botPick?.confidence || 'medium'
         }
       })

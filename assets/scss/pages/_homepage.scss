@@ -108,10 +108,30 @@
     color: var(--text-secondary);
   }
 
+  &__when { display: inline-flex; align-items: center; gap: var(--space-2); }
+
+  // "RACE 1 · POST 1:00 PM"
+  &__race {
+    color: var(--color-espresso);
+
+    &::after { content: '·'; margin-left: var(--space-2); color: var(--text-secondary); }
+  }
+
+  &__name-row {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    margin-bottom: var(--space-4);
+    min-width: 0;
+  }
+
+  // finish medal left of the name (gold / silver / bronze, else espresso)
+  &__place { width: 36px; height: 36px; font-size: 1rem; }
+
   &__horse {
+    min-width: 0;
     font-size: var(--fs-2xl);
     color: var(--color-espresso);
-    margin-bottom: var(--space-4);
   }
 
   &__details {

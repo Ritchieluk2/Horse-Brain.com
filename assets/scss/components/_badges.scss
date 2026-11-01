@@ -66,22 +66,45 @@
   &--low    { background-color: var(--confidence-low-bg); color: var(--confidence-low); }
 }
 
-// Homepage pick-card variant — solid fern with brass border
+// Homepage pick-card variant: icon + label. High = solid fern with a brass
+// corner mark on the sharp top-left (the frame's bracket, in miniature).
 .pick-card__confidence {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   @include label-caps(var(--fs-2xs), 0.08em);
   padding: 5px 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-cut-sm);
+
+  svg { flex-shrink: 0; }
 
   &--high {
     background-color: var(--color-fern);
     color: var(--color-white);
-    border: 1px solid var(--color-brass);
-    box-shadow: 0 2px 4px rgb(199 169 107 / 0.25);
+    box-shadow: 0 2px 4px rgb(54 107 36 / 0.25);
+
+    &::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      left: -4px;
+      width: 12px;
+      height: 12px;
+      border-top: 2px solid var(--color-brass);
+      border-left: 2px solid var(--color-brass);
+      pointer-events: none;
+    }
   }
   &--medium {
     background-color: var(--confidence-high-bg);
     color: var(--color-fern);
     border: 1px solid rgb(54 107 36 / 0.3);
+  }
+
+  &--low {
+    background-color: var(--confidence-low-bg);
+    color: var(--confidence-low);
   }
 }
 

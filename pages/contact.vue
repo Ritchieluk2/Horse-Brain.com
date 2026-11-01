@@ -42,14 +42,14 @@
     <!-- 3. Contact Info (Alt Styling: Dark Background) -->
     <section class="contact-info-section">
       <div class="container">
-        <div class="contact-info__header">
+        <div class="contact-info__header" v-reveal>
           <h2 class="section-title">Get in Touch</h2>
           <p class="section-subtitle">
             Have questions about our methodology, data sources, or partnership opportunities? We'd love to hear from you.
           </p>
         </div>
 
-        <div class="contact-info__grid">
+        <div class="contact-info__grid" v-reveal.stagger>
           <!-- Column 1: Email -->
           <article class="contact-card">
             <span class="contact-card__frame" aria-hidden="true"></span>

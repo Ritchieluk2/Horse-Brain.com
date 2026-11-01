@@ -5,7 +5,7 @@
     <section class="races-section">
       <div class="container">
         <!-- Date Header -->
-        <div class="date-header">
+        <div class="date-header" v-reveal>
           <h2 class="date-header__title">{{ formattedDate }}</h2>
           <p class="date-header__subtitle">
             {{ races.length }} race{{ races.length !== 1 ? 's' : '' }} scheduled across {{ uniqueTracks.length }} track{{ uniqueTracks.length !== 1 ? 's' : '' }}
@@ -13,7 +13,7 @@
         </div>
 
         <!-- Races Accordion -->
-        <div class="races-list">
+        <div class="races-list" v-reveal.stagger>
           <article
             v-for="race in sortedRaces"
             :key="race.id"

@@ -44,6 +44,14 @@
               </svg>
               <span>{{ raceday.weather.condition }}, {{ raceday.weather.temperature }} • Wind {{ raceday.weather.wind }}</span>
             </div>
+
+            <!-- Premium: the printable / fill-in program for this raceday -->
+            <NuxtLink :to="`/program/${raceday.track_id}/${raceday.dateISO}`" class="btn btn--premium raceday-hero__program">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/>
+              </svg>
+              Raceday Program
+            </NuxtLink>
           </div>
 
           <!-- Right Column: Background Image & CTA -->
@@ -72,9 +80,9 @@
           
           <!-- Left Column: Races List -->
           <div class="races-list-column">
-            <h2 class="section-title">Today's Card</h2>
+            <h2 class="section-title" v-reveal>Today's Card</h2>
             
-            <div class="races-list">
+            <div class="races-list" v-reveal.stagger>
               <article
                 v-for="race in raceday.races"
                 :key="race.id"
@@ -203,7 +211,7 @@
 
           <!-- Right Column: Reporting + Statistics (Glassmorphism Sidebar) -->
           <aside class="reporting-column">
-            <div class="reporting-card reporting-card--glass">
+            <div class="reporting-card reporting-card--glass" v-reveal>
               <span class="reporting-card__frame" aria-hidden="true"></span>
               <i class="reporting-card__corner reporting-card__corner--tl" aria-hidden="true"></i>
               <i class="reporting-card__corner reporting-card__corner--br" aria-hidden="true"></i>
@@ -259,7 +267,7 @@
     <!-- 4. Final CTA -->
     <section class="final-cta">
       <div class="container">
-        <div class="final-cta__inner">
+        <div class="final-cta__inner" v-reveal>
           <div class="final-cta__text">
             <h2 class="final-cta__title">Looking for more insights?</h2>
             <p class="final-cta__subtitle">
@@ -380,7 +388,17 @@ useHead(() => ({
 
   .container { position: relative; z-index: 2; }
 
-  &__header { margin-bottom: var(--space-6); }
+  // Stacked layouts: the hero continues the PageTitle band (same dark
+  // background), so it doesn't need its own full top padding
+  &__content { @include down(lg) { padding-top: var(--space-3); } }
+
+  &__header {
+    margin-bottom: var(--space-6);
+
+    // Below lg the hero sits directly under <PageTitle>, which already
+    // shows the track name + date (title and breadcrumb). Avoid saying it twice.
+    @include down(lg) { display: none; }
+  }
 
   &__title {
     margin-bottom: var(--space-2);
@@ -430,6 +448,8 @@ useHead(() => ({
   }
 
   &__cta { position: relative; z-index: 3; }
+
+  &__program { margin-top: var(--space-5); }
 
   @include hover { .raceday-hero__bg { transform: scale(1.03); } }
 }

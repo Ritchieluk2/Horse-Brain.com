@@ -144,6 +144,10 @@
   --dur-fast: 0.2s;
   --dur: 0.3s;
   --dur-slow: 0.6s;
+  // Reveal motion (v-reveal, see base/_motion.scss)
+  --ease-settle: cubic-bezier(0.22, 1, 0.36, 1);  // quick start, long gentle finish
+  --dur-reveal: 0.75s;   // block rising into place
+  --dur-moment: 0.7s;    // brass brackets, rules, diamond
 
   // ---- Layers ----------------------------------------------------
   --z-sticky: 100;

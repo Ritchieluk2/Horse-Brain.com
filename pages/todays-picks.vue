@@ -17,7 +17,7 @@
           <p class="section-subtitle">Our algorithm's highest confidence selections for today. Click a card to view the full analysis.</p>
         </div>
 
-        <div class="picks-selector__grid">
+        <div class="picks-selector__grid" v-reveal.stagger>
           <button
             v-for="(pick, index) in featuredPicks"
             :key="pick.key"
@@ -103,7 +103,7 @@
           <div :key="activePick" class="analysis-content">
             
             <!-- Race Header -->
-            <header class="analysis-header">
+            <header class="analysis-header" v-reveal>
               <div class="analysis-header__content">
                 <span class="analysis-header__track">{{ currentPick.track_name }}</span>
                 <h2 class="analysis-header__title">Race {{ currentPick.race_num }} Analysis</h2>
@@ -140,7 +140,7 @@
               <h3 class="block-title">Horse-by-Horse Analysis</h3>
               <p class="block-subtitle">Our algorithm's confidence rating and detailed analysis for every runner.</p>
 
-              <div class="predictions-grid">
+              <div class="predictions-grid" v-reveal.stagger>
                 <article 
                   v-for="prediction in currentPick.predictions" 
                   :key="prediction.program_number"
@@ -198,7 +198,7 @@
               <h3 class="block-title">Premium Expert Picks</h3>
               <p class="block-subtitle">Our algorithm's highest-conviction combinations for this race.</p>
 
-              <div class="premium-grid">
+              <div class="premium-grid" v-reveal.stagger>
                 <!-- Most Likely Winner -->
                 <article class="premium-card premium-card--winner">
                   <span class="premium-card__badge">Most Likely Winner</span>
@@ -348,7 +348,7 @@
             </div>
 
             <!-- View Full Raceday Link -->
-            <div class="analysis-cta">
+            <div class="analysis-cta" v-reveal>
               <NuxtLink :to="currentPick.path" class="btn btn--tertiary">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                   <path d="M19 12H5M12 19l-7-7 7-7"/>
@@ -371,7 +371,7 @@
     <!-- 4. Newsletter CTA -->
     <section class="newsletter-cta">
       <div class="container">
-        <div class="newsletter-cta__content">
+        <div class="newsletter-cta__content" v-reveal>
           <h2 class="newsletter-cta__title">Get Daily Picks in Your Inbox</h2>
           <p class="newsletter-cta__text">
             Subscribe to receive our top algorithmic picks every morning before first post.
@@ -388,18 +388,18 @@
     <!-- 5. Transparent Track Record -->
     <section class="track-record">
       <div class="container">
-        <h2 class="section-title">100% Transparent Track Record</h2>
-        <p class="section-subtitle">
+        <h2 class="section-title" v-reveal>100% Transparent Track Record</h2>
+        <p class="section-subtitle" v-reveal>
           We operate like a financial institution. Here is our verified, historical performance.
         </p>
 
-        <div class="track-record__ornament" aria-hidden="true">
+        <div class="track-record__ornament" v-reveal aria-hidden="true">
           <span class="track-record__ornament-line"></span>
           <span class="track-record__ornament-diamond"></span>
           <span class="track-record__ornament-line"></span>
         </div>
 
-        <div class="stats-grid" ref="statsGrid">
+        <div class="stats-grid" v-reveal.stagger ref="statsGrid">
           <div
             v-for="stat in trackRecordStats"
             :key="stat.label"
@@ -438,7 +438,7 @@
     <!-- 6. Schedule CTA -->
     <section class="schedule-cta">
       <div class="container">
-        <div class="schedule-cta__inner">
+        <div class="schedule-cta__inner" v-reveal>
           <div class="schedule-cta__text">
             <h2 class="schedule-cta__title">Ready for the next race?</h2>
             <p class="schedule-cta__subtitle">

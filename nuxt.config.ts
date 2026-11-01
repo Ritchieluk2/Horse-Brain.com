@@ -22,6 +22,25 @@ export default defineNuxtConfig({
     }
   },
 
+  // Cross-fade between pages using the browser's View Transitions API.
+  // Unsupported browsers change page normally. Nuxt skips it for
+  // prefers-reduced-motion. Timing lives in assets/scss/base/_motion.scss.
+  experimental: {
+    viewTransition: true
+  },
+
+  // DEV ONLY: works around a Nuxt 3.16+ dev-server bug where module
+  // paths lose the project prefix ("__nuxt_vite_node__/module//node_modules/…")
+  // and Vite's file-serving check answers 403. Applies to `nuxt dev` only,
+  // never to builds or production. Remove once Nuxt fixes nuxt/nuxt#31311.
+  $development: {
+    vite: {
+      server: {
+        fs: { strict: false }
+      }
+    }
+  },
+
   routeRules: {
     '/Racetracks': { ssr: false }
   },

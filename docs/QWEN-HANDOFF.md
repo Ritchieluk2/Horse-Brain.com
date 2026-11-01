@@ -176,6 +176,56 @@ The page now uses the global `.not-found`, `.metric` and `.summary-stat`; `split
 `stat-row`/`stat-item` for the hero; tokens instead of hex; and mixed-cut tags. Metrics
 grid is `1fr` on phones and two columns from `md` up.
 
+### Motion: `v-reveal` (Claude, 1 Nov)
+
+The site now has a scroll-reveal directive, `plugins/reveal.ts`, with its CSS in
+`assets/scss/base/_motion.scss`. Rules are in BRANDING §10; how to use it is in CSS-GUIDE §5a.
+**Don't add AOS or any animation library.**
+
+- When you build a new section, add `v-reveal` to its header and `v-reveal.stagger` to its card
+  grid or list. Brass corners, bars and medals inside animate automatically.
+- Never put it on the hero, the PageTitle, disclaimers, anything inside the race schedule
+  carousel, or an element positioned with `transform`.
+- `nuxt.config.ts` now has `experimental.viewTransition: true` for page cross-fades.
+  The header has `view-transition-name: site-header`, so keep a single header element.
+- Pages touched (template attributes only, no logic): index, todays-picks, picks race page,
+  TodayRaces, raceday, Racetracks, racetracks/[id], our-track-record, contact, EntityProfile.
+
+### Hero de-duplication (Claude, 1 Nov)
+
+- **Race-day page and track page:** below `lg`, the hero's own title is hidden with CSS
+  (raceday: name + date; track: name, keeping the location), because `<PageTitle>` right above
+  already shows it. The markup is unchanged.
+- **Horse and jockey profiles:** `<PageTitle>` is removed from `EntityProfile.vue`. The eyebrow
+  is now a breadcrumb `<nav>`: Home / Horses / Horse Profile. The profile's `h1` is now the only
+  `h1` on the page. **"Horses" and "Jockeys" are plain text, not links, because `/horses` and
+  `/jockeys` index pages don't exist yet.** When you build them, turn those two spans into
+  `<NuxtLink class="profile-crumbs__link">`.
+
+### Raceday Program, first premium product (Claude, 1 Nov)
+
+Route: **`/program/[track]/[date]`**, e.g. `/program/KEE/2026-10-31`. It's linked from the
+race-day hero ("Raceday Program", the brass button).
+
+| File | What it holds |
+|---|---|
+| `pages/program/[track]/[date].vue` | Cover, sticky race bar with day P/L, My Day scoreboard + budget, race sheets, Day Summary |
+| `components/program/ProgramRace.vue` | One race: field table, HorseBrain picks with "+ Bet", bet log, notes, paper bet slip |
+| `composables/useRacedayProgram.js` | The user's layer: bets, contenders, notes, budget, totals, `gradeBet()` |
+| `assets/scss/components/_program.scss` | All styles, including the `@media print` program |
+
+- **Data in:** `useRacedays().getRaceday()` (participants, predictions, botPick, premiumPicks).
+  Everything is looked up by **program number** within the race.
+- **Data saved:** `localStorage` key `hb:program:v1:{TRACK}:{date}`. The record shape is documented at
+  the top of the composable. **When accounts exist, keep that shape** and swap `load()`/`save()`
+  for API calls (or sync localStorage → account on sign-in). `version` lets us migrate.
+- Premium is labelled but **not gated** yet ("Premium · free during preview").
+- "Check against result" grades open bets from `finish_position`. Win/Place/Show and straight
+  Exacta/Trifecta are graded automatically; "Other" is graded by hand. Payouts are always typed
+  in by the user, because we don't have real payout data.
+- Ideas for Qwen's side: a "Program" link on Today's Picks / the race analysis page, and a
+  "My programs" list once accounts exist.
+
 ## 5. Open issues found during Claude's review (Qwen's side)
 
 Please pick these up. They are template, script or data bugs, not styling.

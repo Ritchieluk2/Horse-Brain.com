@@ -1,0 +1,20 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Site-wide print basics. Any page prints as content only:
+//  no header, footer, loading bar, or sticky chrome.
+//  Page-specific print layouts live with their component
+//  (e.g. the Raceday Program in components/_program.scss).
+// =============================================================
+@media print {
+  .site-header,
+  .site-footer,
+  .nuxt-loading-indicator,
+  .mobile-drawer,
+  .nav-backdrop { display: none !important; }
+
+  html, body { background: #fff !important; }
+
+  // Never print a half-revealed element
+  .reveal-pending, .is-revealing { opacity: 1 !important; transform: none !important; }
+}

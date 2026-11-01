@@ -1,15 +1,5 @@
 <template>
   <div class="entity-profile">
-    <!-- 1. Page Title -->
-    <PageTitle 
-      :title="profile.name"
-      :breadcrumbs="[
-        { label: 'Home', to: '/' },
-        { label: profile.type === 'horse' ? 'Horses' : 'Jockeys', to: profile.type === 'horse' ? '/horses' : '/jockeys' },
-        { label: profile.name }
-      ]"
-    />
-
     <!-- 2. Hero Section: Bot Accuracy + Key Info -->
     <section class="profile-hero">
       <div class="container">
@@ -17,9 +7,14 @@
           
           <!-- Left: Identity + Bot Accuracy -->
           <div class="profile-hero__content">
-            <span class="profile-hero__eyebrow">
-              {{ profile.type === 'horse' ? 'Horse Profile' : 'Jockey Profile' }}
-            </span>
+            <!-- Breadcrumbs double as the eyebrow (this page has no PageTitle band) -->
+            <nav class="profile-hero__eyebrow profile-crumbs" aria-label="Breadcrumb">
+              <ol>
+                <li><NuxtLink to="/" class="profile-crumbs__link">Home</NuxtLink></li>
+                <li><span class="profile-crumbs__section">{{ profile.type === 'horse' ? 'Horses' : 'Jockeys' }}</span></li>
+                <li><span class="profile-crumbs__current" aria-current="page">{{ profile.type === 'horse' ? 'Horse Profile' : 'Jockey Profile' }}</span></li>
+              </ol>
+            </nav>
             <h1 class="profile-hero__name">{{ profile.name }}</h1>
             <p class="profile-hero__subtitle">{{ profile.subtitle }}</p>
 
@@ -73,7 +68,7 @@
 
           <!-- Right: Career Stats -->
           <div class="profile-hero__visual">
-            <div class="career-stats-card">
+            <div class="career-stats-card" v-reveal>
               <span class="career-stats-card__frame" aria-hidden="true"></span>
               <i class="career-stats-card__corner career-stats-card__corner--tl" aria-hidden="true"></i>
               <i class="career-stats-card__corner career-stats-card__corner--br" aria-hidden="true"></i>
@@ -99,14 +94,14 @@
     <!-- 3. Racing History Accordion -->
     <section class="racing-history">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header" v-reveal>
           <h2 class="section-title">Racing History</h2>
           <p class="section-subtitle">
             Complete performance record across all races. Click any entry to view full details.
           </p>
         </div>
 
-        <div class="history-list">
+        <div class="history-list" v-reveal.stagger>
           <article
             v-for="performance in profile.racingHistory"
             :key="performance.id"
@@ -212,7 +207,7 @@
     <!-- 4. Final CTA -->
     <section class="final-cta">
       <div class="container">
-        <div class="final-cta__inner">
+        <div class="final-cta__inner" v-reveal>
           <div class="final-cta__text">
             <h2 class="final-cta__title">Explore more insights</h2>
             <p class="final-cta__subtitle">
@@ -238,7 +233,6 @@
 
 <script setup>
 import { ref } from 'vue'
-import PageTitle from '~/components/snippets/PageTitle.vue'
 
 const props = defineProps({
   profile: {
@@ -307,6 +301,7 @@ const formatOdds = (odds) => {
 // ---- Hero: identity + HorseBrain record | career stats card ----------------
 .profile-hero {
   padding-block: var(--section-pad-sm);
+  padding-top: var(--space-8);   // first band under the header (no PageTitle)
   background-color: var(--bg-dark);
   color: var(--text-on-dark);
   border-bottom: 1px solid rgb(255 255 255 / 0.1);
@@ -320,7 +315,7 @@ const formatOdds = (odds) => {
   }
 
   &__eyebrow {
-    display: inline-block;
+    display: block;
     margin-bottom: var(--space-3);
     @include label-caps(var(--fs-2xs), 0.14em);
     color: var(--color-baby-blue);
@@ -660,4 +655,27 @@ const formatOdds = (odds) => {
   justify-content: flex-end;
   @include down(sm) { .btn { width: 100%; } }
 }
+
+// Breadcrumb eyebrow: HOME / HORSES / HORSE PROFILE
+.profile-crumbs ol {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 2px var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li { display: inline-flex; align-items: center; gap: var(--space-2); }
+  li + li::before { content: '/'; color: var(--text-on-dark-faint); }
+}
+
+.profile-crumbs__link {
+  color: var(--text-on-dark-muted);
+  transition: color var(--dur-fast) ease;
+  @include hover { color: var(--color-white); }
+}
+
+.profile-crumbs__section { color: var(--text-on-dark-muted); }
+.profile-crumbs__current { color: var(--color-baby-blue); }
 </style>

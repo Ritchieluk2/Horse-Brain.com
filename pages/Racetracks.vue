@@ -6,7 +6,7 @@
 
     <section class="all-tracks-section">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header" v-reveal>
           <div class="section-header__text">
             <h2 class="section-title">All Supported Racetracks</h2>
             <p class="section-subtitle">Comprehensive coverage of major racetracks with live data and algorithmic insights.</p>
@@ -21,7 +21,7 @@
           </div>
         </div>
 
-        <div class="tracks-grid">
+        <div class="tracks-grid" v-reveal.stagger>
           <NuxtLink 
             v-for="track in sortedTracks" 
             :key="track.id"

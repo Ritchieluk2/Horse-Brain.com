@@ -15,6 +15,7 @@ No Bootstrap, no Tailwind, no utility-class frameworks.
 ```
 assets/scss/
 ├── main.scss                 ← the only global entry (loaded in nuxt.config.ts)
+│                                (JS side of motion: plugins/reveal.ts → v-reveal)
 ├── abstracts/                ← NO CSS output. Auto-injected into every <style lang="scss">
 │   ├── _tokens.scss          ← $breakpoints, $container-max
 │   └── _mixins.scss          ← up(), down(), card(), ornament-frame(), split-hero(), …
@@ -23,7 +24,9 @@ assets/scss/
 │   ├── _fonts.scss           ← Amagro @font-face (Raleway comes from Google Fonts)
 │   ├── _reset.scss           ← modern reset (replaces Bootstrap Reboot)
 │   ├── _typography.scss      ← headings, .link-underline / .horse-link, .eyebrow
-│   └── _layout.scss          ← .container, .section, .section-title/-subtitle, .auto-grid
+│   ├── _layout.scss          ← .container, .section, .section-title/-subtitle, .auto-grid
+│   ├── _motion.scss          ← v-reveal states, branded moments, keyframes (loaded LAST)
+│   └── _print.scss           ← site-wide print basics (hide header/footer)
 ├── components/               ← shared, GLOBAL component styles (used on 2+ pages)
 │   ├── _buttons.scss         ← .btn + variants
 │   ├── _badges.scss          ← status pills, confidence chips, tags, pick icons
@@ -35,7 +38,8 @@ assets/scss/
 │   ├── _stats.scss           ← track-record band, stat-card odometer, .metric, info/stats cards
 │   ├── _cta.scss             ← .final-cta, .schedule-cta, .newsletter-cta, .newsletter
 │   ├── _states.scss          ← 404/not-found + fade transition
-│   └── racetracks/_upcoming-races.scss  ← rolodex schedule carousel
+│   ├── racetracks/_upcoming-races.scss  ← rolodex schedule carousel
+│   └── _program.scss          ← Raceday Program (screen + @media print)
 └── pages/_homepage.scss      ← hero + featured pick cards
 ```
 
@@ -87,7 +91,7 @@ Baby blue (2.3:1), brass (2.3:1) and live red (2.8:1) **fail** as text on white.
 - Spacing: `--space-1` (4px) … `--space-11` (100px). Sections: `--section-pad`, `--section-pad-sm`.
 - Side padding: `--gutter` (16 → 24 → 32px). Use `.container` rather than custom max-widths.
 - Radius: `--radius-sm|md|lg|pill` for buttons, badges, pills and icons. **Cards use the mixed-cut tokens** `--radius-cut` (lg), `--radius-cut-md`, `--radius-cut-sm`. Shadows: `--shadow-sm|md|lg|card|card-hover|brass`.
-- Motion: `--ease`, `--ease-out`, `--dur-fast|dur|dur-slow`. Reduced-motion is handled globally.
+- Motion: `--ease`, `--ease-out`, `--dur-fast|dur|dur-slow` for interaction; `--ease-settle`, `--dur-reveal`, `--dur-moment` for arrivals. Reduced-motion is handled globally.
 
 ---
 
@@ -183,6 +187,53 @@ in a scoped block.** Ask for a modifier instead.
 
 ---
 
+## 5a. Motion: `v-reveal` (plugins/reveal.ts + base/_motion.scss)
+
+Brand rules: BRANDING.md §10. Don't add AOS or other animation libraries.
+
+```html
+<h2 class="section-title" v-reveal>…</h2>           <!-- rise + fade (default) -->
+<p v-reveal="'fade'">…</p>                          <!-- fade only -->
+<div class="predictions-grid" v-reveal.stagger>     <!-- each CHILD reveals in turn -->
+<div class="x" v-reveal="{ delay: 120 }">           <!-- extra delay, ms -->
+```
+
+- **Inner moments are automatic.** Inside a revealing element, the following play by themselves:
+  brass corners (`<i class="x__corner x__corner--tl|br" aria-hidden>`), frames
+  (`<span class="x__frame" aria-hidden>`), bars (`.probability-bar__fill`,
+  `.confidence-row__fill`, `.metric__bar-fill`, or any `[data-fill]`), medals (`[data-place="1–3"]`)
+  and the track-record ornament. No extra markup needed.
+- **Lifecycle:** `.reveal-pending`, then `.is-revealing`, then no class. After about 2s every helper
+  class is removed, so hover lifts and transitions work as normal.
+- **Put it on:** section headers, cards and card grids (`.stagger`), race and history lists
+  (`.stagger`), CTA inner panels, stat cards.
+- **Don't put it on:**
+  - the hero or page title (first paint)
+  - disclaimers
+  - elements that use `transform` for layout (the carousel's `.race-card`, absolutely centred
+    items). Wrap them in a div instead.
+  - anything inside `UpcomingRacesCarousel`
+- Lists that grow (Load more, tab switches) reveal their new children automatically.
+- Header rails draw in via CSS in `Header.vue` (`hb-rail-x` / `hb-rail-y`). Page changes use
+  Nuxt `experimental.viewTransition`. The header has `view-transition-name: site-header`.
+- New keyframes go in `_motion.scss` with the `hb-` prefix.
+
+---
+
+## 5b. Print styles
+
+- Site-wide basics are in `base/_print.scss`: the header, footer and loading bar are hidden, and the page is white.
+- A page that has a real printed form keeps its print rules **with its component partial**,
+  inside `@media print { … }` at the bottom (see `_program.scss`).
+- Use print units (`pt`, `mm`), `break-before: page` for page breaks, and
+  `print-color-adjust: exact` where colour carries meaning (saddlecloths, medals).
+- Paper-only markup (ruled bet lines, notes lines) is `display: none` on screen, and screen-only
+  controls are `display: none` in print. Never use `visibility`, because it leaves gaps.
+- Test by printing to PDF. The browser pane can't show print preview.
+- `.visually-hidden` is now a global utility class (base/_layout.scss) as well as a mixin.
+
+---
+
 ## 6. Brand usage rules
 
 1. **Brass means premium or high confidence.** Don't use it decoratively on ordinary content.
@@ -195,4 +246,5 @@ in a scoped block.** Ask for a modifier instead.
 8. **"The frame" is the brass treatment only**: inner hairline + brass brackets on the two sharp corners. Add it to premium, featured and high-confidence items, not to everything.
 9. **Black on blue:** on baby-blue backgrounds use `--color-shadow-grey` for text and dark buttons, never espresso.
 10. **Signature frame language:** the rail frame (top-left crossing rails) and the brass corner brackets (top-left + bottom-right) belong together. New framed elements should use one of them, not invent a new corner style.
-11. Never design for "stickiness": no countdown pressure, no flashing wins (see Project Document → Philosophy).
+11. Motion settles once: use `v-reveal`, never loops (LIVE only), never on hero/title/disclaimers (BRANDING §10).
+12. Never design for "stickiness": no countdown pressure, no flashing wins (see Project Document → Philosophy).

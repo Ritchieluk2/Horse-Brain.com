@@ -8,7 +8,7 @@ It's written for people **and** AI agents: rules are explicit, values are exact,
 visual rule maps to a code token. Code is the source of truth: `assets/scss/base/_root.scss`
 (tokens) and `docs/CSS-GUIDE.md` (implementation).
 
-_Version 1.0 · 2026-10-31_
+_Version 1.1 · 2026-11-01 (adds Motion: §10)_
 
 ---
 
@@ -212,10 +212,32 @@ bands. Don't stack two identical backgrounds.
 | **Confidence chip** | Icon + label. High ★ fern + brass ring · Medium ✓ blue · Low ? muted |
 | **Status pill** | LIVE (pulsing red) · UPCOMING (blue) · FINAL (fern) |
 | **Place number** | **Circle, solid background.** 1st gold · 2nd silver · 3rd bronze (metallic `medal()`); 4th and below flat espresso. Shows the digit only (title gives "1st") |
-| **program number** | **Square (mixed-cut), 2px border, transparent background**, number + border in the horse's saddlecloth colour |
+| **Program number (pgm)** | **Square (mixed-cut), 2px border, transparent background**, number + border in the horse's saddlecloth colour |
 | **WPS row** | place circle · "Win / Place / Show" label · horse square · name · confidence chip (icon + %) on the right |
 | **Name link** | Sliding baby-blue underline from the left on hover |
 | **Tap targets** | ≥ 44px tall on every interactive element |
+
+### 8.1 Raceday Program (first premium product)
+
+The program is the thing a racegoer holds. It should feel like a **printed track program**:
+paper, ink and brass. It must never feel like a betting slip that pushes you to bet.
+
+- **Cover:** a cream paper card inlaid in a dark band, framed in brass (full-strength brackets).
+  Kicker "Raceday Program" with a "Premium" brass tag.
+- **Race sheet:** a mixed-cut card with the frame. Each race has a **race number tile** (shadow-grey
+  mixed-cut square, brass hairline, "RACE" label above the number), then the field table
+  (contender tick, program number, horse/jockey, morning line, HorseBrain confidence, finish).
+- **HorseBrain Picks panel:** cream paper with a brass edge, plus a dark tag with brass lettering.
+  Every pick has a quiet "+ Bet" button. Following our picks is one tap, but never a default.
+- **Bet rows:** inset grey panels with a left colour bar: blue = open, fern = won,
+  live-ink = lost, grey = refunded.
+- **Money:** profit is fern and loss is live-ink. Totals always show staked **and** returned, never
+  only wins.
+- **Budget (Responsibility):** an optional daily limit. Going over it turns the meter **brass, not
+  red**, with a calm sentence suggesting it may be time to stop. No alarms, no shaming.
+- **Print:** white paper and espresso ink. Saddlecloth colours and medals stay, because they help find a
+  horse fast. Cover + Race 1 on page 1, then one race per page with ruled bet lines and notes,
+  then a Day Summary with a budget line. The responsible-gambling line prints too.
 
 ---
 
@@ -232,12 +254,63 @@ bands. Don't stack two identical backgrounds.
 
 ## 10. Motion
 
-- Subtle and purposeful: hover lifts (2–4px), fades, sliding underlines, the odometer roll on stats.
-- Durations: 0.2s (fast) · 0.3s (default) · 0.6s (slow). Easing `--ease` / `--ease-out`.
-- Honour `prefers-reduced-motion` (handled globally).
-- **Never:** flashing wins, celebratory confetti, urgency timers.
+HorseBrain moves like a race call: things **settle into place once**, and then hold still.
+Motion should make the page feel crafted and alive, never needy. If someone would notice an
+animation a second time, it's too much.
 
----
+### 10.1 Principles
+
+1. **Settle, don't bounce.** One easing for arrivals, `--ease-settle` (quick start, long gentle
+   finish). No springs, overshoot or wobble.
+2. **Once.** Each element reveals the first time it scrolls into view, then stays put.
+   Only LIVE indicators loop.
+3. **Never hide what's already on screen.** On first load, anything the reader can already see
+   is shown at once. Only content below the fold waits to be revealed.
+4. **Brand moments, not generic fades.** The motion we add belongs to our own visual language:
+   brass brackets, rails, medals and bars.
+5. **Information first.** A reveal never delays reading for more than about a second, and
+   disclaimers and responsible-gambling copy are never animated.
+6. **Reduced motion is respected.** With `prefers-reduced-motion`, nothing moves and everything
+   is visible.
+
+### 10.2 The branded moments
+
+| Moment | What happens | Where |
+|---|---|---|
+| **Rise** | The block fades in while rising 18px into place. | Section headings, cards, rows, CTAs |
+| **Stagger** | Items in a list follow each other 80ms apart, capped at 6 so long lists never drag. | Card grids, race lists, history rows, pillars |
+| **Rail draw** | The header's white rails draw out from their crossing point at the top-left. The bottom rail follows. | Header, on each full page load |
+| **Frame draw** | Brass corner brackets draw out from the sharp corners, then the inner hairline fades up. | Any framed card (`frame()`) inside a revealed block |
+| **Fill** | Probability and confidence bars run from left to right, like a horse down the stretch. | `.probability-bar__fill`, `.confidence-row__fill`, `.metric__bar-fill`, `[data-fill]` |
+| **Medal glint** | 1st, 2nd and 3rd place medals catch a single glint as they arrive. Hovering replays it. | Every `[data-place="1–3"]` |
+| **Odometer** | Stat figures roll up digit by digit. | Track-record stat cards |
+| **Ornament** | The brass rules draw outwards and the diamond turns in. | Track-record ornament |
+| **Page change** | A quick 220ms cross-fade between pages; the header stays still. | Every client-side navigation (View Transitions) |
+
+### 10.3 Timing
+
+| Token | Value | Use |
+|---|---|---|
+| `--dur-fast` | 0.2s | Hover colour, small UI feedback |
+| `--dur` | 0.3s | Default transitions, hover lifts (2–4px) |
+| `--dur-slow` | 0.6s | Larger state changes |
+| `--dur-reveal` | 0.75s | A block rising into place |
+| `--dur-moment` | 0.7s | Brackets, rules, diamond |
+| `--ease` / `--ease-out` | | Interaction (hover, press, open) |
+| `--ease-settle` | `cubic-bezier(0.22, 1, 0.36, 1)` | Arrivals (reveals, rails, fills) |
+
+Inner moments start after the block begins settling: the frame at +200–380ms, fills at +220ms,
+and the glint at +520ms. A whole reveal finishes in under 2 seconds.
+
+### 10.4 Never
+
+- Flashing wins, confetti, celebratory bursts or sound.
+- Countdown or urgency timers, pulsing "bet now" buttons, or anything designed to hold
+  attention for its own sake.
+- Animating disclaimers, odds or results so they are harder to read.
+- Parallax, scroll-jacking (beyond the race schedule's designed sticky stack), or motion on
+  every scroll tick.
+- Revealing the hero or page title. They are the first thing on screen and must be there instantly.
 
 ## 11. Layout
 
@@ -266,14 +339,20 @@ colors:
   cream:       "#F5F1E8"
 fonts:
   heading: Amagro        # headings, buttons, numbers, HORSE NAMES
+  body: Raleway          # body, labels, PEOPLE'S NAMES
 numbers:
   place: circle, solid; 1st gold / 2nd silver / 3rd bronze; 4th+ espresso   # class .place-num + data-place
-  horse: square mixed-cut, 2px border, transparent; saddlecloth colour       # class .horse-num + data-pgm
-  body: Raleway          # body, labels, PEOPLE'S NAMES
+  program: square mixed-cut, 2px border, transparent; saddlecloth colour     # program number (pgm); class .horse-num + data-pgm
 shapes:
   card: mixed-cut        # sharp top-left + bottom-right, rounded top-right + bottom-left
   premium: frame         # inner hairline + brass brackets on the sharp corners
   header: rail-frame     # white rails crossing at the top-left
+motion:
+  principle: settle into place once, then hold still; only LIVE loops
+  directive: v-reveal (rise) | v-reveal="'fade'" | v-reveal.stagger (children)
+  moments: [rise, stagger, rail-draw, frame-draw, fill, medal-glint, odometer, ornament, page-crossfade]
+  easing: --ease-settle  # arrivals; --ease / --ease-out for interaction
+  never: [hero or page title reveals, animated disclaimers, flashing wins, urgency timers, loops]
 rules:
   - never hard-code hex; use tokens in assets/scss/base/_root.scss
   - brass only for premium / high confidence

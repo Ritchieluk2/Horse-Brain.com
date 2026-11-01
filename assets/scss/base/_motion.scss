@@ -1,0 +1,134 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Motion: reveal states + branded moments
+//  JS: plugins/reveal.ts (v-reveal) · Rules: docs/BRANDING.md §Motion
+//
+//  Motion here works like a race call: things settle into place
+//  once and then stay still. Nothing loops except LIVE indicators.
+//
+//  The plugin moves each element through these states:
+//    .reveal-pending  hidden, waiting below the fold
+//    .is-revealing    playing (the inner moments key off this class)
+//    (no class)       finished; the element's own styles take over
+// =============================================================
+
+// ---- 1. Element reveal -------------------------------------------
+// !important is deliberate: these are short-lived states that must
+// beat any component's own opacity/transform until the reveal ends.
+.reveal-pending {
+  opacity: 0 !important;
+  transform: translate3d(0, var(--reveal-rise, 18px), 0) !important;
+}
+
+.is-revealing {
+  transition:
+    opacity var(--dur-reveal) var(--ease-settle),
+    transform var(--dur-reveal) var(--ease-settle) !important;
+  transition-delay: var(--reveal-delay, 0ms) !important;
+}
+
+// ---- 2. Branded moments (play inside any revealing block) ---------
+// Each moment waits for the block to start settling, then plays once.
+// All of them end exactly on the element's resting style, so removing
+// .is-revealing afterwards causes no jump.
+
+// a) "The frame": brass brackets draw out from their sharp corners,
+//    then the inner hairline fades up.
+.is-revealing {
+  [class*='__corner--tl'][aria-hidden] {
+    animation: hb-draw-tl var(--dur-moment) var(--ease-settle) calc(var(--reveal-delay, 0ms) + 260ms) both;
+  }
+  [class*='__corner--br'][aria-hidden] {
+    animation: hb-draw-br var(--dur-moment) var(--ease-settle) calc(var(--reveal-delay, 0ms) + 380ms) both;
+  }
+  [class$='__frame'][aria-hidden] {
+    animation: hb-fade-in var(--dur-moment) var(--ease-out) calc(var(--reveal-delay, 0ms) + 200ms) both;
+  }
+}
+
+// b) Bars fill from the left, like a horse running down the stretch.
+//    clip-path instead of scaleX so rounded ends don't squash.
+.is-revealing :is(.probability-bar__fill, .confidence-row__fill, .metric__bar-fill, [data-fill]) {
+  animation: hb-fill 1.1s var(--ease-settle) calc(var(--reveal-delay, 0ms) + 220ms) both;
+}
+
+// c) Medals (1st/2nd/3rd) catch one glint as they arrive.
+//    Fill mode `backwards`, because the glint's resting place is off-face.
+.is-revealing :is([data-place='1'], [data-place='2'], [data-place='3'])::after {
+  animation: hb-glint 1.1s var(--ease-out) calc(var(--reveal-delay, 0ms) + 520ms) 1 backwards;
+}
+
+// d) Brass ornament rules draw out from the diamond, which turns in.
+.is-revealing {
+  .track-record__ornament-line {
+    animation: hb-rule var(--dur-moment) var(--ease-settle) calc(var(--reveal-delay, 0ms) + 120ms) both;
+    transform-origin: right center;
+
+    &:last-child { transform-origin: left center; }
+  }
+  .track-record__ornament-diamond {
+    animation: hb-diamond var(--dur-moment) var(--ease-settle) var(--reveal-delay, 0ms) both;
+  }
+}
+
+// ---- 3. Page change ------------------------------------------------
+// Nuxt's View Transitions (nuxt.config → experimental.viewTransition).
+// A quick cross-fade between pages. The header keeps its own layer
+// so it never flickers. Browsers without support just change page.
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation-duration: 220ms;
+  animation-timing-function: var(--ease-out);
+}
+
+// ---- 4. Safety nets -------------------------------------------------
+@media print {
+  .reveal-pending { opacity: 1 !important; transform: none !important; }
+}
+
+// ---- Keyframes -----------------------------------------------------
+@keyframes hb-draw-tl {
+  from { clip-path: inset(0 100% 100% 0); }
+  to   { clip-path: inset(0); }
+}
+
+@keyframes hb-draw-br {
+  from { clip-path: inset(100% 0 0 100%); }
+  to   { clip-path: inset(0); }
+}
+
+@keyframes hb-fade-in {
+  from { opacity: 0; }
+}
+
+@keyframes hb-fill {
+  from { clip-path: inset(0 100% 0 0); }
+  to   { clip-path: inset(0); }
+}
+
+@keyframes hb-glint {
+  from { transform: translateX(-70%); }
+  to   { transform: translateX(70%); }
+}
+
+@keyframes hb-rule {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes hb-diamond {
+  from { transform: rotate(-135deg) scale(0); }
+  to   { transform: rotate(45deg) scale(1); }
+}
+
+// Header rails (Header.vue): rails draw along from the top-left corner
+@keyframes hb-rail-x {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+@keyframes hb-rail-y {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}

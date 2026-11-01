@@ -95,9 +95,12 @@ onBeforeUnmount(() => {
   background-color: var(--color-espresso);
   color: var(--color-white);
   box-shadow: 0 2px 12px rgb(0 0 0 / 0.25);
+  view-transition-name: site-header;   // stays still during page cross-fades
 
   // The "white rail": a hairline that fades out, like track rail paint
   &::after {
+    transform-origin: left center;
+    animation: hb-rail-x 1.4s var(--ease-settle) 0.35s both;
     content: '';
     position: absolute;
     left: 0;
@@ -126,6 +129,12 @@ onBeforeUnmount(() => {
     padding-top: 12px;            // breathing room under the top rail
 
     @include up(lg) { padding-top: 16px; }
+
+    // Branded moment: on page load the rails draw out from their
+    // crossing point. CSS only, so it plays on every full load and
+    // never again while the user moves around the site.
+    &::before { transform-origin: left center; animation: hb-rail-x 1.1s var(--ease-settle) 0.15s both; }
+    &::after  { transform-origin: center top;  animation: hb-rail-y 0.8s var(--ease-settle) 0.15s both; }
   }
 
   &__brand {

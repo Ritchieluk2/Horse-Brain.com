@@ -31,6 +31,11 @@
 @use 'components/cta';
 @use 'components/states';
 @use 'components/racetracks/upcoming-races';
+@use 'components/program';
 
 // Page-level (global because markup is spread across components).
 @use 'pages/homepage';
+
+// Motion last: reveal states must win over component styles
+@use 'base/motion';
+@use 'base/print';

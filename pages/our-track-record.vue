@@ -9,7 +9,7 @@
     <!-- Key Stats Section -->
     <section class="key-stats">
       <div class="container">
-        <div class="section-header">
+        <div class="section-header" v-reveal>
           <h2 class="section-title">Verified Performance, By the Numbers</h2>
           <p class="section-subtitle">
             Every figure below is audited, timestamped, and updated after each race day. 
@@ -17,7 +17,7 @@
           </p>
         </div>
 
-        <div class="stats-grid" ref="statsGrid">
+        <div class="stats-grid" v-reveal.stagger ref="statsGrid">
           <div
             v-for="stat in trackRecordStats"
             :key="stat.label"
@@ -61,7 +61,7 @@
     <section class="process-section">
       <div class="container">
         <div class="process-grid">
-          <div class="process-content">
+          <div class="process-content" v-reveal>
             <span class="process-tag">Our Methodology</span>
             <h2 class="section-title">About Our Process</h2>
             <p class="process-lead">
@@ -70,7 +70,7 @@
               the quantitative research practices of institutional finance.
             </p>
 
-            <div class="process-steps">
+            <div class="process-steps" v-reveal.stagger>
               <div class="process-step">
                 <div class="process-step__number">01</div>
                 <div class="process-step__content">
@@ -126,7 +126,7 @@
           </div>
 
           <aside class="process-sidebar">
-            <div class="process-sidebar__card">
+            <div class="process-sidebar__card" v-reveal>
               <span class="process-sidebar__label">Model Accuracy by Confidence</span>
               <div class="confidence-breakdown">
                 <div class="confidence-row">
@@ -164,7 +164,7 @@
     <section class="ml-section">
       <div class="container">
         <div class="ml-grid">
-          <div class="ml-content">
+          <div class="ml-content" v-reveal>
             <span class="ml-tag">The Engine</span>
             <h2 class="section-title">Machine Learning</h2>
             <p class="ml-lead">
@@ -213,7 +213,7 @@
             </ul>
           </div>
 
-          <div class="ml-visual">
+          <div class="ml-visual" v-reveal>
             <div class="ml-visual__frame">
               <img 
                 src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&q=80" 
@@ -236,7 +236,7 @@
     <!-- Transparency Commitment -->
     <section class="transparency-section">
       <div class="container">
-        <div class="transparency-card">
+        <div class="transparency-card" v-reveal>
           <span class="transparency-card__frame" aria-hidden="true"></span>
           <i class="transparency-card__corner transparency-card__corner--tl" aria-hidden="true"></i>
           <i class="transparency-card__corner transparency-card__corner--br" aria-hidden="true"></i>
@@ -255,7 +255,7 @@
               actual outcomes — whether it wins or loses.
             </p>
 
-            <div class="transparency-pillars">
+            <div class="transparency-pillars" v-reveal.stagger>
               <div class="pillar">
                 <div class="pillar__icon">
                   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -363,7 +363,7 @@
     <!-- Final CTA -->
     <section class="final-cta">
       <div class="container">
-        <div class="final-cta__inner">
+        <div class="final-cta__inner" v-reveal>
           <div class="final-cta__text">
             <h2 class="final-cta__title">See the picks for yourself</h2>
             <p class="final-cta__subtitle">

@@ -72,10 +72,10 @@
          ========================================== -->
     <section class="featured-picks">
       <div class="container">
-        <h2 class="section-title">Today's Featured Free Picks</h2>
-        <p class="section-subtitle">Our algorithm's highest confidence selections for today's card.</p>
+        <h2 class="section-title" v-reveal>Today's Featured Free Picks</h2>
+        <p class="section-subtitle" v-reveal>Our algorithm's highest confidence selections for today's card.</p>
         
-        <div class="picks-grid">
+        <div class="picks-grid" v-reveal.stagger>
           <article v-for="pick in featuredPicks" :key="pick.key" class="pick-card">
             <div class="pick-card__header">
               <span class="pick-card__track">{{ pick.track_name }}</span>
@@ -130,10 +130,10 @@
          ========================================== -->
     <section class="tracks-grid">
       <div class="container">
-        <h2 class="section-title">All Supported Tracks</h2>
-        <p class="section-subtitle">Comprehensive coverage of major racetracks with live data and algorithmic insights.</p>
+        <h2 class="section-title" v-reveal>All Supported Tracks</h2>
+        <p class="section-subtitle" v-reveal>Comprehensive coverage of major racetracks with live data and algorithmic insights.</p>
         
-        <div class="tracks-container">
+        <div class="tracks-container" v-reveal.stagger>
           <NuxtLink
             v-for="track in supportedTracks"
             :key="track.id"
@@ -161,18 +161,18 @@
          ========================================== -->
     <section id="track-record" class="track-record">
       <div class="container">
-        <h2 class="section-title">100% Transparent Track Record</h2>
-        <p class="section-subtitle">
+        <h2 class="section-title" v-reveal>100% Transparent Track Record</h2>
+        <p class="section-subtitle" v-reveal>
           We operate like a financial institution. Here is our verified, historical performance across all models.
         </p>
 
-        <div class="track-record__ornament" aria-hidden="true">
+        <div class="track-record__ornament" v-reveal aria-hidden="true">
           <span class="track-record__ornament-line"></span>
           <span class="track-record__ornament-diamond"></span>
           <span class="track-record__ornament-line"></span>
         </div>
 
-        <div class="stats-grid" ref="statsGrid">
+        <div class="stats-grid" v-reveal.stagger ref="statsGrid">
           <div
             v-for="stat in trackRecordStats"
             :key="stat.label"
@@ -220,7 +220,7 @@
          ========================================== -->
     <section class="newsletter">
       <div class="container">
-        <div class="newsletter__content">
+        <div class="newsletter__content" v-reveal>
           <h2 class="newsletter__title">Get Free Daily Picks</h2>
           <p class="newsletter__text">Join our newsletter to receive our top algorithmic picks directly in your inbox every morning before first post.</p>
           

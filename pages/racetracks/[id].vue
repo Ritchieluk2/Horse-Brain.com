@@ -73,7 +73,7 @@
       <!-- Bot Statistics Card -->
       <section class="track-stats-section">
         <div class="container">
-          <div class="stats-card">
+          <div class="stats-card" v-reveal>
             <span class="stats-card__frame" aria-hidden="true"></span>
             <i class="stats-card__corner stats-card__corner--tl" aria-hidden="true"></i>
             <i class="stats-card__corner stats-card__corner--br" aria-hidden="true"></i>
@@ -123,7 +123,7 @@
       <!-- Final CTA -->
       <section class="final-cta">
         <div class="container">
-          <div class="final-cta__inner">
+          <div class="final-cta__inner" v-reveal>
             <div class="final-cta__text">
               <h2 class="final-cta__title">Ready to see the upcoming races?</h2>
               <p class="final-cta__subtitle">
@@ -179,12 +179,20 @@ useHead(() => ({
 .track-hero {
   @include split-hero(440px);
 
+  // Stacked layouts: the hero continues the PageTitle band (same dark
+  // background), so it doesn't need its own full top padding
+  &__content { @include down(lg) { padding-top: var(--space-3); } }
+
   &__header { margin-bottom: var(--space-6); }
 
   &__title {
     margin-bottom: var(--space-3);
     font-size: var(--fs-4xl);
     color: var(--color-white);
+
+    // Below lg <PageTitle> sits right above with the same name, so the
+    // hero leads with the location instead
+    @include down(lg) { display: none; }
   }
 
   &__location {

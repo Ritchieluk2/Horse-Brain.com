@@ -248,7 +248,7 @@
     padding: var(--space-5);
     pointer-events: auto;
 
-    @include up(md) { padding: var(--space-8) 56px; }
+    @include up(md) { padding: var(--space-6) 56px; }
   }
 
   &__details { transform: translateY(calc((1 - var(--detail, 1)) * 24px)); }
@@ -293,7 +293,40 @@
     }
   }
 
-  &__btn { @include down(sm) { width: 100%; } }
+  // Stats + buttons share one row from md up, so the open card's fixed
+  // height (sized to the window) still shows the buttons.
+  &__footer {
+    @include up(md) {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: var(--space-4) var(--space-6);
+
+      .race-card__stats { margin-bottom: 0; }
+    }
+  }
+
+  // Full card (blue) + Raceday Program (brass, premium) side by side.
+  // Phones keep both on one row with shorter labels, so the card's
+  // fixed open height still fits.
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+  }
+
+  &__btn {
+    gap: var(--space-2);
+    @include down(sm) { flex: 1 1 0; min-width: 0; padding-inline: var(--space-3); }
+  }
+
+  &__btn-short { display: none; }
+
+  @include down(sm) {
+    &__btn-long { display: none; }
+    &__btn-short { display: inline; }
+  }
 
   &__logo {
     max-width: 160px;

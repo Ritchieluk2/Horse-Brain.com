@@ -202,6 +202,10 @@
                             </tr>
                             </tbody>
                       </table>
+                      <div class="race-row__links">
+                        <NuxtLink :to="`/picks/${raceday.track_id}/${raceday.dateISO}/${race.race_num}`" class="btn btn--outline btn--small">Full Analysis</NuxtLink>
+                        <ProgramLink small :track="raceday.track_id" :date="raceday.dateISO" :race="race.race_num" label="In the Program" />
+                      </div>
                     </div>
                   </div>
                 </Transition>
@@ -311,6 +315,7 @@ import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 import { useRacedays } from '~/composables/useRacedays'
+import ProgramLink from '~/components/program/ProgramLink.vue'
 
 const route = useRoute()
 const { getRaceday, getAdjacentRacedays } = useRacedays()

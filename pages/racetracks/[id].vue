@@ -137,6 +137,7 @@
                 </svg>
                 All Racetracks
               </NuxtLink>
+              <ProgramLink v-if="nextRaceday" :track="nextRaceday.track_id" :date="nextRaceday.dateISO" :label="`${nextRaceday.shortDate} Program`" />
               <NuxtLink to="/" class="btn btn--primary">
                 View Full Schedule
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -156,6 +157,8 @@ import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 import tracksData from '~/data/tracks.json'
+import { useRacedays } from '~/composables/useRacedays'
+import ProgramLink from '~/components/program/ProgramLink.vue'
 
 const route = useRoute()
 
@@ -164,6 +167,10 @@ const track = computed(() => {
   const targetId = String(route.params.id).toUpperCase()
   return tracksData.tracks.find(t => t.id.toUpperCase() === targetId) || null
 })
+
+// Next race day at this track, for its Raceday Program link
+const { getNextRacedayForTrack } = useRacedays()
+const nextRaceday = computed(() => (track.value ? getNextRacedayForTrack(track.value.id) : null))
 
 useHead(() => ({
   title: track.value ? `${track.value.name} | HorseBrain` : 'Track Not Found | HorseBrain'

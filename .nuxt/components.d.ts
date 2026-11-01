@@ -16,6 +16,7 @@ interface _GlobalComponents {
     'EntityProfile': typeof import("../components/EntityProfile.vue")['default']
     'Footer': typeof import("../components/footer/Footer.vue")['default']
     'Header': typeof import("../components/header/Header.vue")['default']
+    'ProgramLink': typeof import("../components/program/ProgramLink.vue")['default']
     'ProgramRace': typeof import("../components/program/ProgramRace.vue")['default']
     'RacetracksActiveRacetracksOverview': typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
     'RacetracksRacetrackCardOverview': typeof import("../components/racetracks/RacetrackCardOverview.vue")['default']
@@ -51,6 +52,7 @@ interface _GlobalComponents {
     'LazyEntityProfile': LazyComponent<typeof import("../components/EntityProfile.vue")['default']>
     'LazyFooter': LazyComponent<typeof import("../components/footer/Footer.vue")['default']>
     'LazyHeader': LazyComponent<typeof import("../components/header/Header.vue")['default']>
+    'LazyProgramLink': LazyComponent<typeof import("../components/program/ProgramLink.vue")['default']>
     'LazyProgramRace': LazyComponent<typeof import("../components/program/ProgramRace.vue")['default']>
     'LazyRacetracksActiveRacetracksOverview': LazyComponent<typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']>
     'LazyRacetracksRacetrackCardOverview': LazyComponent<typeof import("../components/racetracks/RacetrackCardOverview.vue")['default']>
@@ -92,6 +94,7 @@ export const CurrentlyRacingTicker: typeof import("../components/CurrentlyRacing
 export const EntityProfile: typeof import("../components/EntityProfile.vue")['default']
 export const Footer: typeof import("../components/footer/Footer.vue")['default']
 export const Header: typeof import("../components/header/Header.vue")['default']
+export const ProgramLink: typeof import("../components/program/ProgramLink.vue")['default']
 export const ProgramRace: typeof import("../components/program/ProgramRace.vue")['default']
 export const RacetracksActiveRacetracksOverview: typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
 export const RacetracksRacetrackCardOverview: typeof import("../components/racetracks/RacetrackCardOverview.vue")['default']
@@ -127,6 +130,7 @@ export const LazyCurrentlyRacingTicker: LazyComponent<typeof import("../componen
 export const LazyEntityProfile: LazyComponent<typeof import("../components/EntityProfile.vue")['default']>
 export const LazyFooter: LazyComponent<typeof import("../components/footer/Footer.vue")['default']>
 export const LazyHeader: LazyComponent<typeof import("../components/header/Header.vue")['default']>
+export const LazyProgramLink: LazyComponent<typeof import("../components/program/ProgramLink.vue")['default']>
 export const LazyProgramRace: LazyComponent<typeof import("../components/program/ProgramRace.vue")['default']>
 export const LazyRacetracksActiveRacetracksOverview: LazyComponent<typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']>
 export const LazyRacetracksRacetrackCardOverview: LazyComponent<typeof import("../components/racetracks/RacetrackCardOverview.vue")['default']>

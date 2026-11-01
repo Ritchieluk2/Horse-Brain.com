@@ -100,19 +100,35 @@
               <div class="race-card__details">
                 <span class="race-card__dateplate">{{ race.fullDate }}</span>
                 <h3 class="race-card__headline">{{ race.name }}</h3>
+                <div class="race-card__footer">
                 <div class="race-card__stats">
                   <span><strong>{{ race.races }}</strong> Races</span>
                   <span><strong>{{ race.post }}</strong> First Post</span>
                   <span><strong>{{ race.condition }}</strong> Going</span>
                 </div>
                 
-                <!-- Inside the v-for loop, replace the existing NuxtLink with this: -->
-                <NuxtLink 
-                  :to="race.to || `/racedays/${race.id}/${race.dateISO}`" 
-                  class="btn btn--primary race-card__btn"
-                >
-                  View Full Card &amp; Picks
-                </NuxtLink>
+                <div class="race-card__actions">
+                  <NuxtLink 
+                    :to="race.to || `/racedays/${race.id}/${race.dateISO}`" 
+                    class="btn btn--primary race-card__btn"
+                  >
+                    <span class="race-card__btn-long">View Full Card &amp; Picks</span>
+                    <span class="race-card__btn-short">Card &amp; Picks</span>
+                  </NuxtLink>
+                  <!-- Premium: the printable / fill-in program for this race day -->
+                  <NuxtLink
+                    :to="`/program/${race.id}/${race.dateISO}`"
+                    class="btn btn--premium race-card__btn"
+                    :aria-label="`Raceday Program for ${race.name}, ${race.fullDate}`"
+                  >
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                      <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/>
+                    </svg>
+                    <span class="race-card__btn-long">Raceday Program</span>
+                    <span class="race-card__btn-short">Program</span>
+                  </NuxtLink>
+                </div>
+                </div>
               </div>
             </div>
           </div>

@@ -361,6 +361,7 @@
                   <path d="M5 12h14M12 5l7 7-7 7"/>
                 </svg>
               </NuxtLink>
+              <ProgramLink :track="currentPick.track_id" :date="currentPick.dateISO" :race="currentPick.race_num" label="Track It in the Program" />
             </div>
 
           </div>
@@ -470,6 +471,7 @@
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 import { useRacedays } from '~/composables/useRacedays'
+import ProgramLink from '~/components/program/ProgramLink.vue'
 
 const { getRaceday } = useRacedays()
 

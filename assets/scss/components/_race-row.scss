@@ -306,6 +306,15 @@
   strong { color: var(--color-espresso); margin-right: 6px; }
 }
 
+// Links under an expanded race's field (Full Analysis, Raceday Program)
+.race-row__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: var(--space-3);
+  padding-top: var(--space-4);
+}
+
 // Accordion <Transition name="accordion"> hook (raceday page)
 .accordion-enter-active, .accordion-leave-active { transition: opacity var(--dur) ease; }
 .accordion-enter-from, .accordion-leave-to { opacity: 0; }

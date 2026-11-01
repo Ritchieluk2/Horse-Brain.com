@@ -193,6 +193,9 @@
                             </tr>
                             </tbody>
                     </table>
+                <div v-if="hasProgram(race.track_id)" class="race-row__links">
+                  <ProgramLink small :track="race.track_id" :date="racesData.date" :race="race.race_num" label="In the Program" />
+                </div>
                     </div>
                 </div>
           </article>
@@ -206,10 +209,16 @@
 import { ref, computed } from 'vue'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 import racesData from '~/data/races.json'
+import { useRacedays } from '~/composables/useRacedays'
+import ProgramLink from '~/components/program/ProgramLink.vue'
 
 const expandedRaceId = ref(null)
 
 const races = racesData.races
+
+// Raceday Program links only where a program exists for that track today
+const { getRaceday } = useRacedays()
+const hasProgram = (trackId) => !!getRaceday(trackId, racesData.date)
 
 // Computed: unique tracks for the header summary
 const uniqueTracks = computed(() => {

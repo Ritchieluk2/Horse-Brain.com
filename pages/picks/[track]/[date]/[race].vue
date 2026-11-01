@@ -39,6 +39,8 @@
                 <span class="meta-item__value">${{ (race.purse / 1000).toFixed(0) }}k</span>
               </div>
             </div>
+
+            <ProgramLink class="race-header__program" :track="raceday.track_id" :date="raceday.dateISO" :race="race.race_num" label="Track This Race in the Program" />
           </div>
 
           <div class="race-header__visual">
@@ -311,6 +313,7 @@
               </svg>
               Back to {{ raceday.shortDate }}
             </NuxtLink>
+            <ProgramLink :track="raceday.track_id" :date="raceday.dateISO" />
             <NuxtLink to="/" class="btn btn--primary">
               View Full Schedule
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -338,6 +341,7 @@ import { ref, computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 import { useRacedays } from '~/composables/useRacedays'
+import ProgramLink from '~/components/program/ProgramLink.vue'
 
 const route = useRoute()
 const { getRaceday } = useRacedays()
@@ -495,6 +499,7 @@ const confTier = (p) => (p >= 65 ? 'high' : p >= 45 ? 'medium' : 'low')
   }
 
   &__meta { @include stat-row; }
+  &__program { margin-top: var(--space-5); }
 }
 
 .meta-item { @include stat-item; }

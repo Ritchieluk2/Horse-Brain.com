@@ -223,8 +223,11 @@ race-day hero ("Raceday Program", the brass button).
 - "Check against result" grades open bets from `finish_position`. Win/Place/Show and straight
   Exacta/Trifecta are graded automatically; "Other" is graded by hand. Payouts are always typed
   in by the user, because we don't have real payout data.
-- Ideas for Qwen's side: a "Program" link on Today's Picks / the race analysis page, and a
-  "My programs" list once accounts exist.
+- **Linking to a program: always use `<ProgramLink :track :date :race? :label? small?>`**
+  (`components/program/ProgramLink.vue`, brass button; `race` deep-links to `#race-N`). It's on
+  the Race Schedule cards, the race-day hero and expanded races, Today's Races (only where a
+  program exists), Today's Picks, the race analysis page (hero + bottom CTA) and the track page
+  (next race day). When the program becomes members-only, gate it in that one component.
 
 ## 5. Open issues found during Claude's review (Qwen's side)
 

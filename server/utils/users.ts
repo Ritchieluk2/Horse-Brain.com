@@ -1,17 +1,11 @@
 // =============================================================
 //  User store: the ONLY file that knows where users are kept.
 //
-//  Today it uses Nitro storage (unstorage), mounted as `hb` in
-//  nuxt.config.ts:
-//    • `npm run dev`  → JSON files in .data/hb/ (git-ignored)
-//    • Cloudflare     → the HB_DATA Workers KV namespace
-//  When we move to a real database (D1 / Postgres / Mongo), rewrite
-//  the functions below and keep their signatures; the API routes
-//  and pages won't need to change.
-//
-//  Keys
-//    users:{id}                 → UserRecord
-//    users-by-email:{sha256}    → { id }     (email lookup index)
+//  Storage: the D1 table `users` (migrations/0001_accounts.sql):
+//  the whole UserRecord as JSON in `record`, plus `email` as a UNIQUE
+//  column so two accounts can never share an address.
+//  Keep these function signatures if storage moves again; the API
+//  routes and pages don't need to change.
 //
 //  UserRecord (schemaVersion 1)
 //  {
@@ -35,6 +29,7 @@
 // =============================================================
 import { LEGAL_VERSIONS, MINIMUM_AGE } from '#shared/account-rules.js'
 import type { PasswordRecord } from './password'
+import { useDB, isUniqueViolation, parseJSON } from './db'
 
 export interface Address {
   line1: string
@@ -73,10 +68,6 @@ export interface UserRecord {
 // What the browser is allowed to see
 export type PublicUser = Omit<UserRecord, 'password' | 'schemaVersion' | 'sessionVersion'>
 
-const db = () => useStorage('hb')
-const userKey = (id: string) => `users:${id}`
-const emailKey = async (email: string) => `users-by-email:${await sha256Hex(email.toLowerCase())}`
-
 export function toPublicUser(u: UserRecord | null): PublicUser | null {
   if (!u) return null
   const { password: _pw, schemaVersion: _v, sessionVersion: _s, ...rest } = u
@@ -85,12 +76,15 @@ export function toPublicUser(u: UserRecord | null): PublicUser | null {
 
 export async function findUserById(id: string) {
   if (!id) return null
-  return (await db().getItem<UserRecord>(userKey(id))) || null
+  const db = await useDB()
+  const row = await db.prepare('SELECT record FROM users WHERE id = ?').bind(id).first()
+  return parseJSON<UserRecord>(row?.record)
 }
 
 export async function findUserByEmail(email: string) {
-  const ref = await db().getItem<{ id: string }>(await emailKey(email))
-  return ref?.id ? findUserById(ref.id) : null
+  const db = await useDB()
+  const row = await db.prepare('SELECT record FROM users WHERE email = ?').bind(email.toLowerCase()).first()
+  return parseJSON<UserRecord>(row?.record)
 }
 
 export interface NewUser {
@@ -106,17 +100,11 @@ export interface NewUser {
 export class EmailTakenError extends Error {}
 
 export async function createUser(input: NewUser) {
-  const key = await emailKey(input.email)
-  // Note: KV has no transactions, so two simultaneous sign-ups with the
-  // same email could both pass this check. Acceptable for the mock-up;
-  // a real database gets a UNIQUE index on email.
-  if (await db().hasItem(key)) throw new EmailTakenError()
-
   const now = new Date().toISOString()
   const user: UserRecord = {
     id: crypto.randomUUID(),
     schemaVersion: 1,
-    email: input.email,
+    email: input.email.toLowerCase(),
     firstName: input.firstName,
     lastName: input.lastName,
     phone: input.phone,
@@ -137,32 +125,40 @@ export async function createUser(input: NewUser) {
     lastSignInAt: now
   }
 
-  await db().setItem(userKey(user.id), user)
-  await db().setItem(key, { id: user.id })
+  const db = await useDB()
+  try {
+    await db.prepare('INSERT INTO users (id, email, record, created_at, updated_at) VALUES (?, ?, ?, ?, ?)')
+      .bind(user.id, user.email, JSON.stringify(user), now, now).run()
+  } catch (err) {
+    if (isUniqueViolation(err)) throw new EmailTakenError()
+    throw err
+  }
   return user
 }
 
 /** Is this address free to use (no account, or only this user's)? */
 export async function emailAvailable(email: string, exceptUserId?: string) {
-  const ref = await db().getItem<{ id: string }>(await emailKey(email))
-  return !ref?.id || ref.id === exceptUserId
+  const db = await useDB()
+  const row = await db.prepare('SELECT id FROM users WHERE email = ?').bind(email.toLowerCase()).first()
+  return !row?.id || row.id === exceptUserId
 }
 
 /** Move a user to a new, already-confirmed email address. */
 export async function changeUserEmail(id: string, newEmail: string) {
-  const user = await findUserById(id)
-  if (!user) return null
-  if (!(await emailAvailable(newEmail, id))) throw new EmailTakenError()
-
-  await db().setItem(await emailKey(newEmail), { id })
-  await db().removeItem(await emailKey(user.email))
-  return updateUser(id, { email: newEmail, emailVerifiedAt: new Date().toISOString(), pendingEmail: null })
+  try {
+    return await updateUser(id, { email: newEmail.toLowerCase(), emailVerifiedAt: new Date().toISOString(), pendingEmail: null })
+  } catch (err) {
+    if (isUniqueViolation(err)) throw new EmailTakenError()
+    throw err
+  }
 }
 
 export async function updateUser(id: string, patch: Partial<Omit<UserRecord, 'id' | 'createdAt'>>) {
   const user = await findUserById(id)
   if (!user) return null
   const next: UserRecord = { ...user, ...patch, updatedAt: new Date().toISOString() }
-  await db().setItem(userKey(id), next)
+  const db = await useDB()
+  await db.prepare('UPDATE users SET email = ?, record = ?, updated_at = ? WHERE id = ?')
+    .bind(next.email, JSON.stringify(next), next.updatedAt, id).run()
   return next
 }

@@ -12,6 +12,8 @@
 //  what to use for Cloudflare secrets when we deploy.
 // =============================================================
 
+import type { H3Event } from 'h3'
+
 export interface OutgoingEmail {
   to: string
   subject: string
@@ -21,8 +23,9 @@ export interface OutgoingEmail {
   tag?: string
 }
 
-function settings() {
-  const rc = useRuntimeConfig()
+function settings(event?: H3Event) {
+  // With the event: Cloudflare secrets/vars for this request (NUXT_RESEND_API_KEY …)
+  const rc = useRuntimeConfig(event)
   const env = (typeof process !== 'undefined' ? process.env : {}) as Record<string, string | undefined>
   return {
     apiKey: (rc.resendApiKey as string) || env.RESEND_API_KEY || '',
@@ -34,13 +37,13 @@ function settings() {
 export class EmailNotConfiguredError extends Error {}
 
 /** Dev diagnostics only: which key deliver() will use, without revealing it. */
-export async function emailKeyFingerprint() {
-  const { apiKey } = settings()
+export async function emailKeyFingerprint(event?: H3Event) {
+  const { apiKey } = settings(event)
   return { length: apiKey.length, last4: apiKey.slice(-4), hash: (await sha256Hex(apiKey)).slice(0, 10) }
 }
 
-async function deliver(msg: OutgoingEmail) {
-  const { apiKey, from, replyTo } = settings()
+async function deliver(msg: OutgoingEmail, event?: H3Event) {
+  const { apiKey, from, replyTo } = settings(event)
   if (!apiKey || !from) {
     throw new EmailNotConfiguredError('Email is not configured: set RESEND_API_KEY and EMAIL_FROM in .env, then restart.')
   }
@@ -73,9 +76,9 @@ async function deliver(msg: OutgoingEmail) {
  * Send one email. Returns the provider's message id.
  * Throws on failure; callers decide whether that should fail the request.
  */
-export async function sendEmail(msg: OutgoingEmail) {
+export async function sendEmail(msg: OutgoingEmail, event?: H3Event) {
   try {
-    const id = await deliver(msg)
+    const id = await deliver(msg, event)
     console.info(`[email] sent ${msg.tag || 'email'} (${id})`)
     return id
   } catch (err: any) {

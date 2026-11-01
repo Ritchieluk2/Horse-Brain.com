@@ -1,15 +1,12 @@
 // =============================================================
 //  Program store: each signed-in user's Raceday Programs.
-//  The ONLY file that knows where programs live (Nitro storage
-//  `hb` today; a `programs` + `bets` table later, see
-//  docs/ACCOUNTS-ROADMAP.md §4). Keep these signatures when moving.
-//
-//  Keys
-//    programs:{userId}:{TRACK}:{date}   → program record (v1, shared/program-rules.js)
-//    program-index:{userId}             → { 'KEE:2026-10-31': ProgramListing, … }
-//  The index lets the history page list everything in one read.
+//  The ONLY file that knows where programs live: the D1 table
+//  `programs` (migrations/0001_accounts.sql), one row per
+//  user + track + date, with the v1 record as JSON and a ready-made
+//  summary for the history list. Keep these signatures if it moves.
 // =============================================================
 import { sanitizeProgram, mergePrograms, summariseProgram, hasContent } from '#shared/program-rules.js'
+import { useDB, parseJSON } from './db'
 
 export interface ProgramListing {
   trackId: string
@@ -18,22 +15,28 @@ export interface ProgramListing {
   summary: ReturnType<typeof summariseProgram>
 }
 
-const db = () => useStorage('hb')
-const recordKey = (userId: string, trackId: string, date: string) => `programs:${userId}:${trackId}:${date}`
-const indexKey = (userId: string) => `program-index:${userId}`
-const listingKey = (trackId: string, date: string) => `${trackId}:${date}`
-
-async function readIndex(userId: string) {
-  return (await db().getItem<Record<string, ProgramListing>>(indexKey(userId))) || {}
-}
-
-export async function listPrograms(userId: string) {
-  const index = await readIndex(userId)
-  return Object.values(index).sort((a, b) => b.date.localeCompare(a.date) || a.trackId.localeCompare(b.trackId))
+export async function listPrograms(userId: string): Promise<ProgramListing[]> {
+  const db = await useDB()
+  const { results } = await db
+    .prepare('SELECT track_id, date, updated_at, summary FROM programs WHERE user_id = ? ORDER BY date DESC, track_id')
+    .bind(userId).all()
+  return (results || []).map((r: any) => ({
+    trackId: r.track_id, date: r.date, updatedAt: r.updated_at, summary: parseJSON(r.summary)
+  }))
 }
 
 export async function getProgram(userId: string, trackId: string, date: string) {
-  return (await db().getItem<any>(recordKey(userId, trackId, date))) || null
+  const db = await useDB()
+  const row = await db.prepare('SELECT record FROM programs WHERE user_id = ? AND track_id = ? AND date = ?')
+    .bind(userId, trackId, date).first()
+  return parseJSON<any>(row?.record)
+}
+
+/** Every saved program for a user (full records). Used by insights. */
+export async function getAllPrograms(userId: string) {
+  const db = await useDB()
+  const { results } = await db.prepare('SELECT record FROM programs WHERE user_id = ? ORDER BY date').bind(userId).all()
+  return (results || []).map((r: any) => parseJSON<any>(r.record)).filter(Boolean)
 }
 
 /** Save (replace) one program. An empty program is deleted instead. */
@@ -44,11 +47,14 @@ export async function saveProgram(userId: string, trackId: string, date: string,
     await deleteProgram(userId, trackId, date)
     return { record, listing: null }
   }
-  const listing: ProgramListing = { trackId, date, updatedAt: record.updatedAt, summary: summariseProgram(record) }
-  await db().setItem(recordKey(userId, trackId, date), record)
-  const index = await readIndex(userId)
-  index[listingKey(trackId, date)] = listing
-  await db().setItem(indexKey(userId), index)
+  const summary = summariseProgram(record)
+  const db = await useDB()
+  await db.prepare(`
+    INSERT INTO programs (user_id, track_id, date, record, summary, updated_at) VALUES (?, ?, ?, ?, ?, ?)
+    ON CONFLICT (user_id, track_id, date) DO UPDATE SET
+      record = excluded.record, summary = excluded.summary, updated_at = excluded.updated_at
+  `).bind(userId, trackId, date, JSON.stringify(record), JSON.stringify(summary), record.updatedAt).run()
+  const listing: ProgramListing = { trackId, date, updatedAt: record.updatedAt, summary }
   return { record, listing }
 }
 
@@ -60,17 +66,6 @@ export async function mergeIntoProgram(userId: string, trackId: string, date: st
 }
 
 export async function deleteProgram(userId: string, trackId: string, date: string) {
-  await db().removeItem(recordKey(userId, trackId, date))
-  const index = await readIndex(userId)
-  if (index[listingKey(trackId, date)]) {
-    delete index[listingKey(trackId, date)]
-    await db().setItem(indexKey(userId), index)
-  }
-}
-
-/** Every saved program for a user (full records). Used by insights. */
-export async function getAllPrograms(userId: string) {
-  const listings = await listPrograms(userId)
-  const records = await Promise.all(listings.map(l => getProgram(userId, l.trackId, l.date)))
-  return records.filter(Boolean)
+  const db = await useDB()
+  await db.prepare('DELETE FROM programs WHERE user_id = ? AND track_id = ? AND date = ?').bind(userId, trackId, date).run()
 }

@@ -1,7 +1,9 @@
 import { defineNuxtConfig } from 'nuxt/config'
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  // Keep in step with wrangler.jsonc. 2025-07-15+ is required for Nitro's
+  // Cloudflare dev emulation (local D1 in `npm run dev`).
+  compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
 
   app: {
@@ -62,19 +64,12 @@ export default defineNuxtConfig({
   },
 
   nitro: {
-    preset: 'cloudflare', // ← Change this to exactly 'cloudflare'
+    // Cloudflare Workers (module format). In `npm run dev` this also
+    // emulates the bindings in wrangler.jsonc, so the D1 database works
+    // locally (.wrangler/state/v3). Requires `wrangler` (a devDependency).
+    preset: 'cloudflare-module',
     cloudflare: {
       nodeCompat: true
-    },
-
-    // User-account storage (server/utils/users.ts).
-    // Production: Cloudflare Workers KV, bound as HB_DATA in wrangler.jsonc.
-    storage: {
-      hb: { driver: 'cloudflare-kv-binding', binding: 'HB_DATA' }
-    },
-    // `npm run dev`: plain JSON files in .data/hb/ (git-ignored)
-    devStorage: {
-      hb: { driver: 'fs', base: './.data/hb' }
     }
   },
 

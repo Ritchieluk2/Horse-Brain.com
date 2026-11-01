@@ -1,10 +1,28 @@
 {
-  "name": "horse-brain-com", 
-  "compatibility_date": "2024-04-03",
-  "compatibility_flags": ["nodejs_compat"],
-  "main": "./.output/server/index.mjs",
-  "assets": {
-    "directory": "./.output/public",
-    "binding": "ASSETS"
-  }
+	"name": "horse-brain-com",
+	"compatibility_date": "2025-07-15",
+	"compatibility_flags": [
+		"nodejs_compat"
+	],
+	"main": "./.output/server/index.mjs",
+	"assets": {
+		"directory": "./.output/public",
+		"binding": "ASSETS"
+	},
+	"d1_databases": [
+		{
+			"binding": "horsebrain",
+			"database_name": "horsebrain",
+			"database_id": "ecb55e0d-4f56-48f5-9880-c93aada388ef",
+			"migrations_dir": "migrations"
+		}
+	],
+	// Non-secret settings (read by nuxt.config.ts runtimeConfig).
+	// Secrets are NOT here: set them with `npx wrangler secret put …`
+	//   NUXT_SESSION_SECRET, NUXT_RESEND_API_KEY
+	"vars": {
+		"NUXT_SITE_URL": "https://horse-brain.com",
+		"NUXT_EMAIL_FROM": "HorseBrain <noreply@mail.horse-brain.com>",
+		"NUXT_EMAIL_REPLY_TO": "info@horse-brain.com"
+	}
 }

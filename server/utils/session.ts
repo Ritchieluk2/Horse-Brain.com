@@ -21,8 +21,9 @@ interface SessionData {
 
 let warned = false
 
-function sessionConfig() {
-  let password = useRuntimeConfig().sessionSecret as string
+// Read per request: on Cloudflare, secrets arrive with each request
+function sessionConfig(event: H3Event) {
+  let password = useRuntimeConfig(event).sessionSecret as string
   if (!password || password.length < 32) {
     if (!import.meta.dev) {
       throw createError({ statusCode: 500, statusMessage: 'NUXT_SESSION_SECRET is missing or shorter than 32 characters.' })
@@ -46,7 +47,7 @@ function sessionConfig() {
   }
 }
 
-export const getAuthSession = (event: H3Event) => useSession<SessionData>(event, sessionConfig())
+export const getAuthSession = (event: H3Event) => useSession<SessionData>(event, sessionConfig(event))
 
 export async function startUserSession(event: H3Event, user: { id: string; sessionVersion?: number }) {
   const session = await getAuthSession(event)

@@ -12,21 +12,21 @@ import { verifyEmailTemplate, resetPasswordTemplate, passwordChangedTemplate, co
 // Links point back at whichever host served the request
 // (http://localhost:3000 in dev). NUXT_SITE_URL overrides it.
 function siteUrl(event: H3Event) {
-  const configured = useRuntimeConfig().siteUrl as string
+  const configured = useRuntimeConfig(event).siteUrl as string
   return (configured || getRequestURL(event).origin).replace(/\/$/, '')
 }
 
 export async function sendVerificationEmail(event: H3Event, user: UserRecord) {
   const token = await issueToken('verify-email', user)
   const url = `${siteUrl(event)}/verify-email?token=${encodeURIComponent(token)}`
-  await sendEmail({ to: user.email, tag: 'verify-email', ...verifyEmailTemplate({ firstName: user.firstName, url }) })
+  await sendEmail({ to: user.email, tag: 'verify-email', ...verifyEmailTemplate({ firstName: user.firstName, url }) }, event)
   await startEmailCooldown('verify-email', user.email)
 }
 
 export async function sendPasswordResetEmail(event: H3Event, user: UserRecord) {
   const token = await issueToken('reset-password', user)
   const url = `${siteUrl(event)}/reset-password?token=${encodeURIComponent(token)}`
-  await sendEmail({ to: user.email, tag: 'reset-password', ...resetPasswordTemplate({ firstName: user.firstName, url }) })
+  await sendEmail({ to: user.email, tag: 'reset-password', ...resetPasswordTemplate({ firstName: user.firstName, url }) }, event)
   await startEmailCooldown('reset-password', user.email)
 }
 
@@ -38,7 +38,7 @@ export async function sendPasswordChangedEmail(event: H3Event, user: UserRecord)
     to: user.email,
     tag: 'password-changed',
     ...passwordChangedTemplate({ firstName: user.firstName, when, resetUrl: `${siteUrl(event)}/forgot-password` })
-  })
+  }, event)
 }
 
 // n•••@gmail.com: enough to recognise, not enough to harvest
@@ -55,7 +55,7 @@ export async function sendEmailChangeEmails(event: H3Event, user: UserRecord, ne
     to: newEmail,
     tag: 'change-email',
     ...confirmNewEmailTemplate({ firstName: user.firstName, newEmail, url: `${base}/verify-email?change=1&token=${encodeURIComponent(token)}` })
-  })
+  }, event)
   await startEmailCooldown('change-email', user.email)
   try {
     await sendEmail({
@@ -67,7 +67,7 @@ export async function sendEmailChangeEmails(event: H3Event, user: UserRecord, ne
         settingsUrl: `${base}/account/settings`,
         resetUrl: `${base}/forgot-password`
       })
-    })
+    }, event)
   } catch (err: any) {
     console.error('[auth] email-change notice not sent:', err?.message || err)
   }

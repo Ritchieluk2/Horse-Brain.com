@@ -40,3 +40,7 @@ package-lock.json
 .nuxt/types/middleware.d.ts
 .nuxt/types/plugins.d.ts
 .nuxt/types/schema.d.ts
+
+# Wrangler local state (local D1 database etc.)
+.wrangler
+.dev.vars

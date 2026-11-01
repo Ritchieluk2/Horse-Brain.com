@@ -23,7 +23,7 @@ export default defineEventHandler(async (event) => {
   if (!import.meta.dev) throw createError({ statusCode: 404 })
 
   // What the running server sees
-  const rc = useRuntimeConfig()
+  const rc = useRuntimeConfig(event)
   const fromRuntimeConfig = (rc.resendApiKey as string) || ''
   const fromProcessEnv = process.env.RESEND_API_KEY
   const inUse = fromRuntimeConfig || fromProcessEnv || ''
@@ -61,11 +61,11 @@ export default defineEventHandler(async (event) => {
     const directBody = await direct.json().catch(() => ({}))
     let viaModule: unknown
     try {
-      viaModule = { ok: true, id: await sendEmail({ to: 'delivered@resend.dev', subject: 'HorseBrain setup check (module)', text: 'check', html: '<p>check</p>', tag: 'setup-check' }) }
+      viaModule = { ok: true, id: await sendEmail({ to: 'delivered@resend.dev', subject: 'HorseBrain setup check (module)', text: 'check', html: '<p>check</p>', tag: 'setup-check' }, event) }
     } catch (err: any) {
       viaModule = { ok: false, error: err?.message }
     }
-    sendTest = { direct: { status: direct.status, body: directBody }, viaModule, moduleKey: await emailKeyFingerprint() }
+    sendTest = { direct: { status: direct.status, body: directBody }, viaModule, moduleKey: await emailKeyFingerprint(event) }
   }
 
   return {

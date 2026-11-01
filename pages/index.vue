@@ -78,7 +78,10 @@
         <div class="picks-grid" v-reveal.stagger>
           <article v-for="pick in featuredPicks" :key="pick.key" class="pick-card">
             <div class="pick-card__header">
-              <span class="pick-card__track">{{ pick.track_name }}</span>
+              <span class="pick-card__track">
+                <img v-if="pick.square" :src="pick.square" alt="" class="track-icon pick-card__icon" />
+                {{ pick.track_name }}
+              </span>
               <span class="pick-card__when">
                 <span class="pick-card__race">Race {{ pick.race_num }}</span>
                 <span class="pick-card__time">Post {{ formatTime(pick.post_time) }}</span>
@@ -94,6 +97,18 @@
                 :title="`Finished ${ordinal(pick.botPick.finish_position)}`"
                 :aria-label="`Finished ${ordinal(pick.botPick.finish_position)}`"
               >{{ pick.botPick.finish_position }}</span>
+              <!-- Not run yet: a flat dashed "result to come" ring with a clock, same size as the medal -->
+              <span
+                v-else
+                class="place-num place-num--pending pick-card__place"
+                :class="{ 'place-num--live': pick.status === 'live' }"
+                :title="pick.status === 'live' ? 'Running now' : `Result after post time, ${formatTime(pick.post_time)}`"
+                :aria-label="pick.status === 'live' ? 'Race running now' : `Result after post time, ${formatTime(pick.post_time)}`"
+              >
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="8"/><path d="M12 8v4l2.5 2"/>
+                </svg>
+              </span>
               <NuxtLink 
                 v-if="getHorseLink(pick.botPick.program_number, pick)"
                 :to="getHorseLink(pick.botPick.program_number, pick)"
@@ -255,11 +270,17 @@
       </div>
     </section>
 
+    <!-- ==========================================
+         8. ABOUT OUR PROCESS (shared with Our Track Record) + CTA
+         ========================================== -->
+    <ProcessSection cta />
+
   </main>
 </template>
 
 <script setup>
 import { ref, computed, onMounted, onBeforeUnmount } from 'vue'
+import ProcessSection from '~/components/ProcessSection.vue'
 import tracksData from '~/data/tracks.json'
 import UpcomingRacesCarousel from '~/components/racetracks/UpcomingRacesCarousel.vue'
 import { useRacedays } from '~/composables/useRacedays'
@@ -286,6 +307,7 @@ const featuredPicks = computed(() => {
         ...race1,
         track_id: kee.track_id,
         track_name: kee.track_name,
+        square: kee.square,
         dateISO: kee.dateISO,
         botPick: {
           program_number: pickPgm,
@@ -310,6 +332,7 @@ const featuredPicks = computed(() => {
         ...race2,
         track_id: bel.track_id,
         track_name: bel.track_name,
+        square: bel.square,
         dateISO: bel.dateISO,
         botPick: {
           program_number: pickPgm,

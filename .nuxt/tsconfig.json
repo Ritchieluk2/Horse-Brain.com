@@ -73,6 +73,9 @@
       "#shared": [
         "../shared"
       ],
+      "#shared/*": [
+        "../shared/*"
+      ],
       "assets": [
         "../assets"
       ],

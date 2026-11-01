@@ -100,7 +100,7 @@ section.tracks-grid {
     max-height: 64px;
     object-fit: contain;
     padding: 10px 18px;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-plate);
     background: rgb(255 255 255 / 0.85);
     backdrop-filter: blur(8px);
     box-shadow: 0 4px 12px rgb(0 0 0 / 0.15);
@@ -135,5 +135,30 @@ section.tracks-grid {
     text-shadow: 0 1px 4px rgb(0 0 0 / 0.5);
 
     @include up(md) { font-size: var(--fs-base); }
+  }
+}
+
+// =============================================================
+//  Track icons (BRANDING §3.1). Three logo shapes per track:
+//    logo   → horizontal wordmark, for wide spaces and photo plates
+//    square → solid square tile, for square slots       (.track-icon)
+//    circle → transparent mark, for round slots         (.track-icon--circle)
+//  Size with --icon-size on the element (default 40px).
+// =============================================================
+.track-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  width: var(--icon-size, 40px);
+  height: var(--icon-size, 40px);
+  object-fit: cover;            // tiles are full-bleed; slightly off-square tiles crop evenly
+  border-radius: var(--radius-cut-sm);
+  background-color: var(--color-white);   // some tiles are transparent (Belmont)
+  box-shadow: 0 0 0 1px var(--border-color);
+
+  &--circle {
+    padding: calc(var(--icon-size, 40px) * 0.12);
+    object-fit: contain;
+    border-radius: 50%;
+    box-shadow: 0 0 0 1px var(--border-color), 0 1px 3px rgb(29 28 33 / 0.08);
   }
 }

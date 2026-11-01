@@ -8,7 +8,7 @@ It's written for people **and** AI agents: rules are explicit, values are exact,
 visual rule maps to a code token. Code is the source of truth: `assets/scss/base/_root.scss`
 (tokens) and `docs/CSS-GUIDE.md` (implementation).
 
-_Version 1.1 · 2026-11-01 (adds Motion: §10)_
+_Version 1.2 · 2026-11-01 (adds Motion §10, track logo shapes §3.1)_
 
 ---
 
@@ -58,7 +58,26 @@ them in Title Case in the source ("View Full Card & Picks"). Small labels are UP
 - **Clear space:** at least the height of the "H" on all sides.
 - **Minimum size:** mark 36px, wordmark 24px font-size (mobile header).
 - **Don't:** recolour the mark, stretch it, put it on baby blue, add effects or shadows.
-- _To do:_ provide an optimised SVG/WebP mark (the PNG is 1.2MB).
+- _To do:_ provide an optimised SVG/WebP mark for the header (the PNG is 1.2MB). A 65 KB WebP of
+  the full horse, `assets/images/horsebrain-horse.webp`, is used on About Our Process.
+
+### 3.1 Racetrack logos: pick the shape that fits the slot
+
+Every track has three logo files in `public/images/Racetracks/<Track>/`, listed in `data/tracks.json`
+(`logo`, `square`, `circle`) and passed through `useRacedays()` race days. **Never squeeze a
+wordmark into a square or round space.** Use the file made for that shape.
+
+| File | What it is | Use it for | Class |
+|---|---|---|---|
+| `horizontal_logo.webp` (`logo`) | The track's full wordmark | Wide spaces: logo plates on track photos, the Currently Racing ticker, the track page hero | `.track-card__logo`, `.race-card__logo`, `.track-row__logo` (mixed-cut `--radius-plate`) |
+| `square.webp` (`square`) | Solid-background square tile | Square slots: Today's Picks tabs, homepage featured pick cards | `.track-icon` (mixed-cut-sm, white behind, cropped to fill) |
+| `circle.webp` (`circle`) | Transparent mark that fits inside a circle | Round slots: Today's Races rows, collapsed Race Schedule rows, the Raceday Program cover | `.track-icon--circle` (white disc, hairline ring, 12% padding) |
+
+- Size every icon with `--icon-size` (default 40px). Square tiles: 28–56px. Circles: 32–88px.
+- Icons beside a visible track name are decorative (`alt=""`). An icon that stands alone carries
+  the track name as `alt`.
+- A new track needs all three files before it goes live. Square tiles may be transparent
+  (Belmont); `.track-icon` adds the white tile behind them.
 
 ---
 
@@ -209,9 +228,11 @@ bands. Don't stack two identical backgrounds.
 | **Secondary button** | White outline on dark. Hover: fills white **and** lifts |
 | **Outline button** | Espresso outline on light backgrounds |
 | **Premium button** | Brass gradient. Premium actions only |
+| **Labels vs buttons** | Anything you can press has even, softly rounded corners. Anything that only labels (badges, tags, status pills, confidence chips) is **mixed-cut**, so the two never get confused |
 | **Confidence chip** | Icon + label. High ★ fern + brass ring · Medium ✓ blue · Low ? muted |
 | **Status pill** | LIVE (pulsing red) · UPCOMING (blue) · FINAL (fern) |
 | **Place number** | **Circle, solid background.** 1st gold · 2nd silver · 3rd bronze (metallic `medal()`); 4th and below flat espresso. Shows the digit only (title gives "1st") |
+| **Place not known yet** | Same circle, **flat with a dashed grey ring and a clock**: the race hasn't been run. Solid live-red ring while the race is running. Replaced by the medal when results arrive |
 | **Program number (pgm)** | **Square (mixed-cut), 2px border, transparent background**, number + border in the horse's saddlecloth colour |
 | **WPS row** | place circle · "Win / Place / Show" label · horse square · name · confidence chip (icon + %) on the right |
 | **Name link** | Sliding baby-blue underline from the left on hover |

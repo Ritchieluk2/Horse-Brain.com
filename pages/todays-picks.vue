@@ -41,7 +41,7 @@
             </div>
 
             <header class="pick-tab__header">
-              <img :src="pick.logo" :alt="pick.track_name" class="pick-tab__logo" />
+              <img :src="pick.square || pick.logo" :alt="`${pick.track_name} logo`" class="track-icon pick-tab__logo" />
               <div class="pick-tab__race-info">
                 <span class="pick-tab__track">{{ pick.track_name }}</span>
                 <span class="pick-tab__race">Race {{ pick.race_num }}</span>
@@ -66,12 +66,12 @@
 
               <div 
                 class="pick-tab__confidence" 
-                :class="`pick-tab__confidence--${pick.confidence}`"
+                :class="`pick-tab__confidence--${pick.botPick.confidence}`"
               >
-                <svg v-if="pick.confidence === 'high'" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <svg v-if="pick.botPick.confidence === 'high'" width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                   <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                 </svg>
-                <svg v-else-if="pick.confidence === 'medium'" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
+                <svg v-else-if="pick.botPick.confidence === 'medium'" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3">
                   <polyline points="20 6 9 17 4 12"/>
                 </svg>
                 <svg v-else width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
@@ -79,7 +79,7 @@
                   <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
                   <line x1="12" y1="17" x2="12.01" y2="17"/>
                 </svg>
-                <span>{{ pick.confidence }} confidence</span>
+                <span>{{ pick.botPick.confidence }} confidence</span>
               </div>
             </div>
 
@@ -494,6 +494,7 @@ const featuredPicks = computed(() => {
         track_id: kee.track_id,
         track_name: kee.track_name,
         logo: kee.logo,
+        square: kee.square,
         background: kee.background,
         dateISO: kee.dateISO,
         shortDate: kee.shortDate,
@@ -521,6 +522,7 @@ const featuredPicks = computed(() => {
         track_id: bel.track_id,
         track_name: bel.track_name,
         logo: bel.logo,
+        square: bel.square,
         background: bel.background,
         dateISO: bel.dateISO,
         shortDate: bel.shortDate,
@@ -729,7 +731,7 @@ const confTier = (p) => (p >= 65 ? 'high' : p >= 45 ? 'medium' : 'low')
     align-items: center;
     gap: 6px;
     padding: 4px 10px;
-    border-radius: var(--radius-sm);
+    border-radius: var(--radius-label);
     background-color: var(--color-fern);
     color: var(--color-white);
     @include label-caps(0.65rem, 0.08em);
@@ -748,15 +750,10 @@ const confTier = (p) => (p >= 65 ? 'high' : p >= 45 ? 'medium' : 'low')
     border-bottom: 1px solid var(--border-color);
   }
 
+  // square track tile (.track-icon, components/_track-cards.scss)
   &__logo {
-    flex-shrink: 0;
-    width: 48px;
-    height: 48px;
-    padding: 6px;
-    object-fit: contain;
-    border-radius: var(--radius-sm);
-    background: rgb(255 255 255 / 0.9);
-    @include up(md) { width: 56px; height: 56px; padding: 8px; }
+    --icon-size: 48px;
+    @include up(md) { --icon-size: 56px; }
   }
 
   &__race-info { display: flex; flex-direction: column; gap: 2px; min-width: 0; }

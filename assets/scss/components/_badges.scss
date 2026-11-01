@@ -14,7 +14,7 @@
   display: inline-block;
   @include label-caps(var(--fs-2xs), 0.1em);
   padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-label);
   color: var(--color-fern);
   background: var(--confidence-high-bg);
   white-space: nowrap;
@@ -31,7 +31,7 @@
   display: inline-block;
   @include label-caps(var(--fs-2xs), 0.06em);
   padding: 4px 10px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-label);
   white-space: nowrap;
 
   &--completed { background-color: var(--status-final-bg); color: var(--status-final); }
@@ -52,7 +52,7 @@
   align-items: center;
   gap: 6px;
   padding: 6px 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-label);
   @include label-caps(var(--fs-2xs), 0.08em);
   flex-shrink: 0;
   white-space: nowrap;
@@ -75,7 +75,7 @@
   gap: 6px;
   @include label-caps(var(--fs-2xs), 0.08em);
   padding: 5px 12px;
-  border-radius: var(--radius-cut-sm);
+  border-radius: var(--radius-label);
 
   svg { flex-shrink: 0; }
 

@@ -49,7 +49,9 @@ function enrich(key, raw) {
 
     // Joined from tracks.json
     track_name: track.name || raw.track_id,
-    logo: track.logo || '',
+    logo: track.logo || '',          // horizontal wordmark (wide spaces)
+    square: track.square || '',      // solid square tile (square slots)
+    circle: track.circle || '',      // transparent mark for round slots
     background: track.background || '',
     location: track.location || '',
 

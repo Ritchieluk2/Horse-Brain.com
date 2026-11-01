@@ -2,157 +2,202 @@
 //  useRacedayProgram: the user's own layer on a Raceday Program
 //  (bets, contenders, notes, budget) for ONE track + date.
 //
-//  Storage, for now: this browser's localStorage, one record per
-//  raceday. The shape is versioned and has no browser-specific
-//  fields, so when user accounts arrive the same object can be
-//  POSTed to the API, and synced back, without changes.
+//  Where it's saved
+//    • Signed in  → the user's account (PUT /api/programs/:track/:date),
+//                   a moment after each change. `sync` reports progress.
+//    • Signed out → this browser's localStorage, key
+//                   hb:program:v1:{TRACK}:{date}.
+//  On sign-in, importGuestPrograms() moves every browser-saved
+//  program into the account (merged, nothing lost) and clears them
+//  from the browser.
 //
-//  Record shape (v1):
-//  {
-//    version: 1,
-//    trackId: 'KEE', date: '2026-10-31',
-//    budget: 60 | null,                       // optional daily limit, $
-//    races: {
-//      '1': {
-//        contenders: ['7', '2'],              // program numbers ticked as "my picks"
-//        notes: 'Paddock: 7 looked sharp',
-//        bets: [{
-//          id, type: 'win'|'place'|'show'|'exacta'|'trifecta'|'other',
-//          selection: ['7'] | ['7','9'] | …,   // program numbers, in finishing order
-//          label: '',                          // free text, only for type 'other'
-//          stake: 2,                           // $ wagered
-//          status: 'pending'|'won'|'lost'|'refunded',
-//          payout: 14.2 | null,                // $ returned (total, incl. stake) when won
-//          source: 'horsebrain' | 'user',      // added from our picks, or by hand
-//          createdAt: ISO string
-//        }]
-//      }
-//    },
-//    updatedAt: ISO string
-//  }
+//  The record shape (v1) and the maths (summarise, gradeBet, …) live
+//  in shared/program-rules.js so the server uses the same rules.
 // =============================================================
-import { reactive, ref, computed, watch, onMounted } from 'vue'
+import { reactive, ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
+import {
+  PROGRAM_VERSION, BET_TYPES, betType, DEFAULT_STAKE, formatMoney,
+  emptyRecord, emptyRace, summarise, gradeBet, mergePrograms, hasContent, programId
+} from '#shared/program-rules.js'
 
-export const PROGRAM_VERSION = 1
+// Re-exported so existing imports from this file keep working
+export { PROGRAM_VERSION, BET_TYPES, betType, DEFAULT_STAKE, formatMoney, summarise, gradeBet }
+
 const PREFIX = 'hb:program'
-
-export const BET_TYPES = [
-  { id: 'win',      label: 'Win',      legs: 1 },
-  { id: 'place',    label: 'Place',    legs: 1 },
-  { id: 'show',     label: 'Show',     legs: 1 },
-  { id: 'exacta',   label: 'Exacta',   legs: 2 },
-  { id: 'trifecta', label: 'Trifecta', legs: 3 },
-  { id: 'other',    label: 'Other',    legs: 0 }
-]
-export const betType = (id) => BET_TYPES.find(t => t.id === id) || BET_TYPES[0]
-
-export const DEFAULT_STAKE = 2   // the classic $2 base bet
-
-const num = (v) => {
-  const n = typeof v === 'number' ? v : parseFloat(v)
-  return Number.isFinite(n) && n >= 0 ? n : 0
-}
-
-export const formatMoney = (v, { sign = false } = {}) => {
-  const n = Number(v) || 0
-  const s = Math.abs(n).toLocaleString('en-US', { style: 'currency', currency: 'USD' })
-  if (!sign) return n < 0 ? `-${s}` : s
-  return n > 0 ? `+${s}` : n < 0 ? `-${s}` : s
-}
-
-function emptyRecord(trackId, date) {
-  return { version: PROGRAM_VERSION, trackId, date, budget: null, races: {}, updatedAt: null }
-}
-
-function emptyRace() {
-  return { contenders: [], notes: '', bets: [] }
-}
+const guestKey = (trackId, date) => `${PREFIX}:v${PROGRAM_VERSION}:${trackId}:${date}`
+const SAVE_DELAY = 800   // ms after the last change before saving to the account
 
 function uid() {
   return `b_${Date.now().toString(36)}${Math.random().toString(36).slice(2, 7)}`
 }
 
-/** Sum a list of bets into the figures shown on the scoreboard. */
-export function summarise(bets) {
-  let staked = 0, settledStake = 0, returned = 0, won = 0, lost = 0, pending = 0
-  for (const b of bets) {
-    const stake = num(b.stake)
-    staked += stake
-    if (b.status === 'pending') { pending++; continue }
-    settledStake += stake
-    if (b.status === 'won') { won++; returned += num(b.payout) }
-    else if (b.status === 'refunded') { returned += stake }
-    else if (b.status === 'lost') { lost++ }
-  }
-  const net = returned - settledStake
-  return {
-    count: bets.length, staked, settledStake, returned, net,
-    won, lost, pending,
-    strikeRate: won + lost ? Math.round((won / (won + lost)) * 100) : null,
-    roi: settledStake ? Math.round((net / settledStake) * 100) : null
-  }
+// ---- Browser storage helpers (never throw) --------------------------------
+function readLocal(key) {
+  try {
+    const raw = window.localStorage.getItem(key)
+    const saved = raw ? JSON.parse(raw) : null
+    return saved?.version === PROGRAM_VERSION ? saved : null
+  } catch { return null }
+}
+function writeLocal(key, value) {
+  try { window.localStorage.setItem(key, JSON.stringify(value)); return true } catch { return false }
+}
+function removeLocal(key) {
+  try { window.localStorage.removeItem(key) } catch { /* ignore */ }
 }
 
 /**
- * Would this bet have won, given the finishing order? Returns
- * 'won' | 'lost' | null (unknown: no result, or type 'other').
- * Exacta/trifecta are "straight": exact order required.
+ * Move every program saved in this browser (while signed out) into the
+ * signed-in account, then remove them from the browser.
+ * Returns how many were imported. Safe to call any time; does nothing
+ * when there's nothing to move.
  */
-export function gradeBet(bet, finishOrder) {
-  if (!finishOrder?.length) return null
-  const sel = (bet.selection || []).map(String)
-  const pos = (pgm) => finishOrder.indexOf(String(pgm)) + 1   // 0 = unplaced
-  switch (bet.type) {
-    case 'win':   return sel[0] && pos(sel[0]) === 1 ? 'won' : 'lost'
-    case 'place': return sel[0] && pos(sel[0]) >= 1 && pos(sel[0]) <= 2 ? 'won' : 'lost'
-    case 'show':  return sel[0] && pos(sel[0]) >= 1 && pos(sel[0]) <= 3 ? 'won' : 'lost'
-    case 'exacta':
-      return sel.length === 2 && sel.every((p, i) => finishOrder[i] === p) ? 'won' : 'lost'
-    case 'trifecta':
-      return sel.length === 3 && sel.every((p, i) => finishOrder[i] === p) ? 'won' : 'lost'
-    default: return null
-  }
+export async function importGuestPrograms() {
+  if (typeof window === 'undefined') return 0
+  const found = []
+  try {
+    for (let i = 0; i < window.localStorage.length; i++) {
+      const key = window.localStorage.key(i)
+      const m = key && key.match(/^hb:program:v1:([A-Z0-9]{1,8}):(\d{4}-\d{2}-\d{2})$/)
+      if (!m) continue
+      const rec = readLocal(key)
+      if (rec && hasContent(rec)) found.push({ key, rec: { ...rec, trackId: m[1], date: m[2] } })
+      else removeLocal(key)
+    }
+  } catch { return 0 }
+  if (!found.length) return 0
+
+  const res = await $fetch('/api/programs/import', { method: 'POST', body: { programs: found.map(f => f.rec) } })
+  found.forEach(f => removeLocal(f.key))
+  return res?.imported || 0
 }
 
-export function useRacedayProgram(trackId, date) {
-  const storageKey = `${PREFIX}:v${PROGRAM_VERSION}:${String(trackId).toUpperCase()}:${date}`
-  const record = reactive(emptyRecord(String(trackId).toUpperCase(), date))
+export function useRacedayProgram(trackIdIn, dateIn) {
+  const id = programId(trackIdIn, dateIn) || { trackId: String(trackIdIn).toUpperCase(), date: String(dateIn) }
+  const { signedIn } = useAuth()
+  const localKey = guestKey(id.trackId, id.date)
+  const apiUrl = `/api/programs/${id.trackId}/${id.date}`
 
-  // `ready` flips once storage has been read on the client. The server
-  // and the first client render both show an empty program, so
+  const record = reactive(emptyRecord(id.trackId, id.date))
+
+  // `ready` flips once the saved copy has been read on the client. The
+  // server and the first client render both show an empty program, so
   // hydration matches; saved bets then fill in.
   const ready = ref(false)
-  const storageOk = ref(true)
+  const storageOk = ref(true)          // guest mode: can this browser save?
+  const mode = computed(() => (signedIn.value ? 'account' : 'guest'))
+  // Account mode: 'idle' | 'loading' | 'saving' | 'saved' | 'error' | 'load-error'
+  const sync = ref('idle')
+  const lastSavedAt = ref(null)
 
-  function load() {
+  // What was last loaded/saved, so filling the record from storage
+  // doesn't count as an edit and trigger a save straight back.
+  const snapshot = () => JSON.stringify([record.budget, record.races])
+  let lastSnapshot = snapshot()
+  let loadedFromAccount = false        // never overwrite the account copy before reading it
+  let timer = null
+  let inFlight = null
+  let queued = false
+
+  function apply(saved) {
+    record.budget = saved?.budget ?? null
+    record.races = saved?.races || {}
+    record.updatedAt = saved?.updatedAt || null
+    lastSnapshot = snapshot()
+  }
+
+  // ---- Loading ------------------------------------------------------------
+  async function load() {
+    if (mode.value === 'guest') {
+      const saved = readLocal(localKey)
+      if (saved) apply(saved)
+      ready.value = true
+      return
+    }
+
+    sync.value = 'loading'
     try {
-      const raw = window.localStorage.getItem(storageKey)
-      if (raw) {
-        const saved = JSON.parse(raw)
-        if (saved?.version === PROGRAM_VERSION) {
-          record.budget = saved.budget ?? null
-          record.races = saved.races || {}
-          record.updatedAt = saved.updatedAt || null
-        }
+      const { program } = await $fetch(apiUrl)
+      // A copy saved in this browser before signing in? Fold it in once.
+      const local = readLocal(localKey)
+      let merged = program
+      if (local && hasContent(local)) merged = mergePrograms(program, { ...local, trackId: id.trackId, date: id.date })
+      apply(merged)
+      loadedFromAccount = true
+      sync.value = program ? 'saved' : 'idle'
+      lastSavedAt.value = program?.updatedAt || null
+      if (merged !== program) {
+        lastSnapshot = ''           // the merged copy is new to the account
+        await pushNow()
+        removeLocal(localKey)
       }
     } catch {
-      storageOk.value = false   // private mode / blocked storage: still usable, just not saved
+      sync.value = 'load-error'
     }
     ready.value = true
   }
 
-  function save() {
-    if (!ready.value) return
-    record.updatedAt = new Date().toISOString()
-    try {
-      window.localStorage.setItem(storageKey, JSON.stringify(record))
-      storageOk.value = true
-    } catch {
-      storageOk.value = false
-    }
+  // ---- Saving -------------------------------------------------------------
+  async function pushNow() {
+    if (mode.value !== 'account' || !loadedFromAccount) return
+    if (inFlight) { queued = true; return inFlight }
+    sync.value = 'saving'
+    lastSnapshot = snapshot()
+    inFlight = $fetch(apiUrl, { method: 'PUT', body: JSON.parse(JSON.stringify(record)) })
+      .then((res) => {
+        sync.value = 'saved'
+        lastSavedAt.value = res?.updatedAt || new Date().toISOString()
+      })
+      .catch(() => { sync.value = 'error' })
+      .finally(() => {
+        inFlight = null
+        if (queued) { queued = false; pushNow() }
+      })
+    return inFlight
   }
 
-  onMounted(load)
+  function save() {
+    if (!ready.value || snapshot() === lastSnapshot) return
+    record.updatedAt = new Date().toISOString()
+    if (mode.value === 'guest') {
+      storageOk.value = writeLocal(localKey, record)
+      lastSnapshot = snapshot()
+      return
+    }
+    sync.value = 'saving'
+    clearTimeout(timer)
+    timer = setTimeout(pushNow, SAVE_DELAY)
+  }
+
+  // Leaving the page with a save still waiting: send it now. keepalive lets
+  // the request finish even as the page unloads.
+  function flush() {
+    if (!timer || mode.value !== 'account' || !loadedFromAccount) return
+    clearTimeout(timer)
+    timer = null
+    try {
+      fetch(apiUrl, {
+        method: 'PUT',
+        keepalive: true,
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(record)
+      })
+    } catch { /* best effort */ }
+  }
+
+  function retry() {
+    if (sync.value === 'load-error') { ready.value = false; return load() }
+    return pushNow()
+  }
+
+  onMounted(() => {
+    load()
+    window.addEventListener('pagehide', flush)
+  })
+  onBeforeUnmount(() => {
+    flush()
+    window.removeEventListener('pagehide', flush)
+  })
   watch(() => [record.budget, record.races], save, { deep: true })
 
   // ---- Per-race access ---------------------------------------------------
@@ -191,8 +236,8 @@ export function useRacedayProgram(trackId, date) {
     return bet
   }
 
-  function updateBet(raceNum, id, patch) {
-    const bet = race(raceNum).bets.find(b => b.id === id)
+  function updateBet(raceNum, betId, patch) {
+    const bet = race(raceNum).bets.find(b => b.id === betId)
     if (!bet) return
     if (patch.type && patch.type !== bet.type) {
       const legs = betType(patch.type).legs
@@ -204,9 +249,9 @@ export function useRacedayProgram(trackId, date) {
     Object.assign(bet, patch)
   }
 
-  function removeBet(raceNum, id) {
+  function removeBet(raceNum, betId) {
     const r = race(raceNum)
-    r.bets = r.bets.filter(b => b.id !== id)
+    r.bets = r.bets.filter(b => b.id !== betId)
   }
 
   /** Mark pending bets won/lost from the official order. Payouts stay for the user to enter. */
@@ -230,6 +275,7 @@ export function useRacedayProgram(trackId, date) {
   const totals = computed(() => summarise(allBets.value))
   const followedTotals = computed(() => summarise(allBets.value.filter(b => b.source === 'horsebrain')))
   const raceTotals = (raceNum) => summarise(peek(raceNum)?.bets || [])
+  const hasInput = computed(() => hasContent(record))
 
   const budgetUsed = computed(() =>
     record.budget ? Math.min(100, Math.round((totals.value.staked / record.budget) * 100)) : null
@@ -237,7 +283,7 @@ export function useRacedayProgram(trackId, date) {
   const overBudget = computed(() => !!record.budget && totals.value.staked > record.budget)
 
   return {
-    record, ready, storageOk,
+    record, ready, storageOk, mode, sync, lastSavedAt, retry, hasInput,
     race, peek, toggleContender,
     addBet, updateBet, removeBet, settleFromResult, resetAll,
     totals, followedTotals, raceTotals, budgetUsed, overBudget

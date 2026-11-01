@@ -91,7 +91,14 @@
   }
 }
 
-.race-row__status { flex-shrink: 0; }
+.race-row__status {
+  flex-shrink: 0;
+  // a fixed slot so the track icons line up whatever the pill says
+  @include up(md) { width: 92px; }
+}
+
+// Round track mark beside the name (.track-icon--circle)
+.race-row__icon { --icon-size: 40px; @include up(md) { --icon-size: 44px; } }
 
 .race-row__track {
   flex: 1 1 140px;

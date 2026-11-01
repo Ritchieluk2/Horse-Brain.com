@@ -7,10 +7,19 @@
     <div class="ticker-wrapper">
       <div class="ticker-track">
         <!-- Duplicated twice for seamless infinite looping -->
-        <div v-for="n in 2" :key="n" class="ticker-items">
-          <div v-for="track in activeTracks" :key="track.id" class="ticker-item">
-            <img :src="track.logo" :alt="`${track.name} Logo`" class="ticker-logo" />
-          </div>
+        <!-- Each logo links to its track page. The second copy exists only for the
+             seamless loop, so it is hidden from screen readers and the tab order. -->
+        <div v-for="n in 2" :key="n" class="ticker-items" :aria-hidden="n === 2 ? 'true' : undefined">
+          <NuxtLink
+            v-for="track in activeTracks"
+            :key="track.id"
+            :to="`/racetracks/${track.id}`"
+            class="ticker-item"
+            :tabindex="n === 2 ? -1 : undefined"
+            :aria-label="`${track.name} track page`"
+          >
+            <img :src="track.logo" alt="" class="ticker-logo" />
+          </NuxtLink>
         </div>
       </div>
     </div>
@@ -99,7 +108,11 @@ const activeTracks = tracksData.tracks
   justify-content: center;
   flex-shrink: 0;
   height: 64px;
+  border-radius: var(--radius-sm);
   @include up(md) { height: 80px; }
+
+  // keyboard focus lights the logo the same way hover does
+  &:focus-visible .ticker-logo { opacity: 1; filter: none; transform: scale(1.05); }
 }
 
 .ticker-logo {
@@ -111,8 +124,10 @@ const activeTracks = tracksData.tracks
   transition: opacity var(--dur) ease, filter var(--dur) ease, transform var(--dur) ease;
 
   @include up(md) { max-width: 180px; max-height: 60px; }
+}
 
-  @include hover {
+.ticker-item:hover .ticker-logo {
+  @media (hover: hover) {
     opacity: 1;
     filter: none;
     transform: scale(1.05);

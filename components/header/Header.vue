@@ -2,7 +2,7 @@
   <header class="site-header" :class="{ 'is-open': menuOpen }">
     <div class="site-header__bar container">
       <NuxtLink to="/" class="site-header__brand" aria-label="HorseBrain home">
-        <img src="../../static/horse.png" alt="" class="site-header__logo" width="40" height="40" />
+        <img src="../../static/horse-head.png" alt="" class="site-header__logo" width="40" height="40" />
         <span class="site-header__wordmark">HorseBrain</span>
       </NuxtLink>
 
@@ -28,6 +28,18 @@
               :class="{ 'is-active': isActive(link) }"
             >{{ link.label }}</NuxtLink>
           </li>
+          <li>
+            <NuxtLink
+              :to="accountLink.to"
+              class="site-nav__link site-nav__link--account"
+              :class="{ 'is-active': isActive(accountLink) }"
+            >
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <circle cx="12" cy="8" r="4" /><path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" />
+              </svg>
+              {{ accountLink.label }}
+            </NuxtLink>
+          </li>
           <li class="site-nav__cta-item">
             <NuxtLink
               to="/todays-picks"
@@ -43,7 +55,7 @@
 </template>
 
 <script setup>
-import { ref, watch, onMounted, onBeforeUnmount } from 'vue'
+import { ref, computed, watch, onMounted, onBeforeUnmount } from 'vue'
 import { useRoute } from 'vue-router'
 
 const route = useRoute()
@@ -56,6 +68,14 @@ const links = [
   { to: '/our-track-record', label: 'Our Track Record', match: ['/our-track-record'] },
   { to: '/contact', label: 'Contact Us', match: ['/contact'] },
 ]
+
+// Sign In ↔ My Account, depending on the session (composables/useAuth.js)
+const { signedIn } = useAuth()
+const accountLink = computed(() => ({
+  to: signedIn.value ? '/account' : '/sign-in',
+  label: signedIn.value ? 'My Account' : 'Sign In',
+  match: ['/account', '/sign-in', '/sign-up']
+}))
 
 const isActive = (link) => {
   const path = route.path.toLowerCase()
@@ -310,6 +330,11 @@ onBeforeUnmount(() => {
     }
 
     @media (min-width: 1440px) { font-size: 1.1rem; }
+  }
+
+  &__link--account {
+    gap: var(--space-2);
+    svg { flex-shrink: 0; width: 18px; height: 18px; }
   }
 
   &__cta-item {

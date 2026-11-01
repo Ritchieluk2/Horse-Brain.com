@@ -14,8 +14,17 @@ type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}
 interface _GlobalComponents {
       'CurrentlyRacingTicker': typeof import("../components/CurrentlyRacingTicker.vue")['default']
     'EntityProfile': typeof import("../components/EntityProfile.vue")['default']
+    'ProcessSection': typeof import("../components/ProcessSection.vue")['default']
+    'AccountNav': typeof import("../components/account/AccountNav.vue")['default']
+    'AccountAddressFields': typeof import("../components/account/AddressFields.vue")['default']
+    'AccountAuthAside': typeof import("../components/account/AuthAside.vue")['default']
+    'AccountBreakdownTable': typeof import("../components/account/BreakdownTable.vue")['default']
+    'AccountPasswordInput': typeof import("../components/account/PasswordInput.vue")['default']
+    'AccountRunningTotalChart': typeof import("../components/account/RunningTotalChart.vue")['default']
+    'AccountStatusIcon': typeof import("../components/account/StatusIcon.vue")['default']
     'Footer': typeof import("../components/footer/Footer.vue")['default']
     'Header': typeof import("../components/header/Header.vue")['default']
+    'ProgramAccountBar': typeof import("../components/program/ProgramAccountBar.vue")['default']
     'ProgramLink': typeof import("../components/program/ProgramLink.vue")['default']
     'ProgramRace': typeof import("../components/program/ProgramRace.vue")['default']
     'RacetracksActiveRacetracksOverview': typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
@@ -50,8 +59,17 @@ interface _GlobalComponents {
     'NuxtRouteAnnouncer': typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']
       'LazyCurrentlyRacingTicker': LazyComponent<typeof import("../components/CurrentlyRacingTicker.vue")['default']>
     'LazyEntityProfile': LazyComponent<typeof import("../components/EntityProfile.vue")['default']>
+    'LazyProcessSection': LazyComponent<typeof import("../components/ProcessSection.vue")['default']>
+    'LazyAccountNav': LazyComponent<typeof import("../components/account/AccountNav.vue")['default']>
+    'LazyAccountAddressFields': LazyComponent<typeof import("../components/account/AddressFields.vue")['default']>
+    'LazyAccountAuthAside': LazyComponent<typeof import("../components/account/AuthAside.vue")['default']>
+    'LazyAccountBreakdownTable': LazyComponent<typeof import("../components/account/BreakdownTable.vue")['default']>
+    'LazyAccountPasswordInput': LazyComponent<typeof import("../components/account/PasswordInput.vue")['default']>
+    'LazyAccountRunningTotalChart': LazyComponent<typeof import("../components/account/RunningTotalChart.vue")['default']>
+    'LazyAccountStatusIcon': LazyComponent<typeof import("../components/account/StatusIcon.vue")['default']>
     'LazyFooter': LazyComponent<typeof import("../components/footer/Footer.vue")['default']>
     'LazyHeader': LazyComponent<typeof import("../components/header/Header.vue")['default']>
+    'LazyProgramAccountBar': LazyComponent<typeof import("../components/program/ProgramAccountBar.vue")['default']>
     'LazyProgramLink': LazyComponent<typeof import("../components/program/ProgramLink.vue")['default']>
     'LazyProgramRace': LazyComponent<typeof import("../components/program/ProgramRace.vue")['default']>
     'LazyRacetracksActiveRacetracksOverview': LazyComponent<typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']>
@@ -92,8 +110,17 @@ declare module 'vue' {
 
 export const CurrentlyRacingTicker: typeof import("../components/CurrentlyRacingTicker.vue")['default']
 export const EntityProfile: typeof import("../components/EntityProfile.vue")['default']
+export const ProcessSection: typeof import("../components/ProcessSection.vue")['default']
+export const AccountNav: typeof import("../components/account/AccountNav.vue")['default']
+export const AccountAddressFields: typeof import("../components/account/AddressFields.vue")['default']
+export const AccountAuthAside: typeof import("../components/account/AuthAside.vue")['default']
+export const AccountBreakdownTable: typeof import("../components/account/BreakdownTable.vue")['default']
+export const AccountPasswordInput: typeof import("../components/account/PasswordInput.vue")['default']
+export const AccountRunningTotalChart: typeof import("../components/account/RunningTotalChart.vue")['default']
+export const AccountStatusIcon: typeof import("../components/account/StatusIcon.vue")['default']
 export const Footer: typeof import("../components/footer/Footer.vue")['default']
 export const Header: typeof import("../components/header/Header.vue")['default']
+export const ProgramAccountBar: typeof import("../components/program/ProgramAccountBar.vue")['default']
 export const ProgramLink: typeof import("../components/program/ProgramLink.vue")['default']
 export const ProgramRace: typeof import("../components/program/ProgramRace.vue")['default']
 export const RacetracksActiveRacetracksOverview: typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']
@@ -128,8 +155,17 @@ export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components
 export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']
 export const LazyCurrentlyRacingTicker: LazyComponent<typeof import("../components/CurrentlyRacingTicker.vue")['default']>
 export const LazyEntityProfile: LazyComponent<typeof import("../components/EntityProfile.vue")['default']>
+export const LazyProcessSection: LazyComponent<typeof import("../components/ProcessSection.vue")['default']>
+export const LazyAccountNav: LazyComponent<typeof import("../components/account/AccountNav.vue")['default']>
+export const LazyAccountAddressFields: LazyComponent<typeof import("../components/account/AddressFields.vue")['default']>
+export const LazyAccountAuthAside: LazyComponent<typeof import("../components/account/AuthAside.vue")['default']>
+export const LazyAccountBreakdownTable: LazyComponent<typeof import("../components/account/BreakdownTable.vue")['default']>
+export const LazyAccountPasswordInput: LazyComponent<typeof import("../components/account/PasswordInput.vue")['default']>
+export const LazyAccountRunningTotalChart: LazyComponent<typeof import("../components/account/RunningTotalChart.vue")['default']>
+export const LazyAccountStatusIcon: LazyComponent<typeof import("../components/account/StatusIcon.vue")['default']>
 export const LazyFooter: LazyComponent<typeof import("../components/footer/Footer.vue")['default']>
 export const LazyHeader: LazyComponent<typeof import("../components/header/Header.vue")['default']>
+export const LazyProgramAccountBar: LazyComponent<typeof import("../components/program/ProgramAccountBar.vue")['default']>
 export const LazyProgramLink: LazyComponent<typeof import("../components/program/ProgramLink.vue")['default']>
 export const LazyProgramRace: LazyComponent<typeof import("../components/program/ProgramRace.vue")['default']>
 export const LazyRacetracksActiveRacetracksOverview: LazyComponent<typeof import("../components/racetracks/ActiveRacetracksOverview.vue")['default']>

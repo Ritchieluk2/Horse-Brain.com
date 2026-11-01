@@ -57,108 +57,8 @@
       </div>
     </section>
 
-    <!-- About Our Process -->
-    <section class="process-section">
-      <div class="container">
-        <div class="process-grid">
-          <div class="process-content" v-reveal>
-            <span class="process-tag">Our Methodology</span>
-            <h2 class="section-title">About Our Process</h2>
-            <p class="process-lead">
-              HorseBrain is built on the principle that rigorous, transparent analysis 
-              outperforms gut instinct and tipster hype. Our process is modeled after 
-              the quantitative research practices of institutional finance.
-            </p>
-
-            <div class="process-steps" v-reveal.stagger>
-              <div class="process-step">
-                <div class="process-step__number">01</div>
-                <div class="process-step__content">
-                  <h3>Data Ingestion</h3>
-                  <p>
-                    We collect structured data from Equibase covering every race, 
-                    horse, jockey, and trainer across all major North American tracks. 
-                    This includes historical performances, workout times, pedigree data, 
-                    and real-time odds movements.
-                  </p>
-                </div>
-              </div>
-
-              <div class="process-step">
-                <div class="process-step__number">02</div>
-                <div class="process-step__content">
-                  <h3>Feature Engineering</h3>
-                  <p>
-                    Raw data is transformed into predictive features: jockey win rates 
-                    at specific tracks, horse form over distance classes, track condition 
-                    preferences, pace scenarios, and class movements. Each feature is 
-                    validated against historical outcomes.
-                  </p>
-                </div>
-              </div>
-
-              <div class="process-step">
-                <div class="process-step__number">03</div>
-                <div class="process-step__content">
-                  <h3>Model Training</h3>
-                  <p>
-                    Our ensemble models are trained on historical track data to draw 
-                    statistical inferences about finishing probabilities. Models are 
-                    continuously retrained and back-tested to prevent overfitting and 
-                    ensure robustness across changing track conditions.
-                  </p>
-                </div>
-              </div>
-
-              <div class="process-step">
-                <div class="process-step__number">04</div>
-                <div class="process-step__content">
-                  <h3>Publication & Audit</h3>
-                  <p>
-                    Every pick is timestamped and published before post time. Results 
-                    are recorded automatically and displayed transparently. We never 
-                    revise past picks or hide losses — our track record is our 
-                    reputation.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <aside class="process-sidebar">
-            <div class="process-sidebar__card" v-reveal>
-              <span class="process-sidebar__label">Model Accuracy by Confidence</span>
-              <div class="confidence-breakdown">
-                <div class="confidence-row">
-                  <span class="confidence-row__label">High Confidence</span>
-                  <div class="confidence-row__bar">
-                    <div class="confidence-row__fill" style="width: 72%"></div>
-                  </div>
-                  <span class="confidence-row__value">72%</span>
-                </div>
-                <div class="confidence-row">
-                  <span class="confidence-row__label">Medium Confidence</span>
-                  <div class="confidence-row__bar">
-                    <div class="confidence-row__fill" style="width: 48%"></div>
-                  </div>
-                  <span class="confidence-row__value">48%</span>
-                </div>
-                <div class="confidence-row">
-                  <span class="confidence-row__label">Low Confidence</span>
-                  <div class="confidence-row__bar">
-                    <div class="confidence-row__fill" style="width: 31%"></div>
-                  </div>
-                  <span class="confidence-row__value">31%</span>
-                </div>
-              </div>
-              <p class="process-sidebar__note">
-                Win rates across 1,240+ analyzed races, Jan 2024 – present.
-              </p>
-            </div>
-          </aside>
-        </div>
-      </div>
-    </section>
+    <!-- About Our Process (shared with the homepage) -->
+    <ProcessSection />
 
     <!-- Machine Learning Section -->
     <section class="ml-section">
@@ -389,6 +289,7 @@
 
 <script setup>
 import { ref, onMounted, onBeforeUnmount } from 'vue'
+import ProcessSection from '~/components/ProcessSection.vue'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 
 const breadcrumbs = [
@@ -537,25 +438,18 @@ useHead({
   }
 }
 
-// ---- Process ---------------------------------------------------------------
-.process-section { padding-block: var(--section-pad); }
-
-.process-grid,
 .ml-grid {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: var(--space-8);
+
+  @include up(lg) { grid-template-columns: 1fr 1fr; gap: var(--space-9); align-items: center; }
 }
 
-.process-grid { @include up(lg) { grid-template-columns: 1.5fr 1fr; gap: var(--space-9); align-items: start; } }
-.ml-grid      { @include up(lg) { grid-template-columns: 1fr 1fr; gap: var(--space-9); align-items: center; } }
-
-.process-content .section-title,
 .ml-content .section-title { text-align: left; }
 
-.process-tag, .ml-tag { margin-bottom: var(--space-4); }
+.ml-tag { margin-bottom: var(--space-4); }
 
-.process-lead,
 .ml-lead {
   margin-bottom: var(--space-6);
   font-size: var(--fs-md);
@@ -564,107 +458,7 @@ useHead({
   @include up(md) { font-size: 1.2rem; }
 }
 
-.process-steps {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-7);
-  margin-top: var(--space-8);
-}
-
-.process-step {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-2);
-
-  @include up(sm) { flex-direction: row; gap: var(--space-6); }
-
-  &__number {
-    flex-shrink: 0;
-    width: 56px;
-    @include heading-font;
-    font-size: var(--fs-2xl);
-    line-height: 1;
-    color: var(--color-blue-ink);
-    opacity: 0.8;
-  }
-
-  &__content {
-    flex: 1;
-    h3 { font-size: var(--fs-lg); color: var(--color-espresso); margin-bottom: var(--space-2); }
-    p { font-size: 0.95rem; color: var(--text-secondary); }
-  }
-}
-
-.process-sidebar__card {
-  padding: var(--space-6);
-  border: 1px solid var(--border-color);
-  border-radius: var(--radius-cut);
-  background: linear-gradient(135deg, var(--color-cream), var(--color-cream-deep));
-  box-shadow: 0 4px 12px rgb(29 28 33 / 0.06);
-
-  @include up(md) { padding: var(--space-7); }
-  @include up(lg) { position: sticky; top: calc(var(--header-h) + var(--space-6)); }
-}
-
-.process-sidebar__label {
-  display: block;
-  margin-bottom: var(--space-6);
-  padding-bottom: var(--space-4);
-  border-bottom: 1px solid var(--border-strong);
-  @include label-caps;
-  color: var(--color-espresso);
-}
-
-.confidence-breakdown {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-4);
-  margin-bottom: var(--space-6);
-}
-
-.confidence-row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 48px;
-  grid-template-areas: 'label value' 'bar bar';
-  align-items: center;
-  gap: 6px var(--space-3);
-
-  @include up(sm) {
-    grid-template-columns: 130px minmax(0, 1fr) 48px;
-    grid-template-areas: 'label bar value';
-  }
-
-  &__label { grid-area: label; font-size: var(--fs-sm); font-weight: 600; color: var(--color-espresso); }
-
-  &__bar {
-    grid-area: bar;
-    height: 8px;
-    border-radius: 4px;
-    overflow: hidden;
-    background: rgb(69 32 26 / 0.08);
-  }
-
-  &__fill {
-    height: 100%;
-    border-radius: 4px;
-    background: linear-gradient(to right, var(--color-fern), var(--color-fern-bright));
-    transition: width 1s ease;
-  }
-
-  &__value {
-    grid-area: value;
-    @include heading-font;
-    text-align: right;
-    color: var(--color-espresso);
-  }
-}
-
-.process-sidebar__note {
-  font-size: var(--fs-xs);
-  font-style: italic;
-  line-height: 1.4;
-  color: var(--text-secondary);
-}
+// About Our Process → components/ProcessSection.vue (shared with the homepage)
 
 // ---- Machine learning ------------------------------------------------------
 .ml-section {

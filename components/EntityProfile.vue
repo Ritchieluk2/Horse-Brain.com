@@ -412,7 +412,7 @@ const formatOdds = (odds) => {
 .confidence-badge {
   display: inline-block;
   padding: 4px 12px;
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-label);
   @include label-caps(var(--fs-2xs), 0.08em);
 
   &--high {

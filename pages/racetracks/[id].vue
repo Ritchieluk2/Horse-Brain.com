@@ -247,7 +247,7 @@ useHead(() => ({
     &-tag {
       padding: 4px 12px;
       border: 1px solid rgb(199 169 107 / 0.45);
-      border-radius: var(--radius-cut-sm);
+      border-radius: var(--radius-label);
       background: rgb(199 169 107 / 0.12);
       color: var(--color-brass-light);
       font-size: var(--fs-xs);
@@ -265,7 +265,7 @@ useHead(() => ({
     max-height: 64px;
     padding: 10px 20px;
     object-fit: contain;
-    border-radius: var(--radius-pill);
+    border-radius: var(--radius-plate);
     background: rgb(255 255 255 / 0.92);
     box-shadow: 0 8px 24px rgb(0 0 0 / 0.3);
 

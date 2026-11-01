@@ -32,6 +32,9 @@
 @use 'components/states';
 @use 'components/racetracks/upcoming-races';
 @use 'components/program';
+@use 'components/forms';
+@use 'components/auth';
+@use 'components/account';
 
 // Page-level (global because markup is spread across components).
 @use 'pages/homepage';

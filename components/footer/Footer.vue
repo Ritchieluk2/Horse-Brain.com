@@ -14,6 +14,8 @@
         </p>
         
         <div class="footer-links">
+          <NuxtLink to="/legal" class="footer-link">Terms &amp; Privacy</NuxtLink>
+
           <!-- Email Link -->
           <a href="mailto:info@horse-brain.com" class="footer-link" title="Email Us">
             <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">

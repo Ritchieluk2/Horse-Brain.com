@@ -37,6 +37,7 @@
                 </span>
                 </div>
 
+                <img v-if="trackCircle(race.track_id)" :src="trackCircle(race.track_id)" alt="" class="track-icon track-icon--circle race-row__icon" />
                 <div class="race-row__track">
                 <span class="race-row__track-name">{{ race.track_name }}</span>
                 <span class="race-row__race-num">Race {{ race.race_num }}</span>
@@ -209,12 +210,17 @@
 import { ref, computed } from 'vue'
 import PageTitle from '~/components/snippets/PageTitle.vue'
 import racesData from '~/data/races.json'
+import tracksData from '~/data/tracks.json'
 import { useRacedays } from '~/composables/useRacedays'
 import ProgramLink from '~/components/program/ProgramLink.vue'
 
 const expandedRaceId = ref(null)
 
 const races = racesData.races
+
+// Round track marks for the race rows
+const TRACKS = Object.fromEntries(tracksData.tracks.map(t => [t.id, t]))
+const trackCircle = (id) => TRACKS[id]?.circle || ''
 
 // Raceday Program links only where a program exists for that track today
 const { getRaceday } = useRacedays()
@@ -227,7 +233,9 @@ const uniqueTracks = computed(() => {
 
 // Computed: formatted date
 const formattedDate = computed(() => {
-  const date = new Date(racesData.date)
+  // 'YYYY-MM-DD' parses as UTC midnight (the evening before in US time zones); read it as a local date
+  const [y, m, d] = String(racesData.date).slice(0, 10).split('-').map(Number)
+  const date = new Date(y, m - 1, d)
   return date.toLocaleDateString('en-US', {
     weekday: 'long',
     year: 'numeric',

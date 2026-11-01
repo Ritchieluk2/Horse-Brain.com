@@ -42,13 +42,39 @@ export default defineNuxtConfig({
   },
 
   routeRules: {
-    '/Racetracks': { ssr: false }
+    '/Racetracks': { ssr: false },
+    // Never cache anything personal
+    '/api/auth/**': { headers: { 'cache-control': 'no-store' } },
+    '/account': { headers: { 'cache-control': 'no-store' } },
+    '/account/**': { headers: { 'cache-control': 'no-store' } }
+  },
+
+  // Server-only settings. Override with env vars, e.g. NUXT_SESSION_SECRET.
+  // See .env.example.
+  runtimeConfig: {
+    sessionSecret: '',  // 32+ chars; seals the sign-in cookie
+    // Outgoing email (server/utils/email.ts). Locally these are read from
+    // RESEND_API_KEY / EMAIL_FROM / EMAIL_REPLY_TO in .env.
+    resendApiKey: '',
+    emailFrom: '',
+    emailReplyTo: '',
+    siteUrl: ''         // base for links in emails; defaults to the request's own host
   },
 
   nitro: {
     preset: 'cloudflare', // ← Change this to exactly 'cloudflare'
     cloudflare: {
       nodeCompat: true
+    },
+
+    // User-account storage (server/utils/users.ts).
+    // Production: Cloudflare Workers KV, bound as HB_DATA in wrangler.jsonc.
+    storage: {
+      hb: { driver: 'cloudflare-kv-binding', binding: 'HB_DATA' }
+    },
+    // `npm run dev`: plain JSON files in .data/hb/ (git-ignored)
+    devStorage: {
+      hb: { driver: 'fs', base: './.data/hb' }
     }
   },
 

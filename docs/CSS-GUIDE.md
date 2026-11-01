@@ -39,7 +39,9 @@ assets/scss/
 │   ├── _cta.scss             ← .final-cta, .schedule-cta, .newsletter-cta, .newsletter
 │   ├── _states.scss          ← 404/not-found + fade transition
 │   ├── racetracks/_upcoming-races.scss  ← rolodex schedule carousel
-│   └── _program.scss          ← Raceday Program (screen + @media print)
+│   ├── _program.scss          ← Raceday Program (screen + @media print)
+│   ├── _forms.scss            ← .form-field/.form-input/.form-check/.form-alert (all forms)
+│   └── _auth.scss             ← sign-in / sign-up shell (.auth card + espresso aside)
 └── pages/_homepage.scss      ← hero + featured pick cards
 ```
 
@@ -90,7 +92,7 @@ Baby blue (2.3:1), brass (2.3:1) and live red (2.8:1) **fail** as text on white.
 - Sizes (fluid): `--fs-2xs … --fs-display`. Headings h1–h4 are already sized globally.
 - Spacing: `--space-1` (4px) … `--space-11` (100px). Sections: `--section-pad`, `--section-pad-sm`.
 - Side padding: `--gutter` (16 → 24 → 32px). Use `.container` rather than custom max-widths.
-- Radius: `--radius-sm|md|lg|pill` for buttons, badges, pills and icons. **Cards use the mixed-cut tokens** `--radius-cut` (lg), `--radius-cut-md`, `--radius-cut-sm`. Shadows: `--shadow-sm|md|lg|card|card-hover|brass`.
+- Radius: **buttons and form controls** use uniform `--radius-sm`. **Labels** (badges, tags, status pills, confidence chips, verdicts) use the mixed-cut `--radius-label`, so they never look clickable. Logo plates on photos use `--radius-plate`. `--radius-pill` is only for round controls (the race schedule dots). **Cards use the mixed-cut tokens** `--radius-cut` (lg), `--radius-cut-md`, `--radius-cut-sm`. Shadows: `--shadow-sm|md|lg|card|card-hover|brass`.
 - Motion: `--ease`, `--ease-out`, `--dur-fast|dur|dur-slow` for interaction; `--ease-settle`, `--dur-reveal`, `--dur-moment` for arrivals. Reduced-motion is handled globally.
 
 ---
@@ -188,6 +190,11 @@ in a scoped block.** Ask for a modifier instead.
 - Links on names: `.horse-link` (or `.link-underline`).
 - Textured bands for new sections: `.band--fern`, `.band--blue` (put content in a `.container`).
 - Names: add `.horse-name` / `.jockey-name` to any new markup that shows a horse or a person.
+- Forms: `.form > .form-field > label.form-label + .form-input|.form-select + p.form-hint + p.form-error`.
+  Rows `.form-row` (`--address`), groups `fieldset.form-fieldset > legend`, checkboxes
+  `label.form-check > input + span.form-check__text`, banners `.form-alert--error|success|info`.
+  Mark invalid inputs with `aria-invalid="true"` (that's what turns them red) and point
+  `aria-describedby` at the error. Inputs stay 16px so iOS doesn't zoom.
 
 ---
 

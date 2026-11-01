@@ -43,6 +43,7 @@
           <i class="race-card__corner race-card__corner--br" aria-hidden="true"></i>
           <div class="race-card__compact">
             <span class="race-card__tag">Archived</span>
+            <img v-if="previousRaceday.circle" :src="previousRaceday.circle" alt="" class="track-icon track-icon--circle race-card__icon" />
             <h3 class="race-card__name">{{ previousRaceday.track_name }}</h3>
             <span class="race-card__meta">
               {{ previousRaceday.shortDate }} &bull;
@@ -74,6 +75,7 @@
           <!-- Compact / table-row face -->
           <div class="race-card__compact">
             <span class="race-card__tag">{{ i === 0 ? 'Today' : 'Upcoming' }}</span>
+            <img v-if="race.circle" :src="race.circle" alt="" class="track-icon track-icon--circle race-card__icon" />
             <h3 class="race-card__name">{{ race.name }}</h3>
             <span class="race-card__meta">{{ race.shortDate }} &bull; {{ race.races }} Races &bull; {{ race.post }}</span>
             <span class="race-card__action">Open Card &rarr;</span>
@@ -188,6 +190,7 @@ const CATALOG = computed(() =>
     id: rd.track_id,
     name: rd.track_name,
     logo: rd.logo,
+    circle: rd.circle,
     background: rd.background,
     shortDate: rd.shortDate,
     fullDate: rd.fullDate,

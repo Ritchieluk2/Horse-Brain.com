@@ -1,0 +1,260 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Forms (sign-in, sign-up, account settings, future bet entry)
+//
+//  <div class="form-field">
+//    <label class="form-label" for="x">Email <span class="form-optional">optional</span></label>
+//    <input id="x" class="form-input" :aria-invalid="!!err" aria-describedby="x-err">
+//    <p class="form-hint">…</p>
+//    <p id="x-err" class="form-error">…</p>
+//  </div>
+//
+//  Rows: .form-row (2 cols from sm), .form-row--address (street
+//  city / state / ZIP). Groups: fieldset.form-fieldset > legend.
+//  Checkboxes: label.form-check > input + span.form-check__text
+//  Banners: .form-alert--error | --success | --info
+//  Inputs are 16px so iOS Safari doesn't zoom on focus.
+// =============================================================
+
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.form-field {
+  display: grid;
+  gap: var(--space-2);
+  min-width: 0;
+}
+
+.form-label {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.form-optional {
+  margin-left: var(--space-1);
+  font-weight: 400;
+  color: var(--text-secondary);
+}
+
+.form-input,
+.form-select {
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 14px;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+  background-color: var(--surface);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--text-primary);
+  transition: border-color var(--dur-fast) ease, box-shadow var(--dur-fast) ease;
+
+  &::placeholder { color: var(--text-secondary); opacity: 0.7; }
+
+  @include hover { border-color: var(--color-espresso-soft); }
+
+  &:focus-visible {
+    outline: none;
+    border-color: var(--color-blue-ink);
+    box-shadow: 0 0 0 3px var(--confidence-medium-bg);
+  }
+
+  &[aria-invalid='true'] {
+    border-color: var(--color-negative);
+    &:focus-visible { box-shadow: 0 0 0 3px var(--status-live-bg); }
+  }
+
+  &:disabled { background-color: var(--color-paper-warm); color: var(--text-secondary); }
+}
+
+.form-select {
+  appearance: none;
+  padding-right: 40px;
+  // chevron drawn with two gradients so it picks up no hex
+  background-image:
+    linear-gradient(45deg, transparent 50%, var(--color-espresso) 50%),
+    linear-gradient(135deg, var(--color-espresso) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
+}
+
+.form-hint {
+  margin: 0;
+  font-size: var(--fs-xs);
+  color: var(--text-secondary);
+}
+
+.form-error {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  margin: 0;
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--color-negative);
+
+  &::before {
+    content: '!';
+    flex-shrink: 0;
+    display: inline-grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    margin-top: 1px;
+    border-radius: 50%;
+    background-color: var(--color-negative);
+    color: var(--color-white);
+    font-size: 0.7rem;
+    font-weight: 700;
+  }
+}
+
+// ---- Layout -------------------------------------------------------
+.form-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-5);
+
+  @include up(sm) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+
+  // City / State / ZIP
+  &--address {
+    @include up(sm) { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+    @include up(md) { grid-template-columns: minmax(0, 2fr) minmax(0, 1.4fr) minmax(0, 1fr); }
+  }
+}
+
+.form-fieldset {
+  display: grid;
+  gap: var(--space-5);
+  min-width: 0;
+  margin: 0;
+  padding: var(--space-6) 0 0;
+  border: 0;
+  border-top: 1px solid var(--border-color);
+
+  > legend {
+    float: left;            // lets the legend sit inside the grid flow
+    width: 100%;
+    margin-bottom: var(--space-1);
+    padding: 0;
+    @include heading-font;
+    font-size: var(--fs-lg);
+    color: var(--text-heading);
+
+    + * { clear: both; }
+
+    .form-optional { font-family: var(--font-body); font-size: var(--fs-sm); }
+  }
+}
+
+.form-fieldset__note {
+  margin: calc(var(--space-3) * -1) 0 0;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
+
+// ---- Checkboxes ---------------------------------------------------
+.form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  min-height: 44px;
+  padding-block: var(--space-2);
+  cursor: pointer;
+
+  input {
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    margin: 0;
+    accent-color: var(--color-fern);
+    cursor: pointer;
+
+    &:focus-visible { @include focus-ring(var(--color-blue-ink)); }
+  }
+
+  &__text {
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+    color: var(--text-primary);
+
+    a { color: var(--text-link); text-decoration: underline; text-underline-offset: 2px; }
+  }
+
+  &.is-invalid input { outline: 2px solid var(--color-negative); outline-offset: 1px; }
+}
+
+.form-checks {
+  display: grid;
+  gap: var(--space-1);
+
+  .form-error { margin-left: calc(22px + var(--space-3)); }
+}
+
+// ---- Password show/hide -------------------------------------------
+.password-field {
+  position: relative;
+
+  .form-input { padding-right: 76px; }
+
+  &__toggle {
+    position: absolute;
+    top: 50%;
+    right: 6px;
+    min-width: 60px;
+    min-height: 36px;
+    padding: 0 var(--space-2);
+    border-radius: var(--radius-sm);
+    transform: translateY(-50%);
+    font-size: var(--fs-xs);
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--text-link);
+
+    @include hover { background-color: var(--confidence-medium-bg); }
+    &:focus-visible { @include focus-ring(var(--color-blue-ink)); }
+  }
+}
+
+// ---- Banners ------------------------------------------------------
+// Coloured bar runs off the sharp top-left corner (mixed-cut)
+.form-alert {
+  position: relative;
+  padding: var(--space-4) var(--space-5);
+  border-left: 4px solid currentColor;
+  @include mixed-cut(var(--radius-md));
+  font-size: var(--fs-sm);
+  line-height: var(--lh-snug);
+
+  p { margin: 0; color: var(--text-primary); }
+  strong { display: block; margin-bottom: 2px; }
+
+  &--error   { background-color: var(--status-live-bg);       color: var(--color-live-ink); }
+  &--success { background-color: var(--confidence-high-bg);   color: var(--color-fern); }
+  &--info    { background-color: var(--confidence-medium-bg); color: var(--color-blue-ink); }
+}
+
+.form-actions {
+  display: grid;
+  gap: var(--space-4);
+  justify-items: center;
+  padding-top: var(--space-2);
+
+  .btn { width: 100%; }
+}
+
+.form-switch {
+  margin: 0;
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+  text-align: center;
+
+  a { font-weight: 600; color: var(--text-link); text-decoration: underline; text-underline-offset: 3px; }
+}

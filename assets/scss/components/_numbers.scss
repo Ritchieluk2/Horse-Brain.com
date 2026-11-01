@@ -40,6 +40,21 @@
 .horse-num { @include horse-num; }
 .place-num { @include place-num; }
 
+// Place not known yet (race upcoming): same circle, flat and quiet,
+// a dashed ring + clock saying "result to come". Live = live-red ring.
+.place-num--pending {
+  background: transparent;
+  border: 1.5px dashed rgb(69 32 26 / 0.38);   // visible ring, still quieter than a medal
+  color: var(--text-secondary);
+  box-shadow: none;
+}
+
+.place-num--live {
+  border-style: solid;
+  border-color: var(--color-live);
+  color: var(--color-live-ink);
+}
+
 
 // ---- Horse numbers in existing components ------------------------------
 .pick-tab__program        { @include horse-num(48px, 1.4rem); }

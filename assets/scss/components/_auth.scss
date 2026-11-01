@@ -1,0 +1,143 @@
+@use '../abstracts' as *;
+
+// =============================================================
+//  Account pages shell: /sign-in, /sign-up (and later reset /
+//  verify). A white form card beside an espresso "why sign up"
+//  panel. Phones: the form comes first, the panel follows.
+//
+//  section.auth > .container.auth__grid
+//    .auth__card            (form)
+//    aside.auth__aside      (brand panel)
+//  Modifier: .auth--wide for the longer sign-up form.
+// =============================================================
+
+.auth {
+  padding-block: var(--section-pad-sm) var(--section-pad);
+  background-color: var(--bg-alt);
+}
+
+.auth__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: var(--space-7);
+  max-width: 1040px;
+  align-items: start;
+
+  @include up(lg) {
+    grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr);
+    gap: var(--space-8);
+  }
+
+  .auth--wide & {
+    @include up(lg) { grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); }
+  }
+}
+
+.auth__card {
+  @include card(var(--space-6) var(--space-5));
+  @include up(sm) { padding: var(--space-8) var(--space-7); }
+}
+
+.auth__head {
+  margin-bottom: var(--space-6);
+
+  p { margin: 0; font-size: var(--fs-md); color: var(--text-secondary); }
+}
+
+.auth__eyebrow {
+  display: block;
+  margin-bottom: var(--space-2);
+  @include label-caps;
+  color: var(--color-blue-ink);
+}
+
+// ---- Brand panel --------------------------------------------------
+.auth__aside {
+  position: relative;
+  padding: var(--space-7) var(--space-6);
+  @include mixed-cut;
+  background-color: var(--bg-dark-warm);
+  color: var(--text-on-dark);
+  box-shadow: var(--shadow-card);
+
+  @include up(sm) { padding: var(--space-8) var(--space-7); }
+  @include up(lg) { position: sticky; top: calc(var(--header-h) + var(--space-6)); }
+
+  h2 {
+    margin-bottom: var(--space-3);
+    font-size: var(--fs-xl);
+    color: var(--color-white);
+  }
+
+  > p { color: var(--text-on-dark-muted); }
+
+  .auth__eyebrow { color: var(--color-baby-blue); }
+}
+
+.auth__benefits {
+  display: grid;
+  gap: var(--space-4);
+  margin: var(--space-6) 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: var(--space-3);
+    font-size: var(--fs-sm);
+    line-height: var(--lh-snug);
+    color: var(--text-on-dark-muted);
+  }
+
+  strong { display: block; margin-bottom: 2px; color: var(--color-white); }
+
+  svg { width: 22px; height: 22px; margin-top: 1px; color: var(--color-baby-blue); }
+}
+
+// Responsible-gambling line: full contrast, never animated
+.auth__rg {
+  margin: 0;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--border-on-dark);
+  font-size: var(--fs-xs);
+  line-height: var(--lh-snug);
+  color: var(--text-on-dark-muted);
+
+  a { color: var(--color-white); text-decoration: underline; text-underline-offset: 2px; }
+}
+
+// ---- Single-card pages (forgot / reset password, verify email) ----
+.auth--single .auth__grid {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 560px;
+}
+
+// Big status icon for result states (sent, confirmed, expired)
+.auth__status {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  margin-bottom: var(--space-5);
+  border-radius: 50%;
+  background-color: var(--confidence-medium-bg);
+  color: var(--color-blue-ink);
+
+  svg { width: 28px; height: 28px; }
+
+  &--success { background-color: var(--confidence-high-bg); color: var(--color-fern); }
+  &--error   { background-color: var(--status-live-bg);     color: var(--color-live-ink); }
+}
+
+.auth__title {
+  margin-bottom: var(--space-3);
+  font-size: var(--fs-2xl);
+}
+
+.auth__text {
+  margin: 0 0 var(--space-4);
+  color: var(--text-secondary);
+
+  strong { color: var(--text-primary); overflow-wrap: anywhere; }
+}

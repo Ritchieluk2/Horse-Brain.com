@@ -97,6 +97,14 @@ select.program-input {
   // corners sit at full strength: this IS the premium product
   &__corner { opacity: 1; }
 
+  // round track mark on the cover (.track-icon--circle)
+  &__icon {
+    --icon-size: 72px;
+    display: block;
+    margin: var(--space-5) auto 0;
+    @include up(md) { --icon-size: 88px; }
+  }
+
   &__eyebrow {
     display: flex;
     flex-wrap: wrap;
@@ -114,7 +122,7 @@ select.program-input {
   &__premium {
     padding: 3px 10px;
     border: 1px solid rgb(199 169 107 / 0.6);
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-label);
     background: var(--premium-bg);
     @include label-caps(var(--fs-2xs), 0.1em);
     color: var(--color-brass-ink);
@@ -171,6 +179,7 @@ select.program-input {
     color: var(--text-secondary);
 
     strong { color: var(--color-espresso); }
+    a { color: var(--text-link); text-decoration: underline; text-underline-offset: 2px; }
   }
 }
 
@@ -227,7 +236,7 @@ select.program-input {
     height: 44px;
     padding: 0 var(--space-3);
     border: 1px solid rgb(255 255 255 / 0.14);
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-sm);   // a link: button corners
     color: var(--color-white);
     line-height: 1.1;
     transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
@@ -530,7 +539,7 @@ select.program-input {
     width: 22px;
     height: 22px;
     border: 2px solid var(--border-strong);
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-sm);
     background: var(--color-white);
     transition: background-color var(--dur-fast) ease, border-color var(--dur-fast) ease;
   }
@@ -562,7 +571,7 @@ select.program-input {
     padding: 3px 10px;
     background: var(--color-shadow-grey);
     border: 1px solid var(--color-brass);
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-label);
     @include label-caps(var(--fs-2xs), 0.12em);
     color: var(--color-brass-light);
   }
@@ -598,7 +607,7 @@ select.program-input {
     min-height: 36px;
     padding: 0 12px;
     border: 1px solid rgb(59 103 191 / 0.45);
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-sm);   // a button
     background: var(--color-white);
     color: var(--color-blue-ink);
     @include label-caps(var(--fs-2xs), 0.06em);
@@ -742,7 +751,7 @@ select.program-input {
     top: -9px;
     right: var(--space-3);
     padding: 1px 8px;
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-label);
     background: var(--color-shadow-grey);
     @include label-caps(0.58rem, 0.1em);
     color: var(--color-brass-light);
@@ -761,7 +770,7 @@ select.program-input {
     min-height: 44px;
     padding: 0 12px;
     border: 1px solid var(--border-strong);
-    border-radius: var(--radius-cut-sm);
+    border-radius: var(--radius-sm);   // a control
     background: var(--color-white);
     font-size: var(--fs-sm);
     font-weight: 600;
@@ -1002,4 +1011,79 @@ select.program-input {
   }
 
   .program-disclaimer { font-size: 8.5pt; }
+}
+
+// =============================================================
+//  Account bar (components/program/ProgramAccountBar.vue)
+//  Save status when signed in; sign-up invitation for guests.
+//  Lives inside .program-day, so it never prints.
+// =============================================================
+.program-account {
+  display: grid;
+  gap: var(--space-3);
+  margin-bottom: var(--space-5);
+
+  &__notice {
+    display: grid;
+    gap: var(--space-2);
+    align-items: center;
+    @include up(sm) { grid-template-columns: minmax(0, 1fr) auto; }
+  }
+
+  &__status {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-1) var(--space-2);
+    margin: 0;
+    font-size: var(--fs-sm);
+    color: var(--text-secondary);
+
+    svg { width: 16px; height: 16px; color: var(--color-fern); }
+
+    &.is-saved, &.is-idle { color: var(--text-primary); }
+    &.is-error, &.is-load-error { color: var(--color-live-ink); font-weight: 600; }
+  }
+
+  &__sep { color: var(--border-strong); }
+
+  &__retry {
+    min-height: 32px;
+    padding: 0 var(--space-2);
+    font-weight: 700;
+    color: var(--text-link);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  // The invitation: a quiet cream card, not a pop-up
+  &__invite {
+    display: grid;
+    gap: var(--space-4);
+    padding: var(--space-5);
+    border: 1px solid var(--border-color);
+    border-left: 4px solid var(--color-baby-blue);
+    @include mixed-cut(var(--radius-md));
+    @include paper;
+
+    @include up(lg) {
+      grid-template-columns: minmax(0, 1fr) auto;
+      align-items: center;
+      padding: var(--space-5) var(--space-6);
+    }
+
+    p { margin: 0; font-size: var(--fs-sm); color: var(--text-secondary); }
+  }
+
+  &__title {
+    margin-bottom: var(--space-1);
+    font-size: var(--fs-lg);
+  }
+
+  &__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-2) var(--space-3);
+  }
 }

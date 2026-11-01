@@ -23,6 +23,8 @@
             </ol>
           </nav>
 
+          <img v-if="raceday.circle" :src="raceday.circle" :alt="`${raceday.track_name} logo`" class="track-icon track-icon--circle program-cover__icon" />
+
           <div class="program-cover__eyebrow">
             <span class="program-cover__kicker">Raceday Program</span>
             <span class="program-cover__premium">Premium · free during preview</span>
@@ -50,8 +52,10 @@
 
           <p class="program-cover__how">
             Mark your contenders, log bets as you place them, and settle them after each race.
-            Or print it and fill it in at the track. Everything you enter is saved
-            <strong>on this device only</strong>.
+            Or print it and fill it in at the track.
+            <template v-if="signedIn">Everything you enter is saved <strong>to your account</strong>.</template>
+            <template v-else>Everything you enter is saved <strong>on this device only</strong> unless you
+              <NuxtLink :to="{ path: '/sign-up', query: { redirect: route.fullPath } }">create a free account</NuxtLink>.</template>
           </p>
         </div>
       </div>
@@ -90,6 +94,7 @@
     <!-- 3. My day: scoreboard + budget ---------------------------------------->
     <section class="program-day">
       <div class="container">
+        <ProgramAccountBar :program="program" />
         <div class="program-day__grid">
           <div class="program-score" v-reveal.stagger>
             <div class="program-score__item">
@@ -150,7 +155,7 @@
           </div>
         </div>
 
-        <p v-if="!program.storageOk.value" class="program-day__warning" role="status">
+        <p v-if="program.mode.value === 'guest' && !program.storageOk.value" class="program-day__warning" role="status">
           This browser isn't letting us save, so your entries will be lost when you close the page.
         </p>
       </div>
@@ -244,9 +249,11 @@ import { useRoute } from 'vue-router'
 import { useRacedays } from '~/composables/useRacedays'
 import { useRacedayProgram, formatMoney } from '~/composables/useRacedayProgram'
 import ProgramRace from '~/components/program/ProgramRace.vue'
+import ProgramAccountBar from '~/components/program/ProgramAccountBar.vue'
 
 const route = useRoute()
 const { getRaceday } = useRacedays()
+const { signedIn } = useAuth()
 
 const raceday = computed(() => getRaceday(route.params.track, route.params.date))
 

@@ -1,6 +1,6 @@
 # Handoff for Qwen — working on HorseBrain alongside Claude
 
-_Last updated: 2026-10-31, 2:25 PM_
+_Last updated: 2026-11-01, 12:00 PM_
 
 ## 1. The project in one paragraph
 
@@ -228,6 +228,35 @@ race-day hero ("Raceday Program", the brass button).
   the Race Schedule cards, the race-day hero and expanded races, Today's Races (only where a
   program exists), Today's Picks, the race analysis page (hero + bottom CTA) and the track page
   (next race day). When the program becomes members-only, gate it in that one component.
+
+### User accounts, phase 0 (Claude, 1 Nov)
+
+The user asked Claude to build sign-up / sign-in, so Claude wrote into `server/**` and
+`composables/` this time. Full map and next steps: **`docs/ACCOUNTS-ROADMAP.md`**.
+
+- Pages: `/sign-up`, `/sign-in`, `/account` (stub), `/legal` (draft terms).
+- API: `server/api/auth/{sign-up,sign-in,sign-out,me}`. Storage lives behind
+  `server/utils/users.ts` only; never call `useStorage('hb')` for users anywhere else.
+- `useAuth()` gives `user`, `signedIn`, `signIn/signUp/signOut`. Protect a page with
+  `definePageMeta({ middleware: 'auth' })`; `'guest'` for sign-in-style pages.
+- Validation and legal versions are in `shared/account-rules.js`. **Import it as
+  `#shared/account-rules.js`**, on both client and server. A relative path or `~/shared`
+  breaks the dev server on Windows (Nitro externalises it with a bad path).
+- Forms: use the global classes in `assets/scss/components/_forms.scss` (see CSS-GUIDE §5).
+- Header shows **Sign In / My Account** from `useAuth()`; footer links to `/legal`.
+- **Raceday Program now saves to the account** when signed in (Claude, 1 Nov). Heads-up,
+  since `composables/` is normally yours: `useRacedayProgram.js` was rewritten around the same
+  v1 record. The record shape and the maths (`summarise`, `gradeBet`, `BET_TYPES` …) moved to
+  `shared/program-rules.js`; the composable re-exports them, so existing imports still work.
+  New return values: `mode` ('account' | 'guest'), `sync` (save status), `hasInput`, `retry()`.
+  `ProgramAccountBar.vue` (top of the "My day" section) shows the save status or the sign-up
+  invitation. History page: `/account/programs`. Insights page: `/account/insights` (maths in
+  `shared/insights-rules.js`; please don't recompute figures in templates). Please don't write to `localStorage` for
+  programs directly; go through the composable.
+- Ownership for these files: Claude owns `server/utils/{users,session,password,throttle}.ts`,
+  `server/api/auth/**`, `server/api/programs/**`, `server/utils/programs.ts`,
+  `shared/account-rules.js`, `shared/program-rules.js`, `composables/useAuth.js`, `middleware/**`.
+  Account **pages** follow the normal split (Qwen: template/script, Claude: styles).
 
 ## 5. Open issues found during Claude's review (Qwen's side)
 

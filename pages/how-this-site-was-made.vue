@@ -7,10 +7,10 @@
       <div class="container made-narrow">
         <p class="made-lead">
           HorseBrain.com is a <strong>mockup</strong>: a working proof of concept for a horse racing
-          picks site, not a finished product. It was designed and built by Luke, the project's
-          creator, working with two AI assistants: <strong>Claude</strong> (made by Anthropic) and
-          <strong>Qwen</strong> (made by Alibaba). This page explains who did what, and which parts of
-          the site are real.
+          picks site, not a finished product. Our development team designed and built it with the
+          help of two AI coding assistants: one focused on <strong>design and styling</strong>, the
+          other on <strong>page structure</strong>. This page explains who did what, and which parts
+          of the site are real.
         </p>
       </div>
     </section>
@@ -21,7 +21,8 @@
         <h2 class="made-title" v-reveal>First, what's real</h2>
         <p class="made-text" v-reveal>
           Everything you can click works, but the racing information behind it is sample data.
-          No machine learning model is producing these picks yet.
+          Our machine learning models aren't connected to the site yet, so the picks you see are
+          placeholders, not their predictions.
         </p>
 
         <div class="made-table-wrap" v-reveal>
@@ -43,7 +44,7 @@
               <tr>
                 <th scope="row">Picks, confidence and predictions</th>
                 <td><span class="made-status made-status--sample">Placeholder</span></td>
-                <td>Hand-made examples. They do not come from a model and are not betting advice.</td>
+                <td>Hand-made examples until our models are connected. They are not betting advice.</td>
               </tr>
               <tr>
                 <th scope="row">Track record figures</th>
@@ -86,38 +87,39 @@
             <span class="made-role__frame" aria-hidden="true"></span>
             <i class="made-role__corner made-role__corner--tl" aria-hidden="true"></i>
             <i class="made-role__corner made-role__corner--br" aria-hidden="true"></i>
-            <span class="made-role__kind">Human · project lead</span>
-            <h3 class="made-role__name">Luke</h3>
+            <span class="made-role__kind">People · project lead</span>
+            <h3 class="made-role__name">Our development team</h3>
             <ul class="made-role__list">
               <li>The idea and the project plan: what HorseBrain is for, its roadmap and its features, including the Raceday Program.</li>
+              <li>The machine learning models behind HorseBrain's predictions, which will be connected to the site in a later phase.</li>
               <li>The values (Responsibility, Honesty, Excellence) and the rule that the site must never be designed to be addictive.</li>
               <li>The brand: the colour palette, the fonts, and the signature shapes, such as the mixed-cut card corners, the brass frame and the crossing rail lines.</li>
-              <li>Supplied the track images and logos, and the HorseBrain horse artwork.</li>
-              <li>Every priority and final call. He reviewed each change on his own screen, caught the bugs the AI missed, and decided what stayed.</li>
+              <li>Supplying the track images and logos, and the HorseBrain horse artwork.</li>
+              <li>Every priority and final call. We reviewed each change ourselves, caught the bugs the AI missed, and decided what stayed.</li>
               <li>Hosting and deployment.</li>
             </ul>
           </article>
 
           <article class="made-role">
-            <span class="made-role__kind">AI · made by Anthropic</span>
-            <h3 class="made-role__name">Claude</h3>
+            <span class="made-role__kind">AI assistant</span>
+            <h3 class="made-role__name">Design &amp; styling</h3>
             <ul class="made-role__list">
               <li>The styling system: one set of design tokens and shared styles, replacing Bootstrap and Tailwind.</li>
               <li>Layouts that work from small phones to wide desktops.</li>
               <li>The motion and scroll effects, and the place and program number icons.</li>
-              <li>The Raceday Program: its layout, bet tracking, totals and printable version, built from Luke's brief.</li>
-              <li>The brand guide and developer guides, written from Luke's direction, plus research on data providers and hosting.</li>
-              <li>Claude edited the project files directly and checked pages in a browser before reporting back.</li>
+              <li>The Raceday Program: its layout, bet tracking, totals and printable version, built from our brief.</li>
+              <li>The brand guide and developer guides, written from our direction, plus research on data providers and hosting.</li>
+              <li>It edited the project files directly and checked pages in a browser before reporting back.</li>
             </ul>
           </article>
 
           <article class="made-role">
-            <span class="made-role__kind">AI · made by Alibaba</span>
-            <h3 class="made-role__name">Qwen</h3>
+            <span class="made-role__kind">AI assistant</span>
+            <h3 class="made-role__name">Page structure</h3>
             <ul class="made-role__list">
               <li>Page and component structure: templates, scripts, routing, and the placeholder data layer.</li>
               <li>Much of the original page structure of the mockup.</li>
-              <li>Logic fixes and new page sections, handed to Claude for a styling pass afterwards.</li>
+              <li>Logic fixes and new page sections, handed to the design assistant for a styling pass afterwards.</li>
             </ul>
           </article>
         </div>
@@ -135,10 +137,10 @@
       <div class="container made-narrow">
         <h2 class="made-title" v-reveal>How the work happened</h2>
         <ol class="made-steps" v-reveal.stagger>
-          <li><strong>Luke described a change</strong> in plain language, often with a screenshot or a site he liked.</li>
-          <li><strong>An AI assistant made it in the code</strong>, following a shared brand guide and a handoff document that split the work between Claude and Qwen.</li>
+          <li><strong>We described a change</strong> in plain language, often with a screenshot or a site we liked.</li>
+          <li><strong>An AI assistant made it in the code</strong>, following a shared brand guide and a handoff document that split the work between the two assistants.</li>
           <li><strong>The assistant checked its own work</strong> in a browser at phone and desktop sizes.</li>
-          <li><strong>Luke reviewed it</strong> on his own screen, then kept it, asked for changes, or threw it out.</li>
+          <li><strong>We reviewed it</strong> ourselves, then kept it, asked for changes, or threw it out.</li>
         </ol>
       </div>
     </section>
@@ -151,10 +153,10 @@
           AI made the work faster, not automatically right. A few examples:
         </p>
         <ul class="made-list" v-reveal.stagger>
-          <li>Claude mixed up a horse's <em>program number</em> (the number it wears for betting) with its <em>finishing place</em>, until Luke explained how race numbering works.</li>
-          <li>Claude introduced a stylesheet bug that turned some subtle paper textures solid, then had to find and fix it.</li>
-          <li>The homepage photo vanished on the live site because of its filename. Luke spotted it; Claude traced the cause.</li>
-          <li>Claude and Qwen sometimes edited the same file at the same time and overwrote each other's work. That led to a written rule for who edits what.</li>
+          <li>The design assistant mixed up a horse's <em>program number</em> (the number it wears for betting) with its <em>finishing place</em>, until we explained how race numbering works.</li>
+          <li>It also introduced a stylesheet bug that turned some subtle paper textures solid, then had to find and fix it.</li>
+          <li>The homepage photo vanished on the live site because of its filename. We spotted it; the AI traced the cause.</li>
+          <li>The two assistants sometimes edited the same file at the same time and overwrote each other's work. That led to a written rule for who edits what.</li>
         </ul>
         <p class="made-text" v-reveal>Every change on this site was reviewed by a person before it stayed.</p>
       </div>
@@ -165,12 +167,12 @@
       <div class="container made-narrow">
         <h2 class="made-title" v-reveal>What this site is not</h2>
         <ul class="made-list" v-reveal.stagger>
-          <li><strong>Not betting advice.</strong> No real predictions are published here yet.</li>
+          <li><strong>Not betting advice.</strong> Our models' predictions aren't published here yet.</li>
           <li><strong>Not a finished product.</strong> Features, wording and design will change.</li>
           <li><strong>Not handling real money.</strong> Nothing on the site places or takes bets.</li>
         </ul>
         <p class="made-text" v-reveal>
-          When live race data and a real model arrive, this page will be updated to say exactly
+          When live race data arrives and our models are connected, this page will be updated to say exactly
           what changed. Questions or feedback are welcome at
           <a href="mailto:info@horse-brain.com">info@horse-brain.com</a>.
         </p>
@@ -190,7 +192,7 @@ import PageTitle from '~/components/snippets/PageTitle.vue'
 useHead({
   title: 'How This Site Was Made | HorseBrain',
   meta: [
-    { name: 'description', content: 'HorseBrain.com is a proof-of-concept mockup built by Luke with the AI assistants Claude and Qwen. Who did what, and what on the site is real.' }
+    { name: 'description', content: 'HorseBrain.com is a proof-of-concept mockup built by our development team with two AI coding assistants. Who did what, and what on the site is real.' }
   ]
 })
 </script>

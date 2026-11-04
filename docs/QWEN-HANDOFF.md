@@ -267,6 +267,10 @@ The user asked Claude to build sign-up / sign-in, so Claude wrote into `server/*
 - `pages/how-this-site-was-made.vue`: honest credits page (Luke / Claude / Qwen), what's real vs
   placeholder, how the work happened, mistakes. **Keep it true:** when live data or a real model
   ships, update its "What's real" table in the same change.
+- Public copy speaks as **the development team ("we", "us")**. Don't name individuals, AI models or
+  AI companies on the site.
+- **The team has working machine learning models.** They aren't connected yet, so on the site say
+  "not connected yet", never "no model exists". Connecting them is roadmap phase 5 (predictions on live data).
 - The footer development band links to the page too.
 
 ## 5. Open issues found during Claude's review (Qwen's side)

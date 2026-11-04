@@ -39,9 +39,7 @@ assets/scss/
 │   ├── _cta.scss             ← .final-cta, .schedule-cta, .newsletter-cta, .newsletter
 │   ├── _states.scss          ← 404/not-found + fade transition
 │   ├── racetracks/_upcoming-races.scss  ← rolodex schedule carousel
-│   ├── _program.scss          ← Raceday Program (screen + @media print)
-│   ├── _forms.scss            ← .form-field/.form-input/.form-check/.form-alert (all forms)
-│   └── _auth.scss             ← sign-in / sign-up shell (.auth card + espresso aside)
+│   └── _program.scss          ← Raceday Program (screen + @media print)
 └── pages/_homepage.scss      ← hero + featured pick cards
 ```
 
@@ -162,6 +160,10 @@ Surface recipes worth reusing:
 > quotes. The production build writes CSS `url()` without quotes, so `photo_(123).webp` silently
 > drops the whole `background-image` line on the live site, while it still works in `npm run dev`.
 
+> Scoped-style gotcha: never write `:global(html.x) .thing` in a `<style scoped>` block. Vue keeps
+> only what's inside `:global()`, so it compiles to `html.x { … }` and styles the whole page (this
+> once blanked the site). Put rules keyed on an `<html>`/`<body>` class in an unscoped `<style>` block.
+
 > Sass gotcha: never write `rgb(r g b / $variable)`. Sass treats the `/` as division and
 > silently produces a wrong, opaque colour. With a variable alpha, use `rgba(r, g, b, $variable)`.
 > Literal values like `rgb(29 28 33 / 0.5)` are fine.
@@ -190,11 +192,6 @@ in a scoped block.** Ask for a modifier instead.
 - Links on names: `.horse-link` (or `.link-underline`).
 - Textured bands for new sections: `.band--fern`, `.band--blue` (put content in a `.container`).
 - Names: add `.horse-name` / `.jockey-name` to any new markup that shows a horse or a person.
-- Forms: `.form > .form-field > label.form-label + .form-input|.form-select + p.form-hint + p.form-error`.
-  Rows `.form-row` (`--address`), groups `fieldset.form-fieldset > legend`, checkboxes
-  `label.form-check > input + span.form-check__text`, banners `.form-alert--error|success|info`.
-  Mark invalid inputs with `aria-invalid="true"` (that's what turns them red) and point
-  `aria-describedby` at the error. Inputs stay 16px so iOS doesn't zoom.
 
 ---
 

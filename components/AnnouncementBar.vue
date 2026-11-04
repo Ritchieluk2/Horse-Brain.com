@@ -57,9 +57,6 @@ function dismiss() {
   border-bottom: 2px solid var(--color-blue-ink);
 }
 
-// Dismissed on an earlier visit: hidden before Vue loads (script in useHead)
-:global(html.hb-announce-off) .announcement { display: none; }
-
 .announcement__inner {
   display: flex;
   align-items: center;
@@ -114,4 +111,12 @@ function dismiss() {
 }
 
 @media print { .announcement { display: none; } }
+</style>
+
+<!-- Unscoped on purpose: hides the bar before Vue loads for visitors who
+     dismissed it (class set by the head script). Don't move this into the
+     scoped block: there, :global(html.x) .announcement compiles to just
+     `html.x { … }` and hides the whole page. -->
+<style>
+html.hb-announce-off .announcement { display: none; }
 </style>

@@ -12,7 +12,8 @@ type HydrationStrategies = {
 }
 type LazyComponent<T> = (T & DefineComponent<HydrationStrategies, {}, {}, {}, {}, {}, {}, { hydrated: () => void }>)
 interface _GlobalComponents {
-      'CurrentlyRacingTicker': typeof import("../components/CurrentlyRacingTicker.vue")['default']
+      'AnnouncementBar': typeof import("../components/AnnouncementBar.vue")['default']
+    'CurrentlyRacingTicker': typeof import("../components/CurrentlyRacingTicker.vue")['default']
     'EntityProfile': typeof import("../components/EntityProfile.vue")['default']
     'ProcessSection': typeof import("../components/ProcessSection.vue")['default']
     'AccountNav': typeof import("../components/account/AccountNav.vue")['default']
@@ -57,7 +58,8 @@ interface _GlobalComponents {
     'Body': typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
     'NuxtIsland': typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
     'NuxtRouteAnnouncer': typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']
-      'LazyCurrentlyRacingTicker': LazyComponent<typeof import("../components/CurrentlyRacingTicker.vue")['default']>
+      'LazyAnnouncementBar': LazyComponent<typeof import("../components/AnnouncementBar.vue")['default']>
+    'LazyCurrentlyRacingTicker': LazyComponent<typeof import("../components/CurrentlyRacingTicker.vue")['default']>
     'LazyEntityProfile': LazyComponent<typeof import("../components/EntityProfile.vue")['default']>
     'LazyProcessSection': LazyComponent<typeof import("../components/ProcessSection.vue")['default']>
     'LazyAccountNav': LazyComponent<typeof import("../components/account/AccountNav.vue")['default']>
@@ -108,6 +110,7 @@ declare module 'vue' {
   export interface GlobalComponents extends _GlobalComponents { }
 }
 
+export const AnnouncementBar: typeof import("../components/AnnouncementBar.vue")['default']
 export const CurrentlyRacingTicker: typeof import("../components/CurrentlyRacingTicker.vue")['default']
 export const EntityProfile: typeof import("../components/EntityProfile.vue")['default']
 export const ProcessSection: typeof import("../components/ProcessSection.vue")['default']
@@ -153,6 +156,7 @@ export const Html: typeof import("../node_modules/nuxt/dist/head/runtime/compone
 export const Body: typeof import("../node_modules/nuxt/dist/head/runtime/components")['Body']
 export const NuxtIsland: typeof import("../node_modules/nuxt/dist/app/components/nuxt-island")['default']
 export const NuxtRouteAnnouncer: typeof import("../node_modules/nuxt/dist/app/components/server-placeholder")['default']
+export const LazyAnnouncementBar: LazyComponent<typeof import("../components/AnnouncementBar.vue")['default']>
 export const LazyCurrentlyRacingTicker: LazyComponent<typeof import("../components/CurrentlyRacingTicker.vue")['default']>
 export const LazyEntityProfile: LazyComponent<typeof import("../components/EntityProfile.vue")['default']>
 export const LazyProcessSection: LazyComponent<typeof import("../components/ProcessSection.vue")['default']>

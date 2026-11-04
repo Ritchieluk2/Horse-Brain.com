@@ -3,7 +3,10 @@
     <!-- Top Section: Development Notice -->
     <div class="footer-development">
       <p class="footer-development__title">Currently in Development</p>
-      <p class="footer-development__note">All data and predictions are placeholder</p>
+      <p class="footer-development__note">
+        All data and predictions are placeholder ·
+        <NuxtLink to="/how-this-site-was-made" class="footer-development__link">How this site was made</NuxtLink>
+      </p>
     </div>
 
     <!-- Bottom Section: Black Bar with Copyright & Links -->
@@ -87,6 +90,13 @@ export default {
     font-weight: 500;
     letter-spacing: 0.04em;
     color: rgb(29 28 33 / 0.75);
+  }
+
+  &__link {
+    font-weight: 700;
+    color: var(--color-shadow-grey);
+    text-decoration: underline;
+    text-underline-offset: 3px;
   }
 }
 

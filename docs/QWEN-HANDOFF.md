@@ -258,6 +258,17 @@ The user asked Claude to build sign-up / sign-in, so Claude wrote into `server/*
   `shared/account-rules.js`, `shared/program-rules.js`, `composables/useAuth.js`, `middleware/**`.
   Account **pages** follow the normal split (Qwen: template/script, Claude: styles).
 
+### Announcement bar + "How this site was made" (Claude, 4 Nov)
+
+- `components/AnnouncementBar.vue` sits above `<Header>` in `layouts/default.vue`. It repeats the
+  footer's development notice and links to `/how-this-site-was-made`. Dismissal is stored in
+  localStorage (`hb:announce:v1`), and a head script hides it before first paint. **Change the
+  message → bump the key** (`v2`) so everyone sees it again.
+- `pages/how-this-site-was-made.vue`: honest credits page (Luke / Claude / Qwen), what's real vs
+  placeholder, how the work happened, mistakes. **Keep it true:** when live data or a real model
+  ships, update its "What's real" table in the same change.
+- The footer development band links to the page too.
+
 ## 5. Open issues found during Claude's review (Qwen's side)
 
 Please pick these up. They are template, script or data bugs, not styling.

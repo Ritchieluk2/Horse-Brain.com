@@ -9,8 +9,9 @@
           HorseBrain.com is a <strong>mockup</strong>: a working proof of concept for a horse racing
           picks site, not a finished product. Our development team designed and built it with the
           help of two AI coding assistants: one focused on <strong>design and styling</strong>, the
-          other on <strong>page structure</strong>. This page explains who did what, and which parts
-          of the site are real.
+          other on <strong>page structure</strong>. A third, general-purpose AI assistant helped us
+          <strong>troubleshoot</strong>. This page explains who did what, and which parts of the site
+          are real.
         </p>
       </div>
     </section>
@@ -95,6 +96,7 @@
               <li>The values (Responsibility, Honesty, Excellence) and the rule that the site must never be designed to be addictive.</li>
               <li>The brand: the colour palette, the fonts, and the signature shapes, such as the mixed-cut card corners, the brass frame and the crossing rail lines.</li>
               <li>Supplying the track images and logos, and the HorseBrain horse artwork.</li>
+              <li>Hands-on fixes to the AI's work: we corrected the final CSS and font styles in every output from the page-structure assistant, and fine-tuned the animations and transitions it couldn't get right.</li>
               <li>Every priority and final call. We reviewed each change ourselves, caught the bugs the AI missed, and decided what stayed.</li>
               <li>Hosting and deployment.</li>
             </ul>
@@ -123,6 +125,11 @@
             </ul>
           </article>
         </div>
+
+        <p class="made-note made-narrow" v-reveal>
+          We also used a third, general-purpose AI assistant for <strong>troubleshooting</strong>: working
+          through errors and finding documentation and other resources to fix them.
+        </p>
 
         <p class="made-note made-narrow" v-reveal>
           Before this mockup, an earlier HorseBrain prototype (a racing-data service built with FastAPI)
@@ -156,14 +163,55 @@
           <li>The design assistant mixed up a horse's <em>program number</em> (the number it wears for betting) with its <em>finishing place</em>, until we explained how race numbering works.</li>
           <li>It also introduced a stylesheet bug that turned some subtle paper textures solid, then had to find and fix it.</li>
           <li>The homepage photo vanished on the live site because of its filename. We spotted it; the AI traced the cause.</li>
+          <li>Dismissing the announcement bar at the top of the page once blanked the whole site, because of a styling rule the design assistant wrote. We found it; the assistant fixed it the same day.</li>
+          <li>The page-structure assistant's CSS and font styling had to be corrected by hand in every output, and it couldn't fine-tune animations and transitions, so we did that ourselves.</li>
           <li>The two assistants sometimes edited the same file at the same time and overwrote each other's work. That led to a written rule for who edits what.</li>
         </ul>
         <p class="made-text" v-reveal>Every change on this site was reviewed by a person before it stayed.</p>
       </div>
     </section>
 
-    <!-- 5. What this isn't -->
+    <!-- 5. The costs of AI, and our commitment -->
     <section class="made-section">
+      <div class="container made-narrow">
+        <h2 class="made-title" v-reveal>The costs of AI, and our commitment</h2>
+        <p class="made-text" v-reveal>
+          AI helped us build this faster, but it isn't free of harm, and we don't want to pretend it is.
+        </p>
+        <ul class="made-list" v-reveal.stagger>
+          <li><strong>Energy and water.</strong> Large AI models run in data centers that use a lot of electricity and, often, water for cooling. Every request has a real, if small, footprint, and the totals across everyone using AI are large.</li>
+          <li><strong>Creators' work.</strong> Many models are trained on writing, code and art made by people who weren't asked and aren't paid.</li>
+          <li><strong>Jobs and skills.</strong> AI changes the work of designers and developers, and leaning on it too much can wear down the skills that catch its mistakes.</li>
+          <li><strong>Confident errors.</strong> AI states wrong answers as confidently as right ones. That's why every change here was checked by a person.</li>
+          <li><strong>Concentration and privacy.</strong> The most capable tools are run by a few large companies, and using them means sending our work to someone else's servers.</li>
+        </ul>
+
+        <div class="made-commitment" v-reveal>
+          <span class="made-commitment__frame" aria-hidden="true"></span>
+          <i class="made-commitment__corner made-commitment__corner--tl" aria-hidden="true"></i>
+          <i class="made-commitment__corner made-commitment__corner--br" aria-hidden="true"></i>
+          <h3 class="made-commitment__title">Our commitment</h3>
+          <p>
+            From here on, we're committed to using <strong>open-source AI models that we run locally</strong>,
+            on our own hardware, wherever they can do the job. That keeps our work and data with us,
+            makes the energy we use something we can see and control, and doesn't depend on any one
+            company.
+          </p>
+          <ul class="made-list">
+            <li>We'll use cloud AI services only when no local model can do the task, and we'll say so on this page.</li>
+            <li>A person will keep reviewing every change before it ships.</li>
+            <li>We'll keep this page up to date as our tools change.</li>
+          </ul>
+          <p class="made-commitment__note">
+            To be clear about the past: not all of the AI used to build this mockup met that standard.
+            The design assistant and the troubleshooting assistant ran on cloud services.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. What this isn't -->
+    <section class="made-section made-section--alt">
       <div class="container made-narrow">
         <h2 class="made-title" v-reveal>What this site is not</h2>
         <ul class="made-list" v-reveal.stagger>
@@ -192,7 +240,7 @@ import PageTitle from '~/components/snippets/PageTitle.vue'
 useHead({
   title: 'How This Site Was Made | HorseBrain',
   meta: [
-    { name: 'description', content: 'HorseBrain.com is a proof-of-concept mockup built by our development team with two AI coding assistants. Who did what, and what on the site is real.' }
+    { name: 'description', content: 'HorseBrain.com is a proof-of-concept mockup built by our development team with AI coding and troubleshooting assistants. Who did what, and what on the site is real.' }
   ]
 })
 </script>
@@ -378,6 +426,39 @@ useHead({
 }
 
 .made-text a { color: var(--color-blue-ink); font-weight: 600; }
+
+// Commitment: the brass-framed card (a promise we stand behind)
+.made-commitment {
+  @include card(var(--space-5), var(--radius-lg));
+  @include frame(18px, var(--color-brass), 1);
+  margin-top: var(--space-6);
+  border-color: rgb(199 169 107 / 0.55);
+
+  @include up(md) { padding: var(--space-7); }
+
+  p {
+    margin: 0 0 var(--space-4);
+    font-size: var(--fs-base);
+    line-height: var(--lh-body);
+    color: var(--color-espresso);
+  }
+
+  .made-list { margin-bottom: var(--space-4); }
+}
+
+.made-commitment__title {
+  margin: 0 0 var(--space-3);
+  font-size: var(--fs-xl);
+  color: var(--color-espresso);
+}
+
+.made-commitment .made-commitment__note {
+  margin: 0;
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-color);
+  font-size: var(--fs-sm);
+  color: var(--text-secondary);
+}
 
 // Responsible-gambling line: full contrast, never faded (BRANDING §6)
 .made-disclaimer {
